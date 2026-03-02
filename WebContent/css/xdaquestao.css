@@ -1,0 +1,4 @@
+h2,h3,.t1 th{color:#02283f;}
+a:hover,.t2 th,.menu a:hover,#usuario:hover a:hover,.menu a.at,.pag a:hover,#usuario:hover dt,#usuario:focus dt{color:#e51b25;}
+#usuario:hover dt:before, #usuario:focus dt:before, #contrai:hover, .pag .at, .pag em{background-color:#e51b25;}.icone:hover{border-color:#044b78;box-shadow:inset 0 0 8px -4px #044b78;}
+.area .at,.area .at:hover{background:#02283f;color:#fff;border-radius:4px;}

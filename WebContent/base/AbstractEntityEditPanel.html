@@ -1,0 +1,32 @@
+<wicket:panel>
+
+     <wicket:fragment wicket:id="botoesContainer" >
+
+     </wicket:fragment>
+    
+    <form wicket:id="form" > 
+
+        <div wicket:id="container" class="containerBotoes">
+            <input type="button" wicket:id="novo"  class="botaoNovo"/>
+            <input type="button" wicket:id="salvar"  class="botaoSalvar"/>
+            <input type="button" wicket:id="excluir"  class="botaoExcluir"/>
+           <input type="button" wicket:id="voltar" class="botaoVoltar" />
+            <wicket:container wicket:id="botoesContainer"/>
+
+        </div>
+       	<p>
+        	<div wicket:id="feedback" class="msg de erro">Texto para mensagem de erro</div>
+        </p>
+        
+        <wicket:child/>
+
+    </form>
+    
+
+    
+    <div style="clear:both"></div>
+
+    <div wicket:id="tabs"/>    
+    <div class="uploadImagePanel" wicket:id="uploadPanel"/>
+    
+</wicket:panel>

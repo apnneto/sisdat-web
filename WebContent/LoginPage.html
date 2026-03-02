@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br">
+
+<head>
+	<title>Sistema</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<wicket:link>
+		<link rel="shortcut icon" type="image/ico" href="img/favicon.ico" />
+    	<link type="text/css" rel="stylesheet" href="css/estilo.css" />
+    </wicket:link>
+        
+</head>
+
+<body>
+<div id="geral" class="login">
+	<div id="cabecalho">
+		<h1><a href="#" id="logo" title="Página inicial">Sistema</a></h1>
+	</div>
+	
+	<div id="corpo">
+		
+			<div class="msg de erro" wicket:id="msg.erro">
+			<span wicket:id="feedback"/>
+			</div>
+		
+		<form wicket:id="loginForm" >
+		<fieldset>
+            	<div><label>Usuário</label><input type="text" wicket:id="login" id="txtUsuario"/></div>
+				<div><label>Senha</label><input type="password" wicket:id="password"/></div>
+		</fieldset>
+
+		<div><input type="submit" value="Entrar" /></div>
+
+		</form>
+		
+	</div>
+
+	<div id="rodape"><span class="icone-rodape">&nbsp;</span> © 2014 - <span wicket:id="dataAtual"></span> </div>
+	
+</div>
+
+</body>
+</html>

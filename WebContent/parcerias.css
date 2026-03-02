@@ -1,0 +1,24 @@
+/* 
+    Document   : parcerias
+    Created on : Jun 18, 2010, 4:11:20 PM
+    Author     : juliano
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.form-invalid {
+    border: 1px solid red;
+}
+
+.form-invalid-message {
+    color: red;
+}
+

@@ -1,0 +1,50 @@
+<wicket:panel>
+    <form wicket:id="filterForm">
+      <fieldset class="tam2 ci">
+            <div class="f3 tam1">
+                <wicket:message key="label.identificador.responsavel" /><br/>
+                <input type="text" wicket:id="identificador"/>
+            </div>
+             
+			<div class="f3 tam1">
+                <wicket:message key="label.data.cadastro" /><br/>
+                <input type="text" wicket:id="dataCadastro"/>
+            </div>
+            
+            <div class="f3 tam1">
+                <wicket:message key="label.destinatario" /><br/>
+                <input type="text" wicket:id="destinatario"/>
+            </div>
+            
+            <div class="f3 tam1">
+            	<wicket:message key="label.numero" /><br/>
+            	<input type="text" wicket:id="numero"/>
+            </div>
+            
+            <div class="f3 tam1">
+            	<wicket:message key="entrega.label.sigla.estado" /><br/>
+            	<input type="text" wicket:id="siglaEstado"/>
+            </div>
+            
+            
+            <div class="f3 tam1">
+            	<wicket:message key="entrega.label.cidade" /><br/>
+            	<input type="text" wicket:id="cidade"/>
+            </div>
+            
+            <div>
+                <input type="button" wicket:id="buscarInformacoes" class="botaoConsultar"/>
+	            <input type="button" wicket:id="exibirMapa"/>
+	            <input type="button" wicket:id="exibirMapa2"/>
+			</div>
+        </fieldset>
+
+        <div class="linhaSepara"/>
+        <script type="text/javascript">
+             $('.data').mask('99/99/9999');
+        </script>
+    </form>
+    
+    <div id="map" style="width:100%; height:500px; display: none; " />
+    <br/>
+</wicket:panel>

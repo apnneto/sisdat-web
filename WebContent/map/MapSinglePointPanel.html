@@ -1,0 +1,34 @@
+<wicket:panel>
+
+	<div id="map-container" style="height: 500px;width: 100%;"></div>
+	<!-- <div wicket:id="jsContainer"></div> -->
+	
+	<script type='text/javascript'>		
+	function loadMap(latitudeMed, longitudeMed, bodyInfoWindowMed, iconPointMed)	{
+						
+		var map = '';			
+		var marker = ''; 	
+		
+		var latlng = new google.maps.LatLng(latitudeMed,longitudeMed);
+		
+		var myOptions = { zoom: 17, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP}; 	
+		
+		map = new google.maps.Map(document.getElementById("map-container"),myOptions);		
+		
+		marker = new google.maps.Marker({ position: latlng, map: map, title:" Local do Ponto ", icon: iconPointMed}); 
+		
+		var infowindow = new google.maps.InfoWindow(), marker; 	
+		google.maps.event.addListener(
+			marker, 'click', (
+				function(marker, i) {
+					return function() {
+						infowindow.setContent(bodyInfoWindowMed);
+						infowindow.open(map, marker);		
+					}
+				}
+			)(marker)
+		)
+	}
+</script>
+
+</wicket:panel>

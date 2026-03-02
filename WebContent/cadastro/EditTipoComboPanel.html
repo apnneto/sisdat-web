@@ -1,0 +1,27 @@
+<wicket:extend>
+
+<script src="/sisdat-web/resources/com.frw.base.web.pages.BasePage/js/jquery-maskmoney.js" type="text/javascript"></script>
+	
+	<fieldset class="ci">
+		
+		<div class="f1 tam2">
+			<label> <wicket:message key="tipo.combo.nome" />:</label>
+			<input type="text" wicket:id="nome" />
+			
+			<label> <wicket:message key="tipo.combo.codigo.play" />:</label>
+			<input type="text" wicket:id="codigoPlay" />
+			
+			
+			<label> <wicket:message key="tipo.combo.codigo.apple" />:</label>
+			<input type="text" wicket:id="codigoApple" />
+			
+			
+			<label> <wicket:message key="tipo.combo.valor" />:</label>
+			<input type="text" wicket:id="valor" maxlength="15" onfocus="$(this).maskMoney({showSymbol:true, decimal:',', thousands:'.', allowZero:false});" />
+		
+		</div>
+		
+	</fieldset>
+
+
+</wicket:extend>

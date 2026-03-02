@@ -1,0 +1,59 @@
+<wicket:extend>
+
+	<fieldset class="ci">
+
+		<div class="f1 tam3">
+			<label> <wicket:message key="coleta.pesquisa.label.id" />:
+			</label> <input type="text" wicket:id="id" class="valorCampo" />
+		</div>
+
+		<div class="f1 tam3">
+			<label><wicket:message key="coleta.pesquisa.label.pesquisa" /></label>
+			<input type="text" wicket:id="pesquisa.numero" /> <a href="#"
+				wicket:id="selectPesquisa">&nbsp;</a> <a href="#"
+				wicket:id="limparPesquisa" class="icone excluir">&nbsp;</a>
+		</div>
+
+		<div class="f1 tam3">
+			<label><wicket:message key="coleta.pesquisa.label.pergunta" /></label>
+			<input type="text" wicket:id="pergunta" /> <a href="#"
+				wicket:id="selectPergunta">&nbsp;</a> <a href="#"
+				wicket:id="limparPergunta" class="icone excluir">&nbsp;</a>
+		</div>
+
+		<div class="f1 tam3">
+			<label><wicket:message key="coleta.pesquisa.label.resposta" /></label>
+			<input type="text" wicket:id="resposta.descricao" /> <a href="#"
+				wicket:id="selectResposta">&nbsp;</a> <a href="#"
+				wicket:id="limparResposta" class="icone excluir">&nbsp;</a>
+		</div>
+
+		<div class="f1 tam1">
+			<label><wicket:message
+					key="coleta.pesquisa.label.campo.livre" />: </label>
+			<textarea wicket:id="campoLivre" class="valorCampo"></textarea>
+		</div>
+
+		<div class="f4 tam1">
+			<label><wicket:message key="coleta.pesquisa.label.excluido" /></label>
+			<input type="checkbox" wicket:id="excluido" />
+		</div>
+
+	</fieldset>
+
+	<fieldset class="ci">
+
+		<div class="f1 tam1">
+
+			<div class="bloco">
+				<h3>Foto</h3>
+				<div wicket:id="fotoContainer" class="borda">
+					<img wicket:id="image" width="442" />
+				</div>
+			</div>
+
+		</div>
+
+	</fieldset>
+
+</wicket:extend>

@@ -1,0 +1,437 @@
+/* CSS Document */
+
+a{text-decoration:none;color: #000}
+body{background:#E7E7E7;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:0.7em;color:#000;/*color:#58595b;*/margin:0;padding:0}
+img{border:0}
+p{margin:0;padding:0}
+
+#centraliza{margin:0 auto;/*width:990px;*/width:100%}
+
+#containerPrincipal{margin:0 auto;/*width:990px;*/width:100%;float:left}
+
+/* ***** Login ***** */
+#bgLogin{background:url(../imagens/bgLogin.png) #E7E7E7 repeat-x}
+
+#containerLogin{background:url(../imagens/bgContainerLogin.png) no-repeat center;/*width:990px;*/width:100%;height:224px;float:left;margin-bottom:30px}
+
+#login{width:354px;height:165px;margin:0 auto;margin-top:20px;color:#FFF}
+#login p{font-size:1.1em;border-bottom:1px solid #FFF;margin-bottom:35px}
+
+#formlogin{margin-left:40px}
+#formlogin div{margin:5px 0}
+#formlogin label{color:#FFF;font-size:1.1em}
+#formlogin input.texto{background:#F1F1F1;width:160px;height:16px;font-size:1.2em;color:#6f6f6f;border:1px #CDCDCD solid;padding-top:2px;margin-left:5px}
+#formlogin a{color:#FFF}
+
+.botaoOK{background:url(../imagens/botaoOK.png) no-repeat top;width:41px;height:21px;font-size:1em;color:#FFF;border:0;cursor:pointer}
+.botaoOK:hover{background-position:bottom}
+
+/* ***** Nome Sistema ***** */
+#containerNomeSistema{/*width:990px;*/width:100%;height:55px;text-align:center;margin:50px 0 20px 0;float:left}
+#containerNomeSistema h1{font-size:4.2em;color:#898989;margin:0;padding:0}
+
+/* ***** Menu Superior ***** */
+#containerMenuSuperior{/*width:990px;*/width:100%;height:28px;float:left}
+#containerMenuSuperior p.itens{color:#FFF5F5;margin:7px 20px 0 0;float:left}
+#containerMenuSuperior p{color:#FFF5F5;margin-top:7px;float:left}
+
+#alterarObraLogoff{float:right;margin:0 4px 0 0}
+#alterarObraLogoff p.logoff{margin:5px 0 0 25px;padding:0px 4px }
+#alterarObraLogoff a {color: #FFF}
+
+#tipoImportacaoBox{width: 230px;float: left;}
+#tipoImportacaoBox span label {margin-top: 0px;}
+
+.botaoLogoff{background:url(../imagens/botaoLogoff.png) no-repeat top;width:52px;height:20px;font-family:Verdana, Arial;font-size:1em;color:#FFF;border:0;cursor:pointer}
+.botaoLogoff:hover{background-position:bottom}
+
+.logoff{background-image:url(../imagens/botaoLogoff.png);background-repeat:no-repeat;width:52px;height:16px}
+.logoff a{color:#FFF;text-decoration:none}
+
+/* ***** Cabeçalho ***** */
+#containerCabecalho{/*width:990px;*/width:100%;height:30px;float:left}
+
+/* ***** Interna ***** */
+#bgInterna{background:url(../imagens/bgInterna_2.png) #E5E5E5 repeat-x}
+
+/* ***** Menu Principal ***** */
+#containerMenuPrincipal{/*width:990px;*/width:100%;/* height:90px;*/float:left;margin-top:31px}
+
+#menuPrincipal{/*background:url(../imagens/bg_menu.png) no-repeat center;width:990px;*/width:100%;/* height:89px;*//*height:39px;*/margin:0}
+
+#menuSP{width:100%;list-style:none;float:left;margin:0;padding:0}
+#menuSP li{color:#FFF;float:left;margin:0;padding:0;height:30px;background:url(../imagens/bgMenuSP.png) repeat-x}
+#menuSP a{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:1.2em;color:#FFF;text-align:center;text-decoration:none;/*padding-top:0.6em;*/padding-top:0.4em;display:block}
+#menuSP a:hover{font-family:Verdana, Arial, Helvetica, sans-serif;font-size:1.2em;text-align:center;text-decoration:none;display:block}
+#menuSP li:hover{background:url(../imagens/bgMenuSPover.png) repeat-x}
+#menuSP li.menuAtivo,#menuSP li.menuAtivo:hover{background:url(../imagens/bgMenuSPativo.png) repeat-x;color:#666}
+
+.menuPrincipalSelecionado{color:#F00 !important}
+
+/* ********* Medição de Equipamentos - Coluna descricao  ********** */
+#colunaDescricao{width: 25%}
+
+/* ***** Conteúdo ***** */
+#containerConteudo{/*background:url(../imagens/bgConteudo.png) repeat-y;*/background:#FFF;/*width:990px;*/width:100%;float:left;min-height:400px}
+
+#imgFimConteudo{margin-bottom:30px;background:(../imagens/bgRodape.png) repeat-x;}
+
+#conteudo{/*width:950px;*/width:100%;margin:0 auto;margin-top:10px}
+
+/* ***** Menu Vertical ***** */
+#containerMenuVertical{background:#F8F8F8;min-width:180px;width:18%;border:#D7D7D7 1px solid;margin:0 5px;float:left}
+
+.barraTitulo{background:url(../imagens/img_01.png) repeat-x;width:100%;height:21px;float:left}
+ 
+#menuVertical{width:95%;margin:10px 0 0 6px;float:left}
+
+#menuVerticalItens{width:95%;margin:0;padding:0;float:left}
+
+ul#itensMenu{margin:0 0 5px 0;padding:0;list-style:none}
+ul#itensMenu li.itemMenu a{background:url(../imagens/img_02.png) #FFF repeat-x bottom;width:100%;border:#DFDFDF 1px solid;margin-bottom:5px;text-decoration:none;display:block;float:left;clear:both;padding:5px 0 5px 5px}
+ul#itensMenu li.itemMenu a h3{color:#000;font-size:1em;font-weight:normal;padding:0;margin:0}
+ul#itensMenu li.itemMenu a h3:hover{color:#FFF;font-size:1em;font-weight:normal;padding:0;margin:0;background:#DA251C}
+ul#itensMenu li.itemMenu a:hover, ul#itensMenu li.itemMenu h3.menuAtivo{color:#FFF;background:#DA251C}
+/*ul#itensMenu li.itemMenu h3.menuAtivo{padding:0}*/
+/*ul#itensMenu li.itemMenu a.menuAtivo{background:#DA251C}*/
+/*ul#itensMenu li.itemMenuAtivo{color:#DA251C}*/
+
+ul#itensMenu li.itemMenuAtivo a{background:url(../imagens/img_02.png) #FFF repeat-x bottom;width:100%;border:#DFDFDF 1px solid;margin-bottom:5px;text-decoration:none;display:block;float:left;clear:both;padding:5px 0 5px 5px;background:#DA251C}
+ul#itensMenu li.itemMenuAtivo a h3{color:#FFF;font-size:1em;font-weight:normal;padding:0;margin:0}
+ul#itensMenu:hover{color:#FFF}
+
+#containerSubMenuVertical{width:180px;margin:0 0 6px 12px;padding:0;float:left}
+
+ul#subMenuVertical{width:180px;margin:0;padding:0;list-style:none;float:left;clear:both}
+ul#subMenuVertical li.itemSubMenuVertical a.subMenu{width:180px;color:#000;font-size:1em;text-decoration:none;border:0;padding:0;margin:0;float:left;height:auto}
+ul#subMenuVertical li.itemSubMenuVertical a.subMenu{background:none;padding:5px 0}
+ul#subMenuVertical li.itemSubMenuVertical a.subMenu.ativo{color:#DA251C}
+ul#subMenuVertical li.itemSubMenuVertical a.subMenu.ativo:hover, ul#subMenuVertical li.itemSubMenuVertical a.subMenu:hover{color:#DA251C}
+
+/* ***** Filtros ***** */
+#containerFiltros{background:#F8F8F8;/*width:756px;*/min-width:756px;width:80%;border:#D7D7D7 1px solid;float:right;/*float:left;*/}
+
+#filtros{width:98%;float:left;margin:10px}
+
+#containerModal{background:#F8F8F8;width:415px;border:#D7D7D7 1px solid;float:left}
+
+#boxModal{background:#F8F8F8;border:#D7D7D7 1px solid;float:left;padding:7px}
+
+#filtros label{width:165px;/*color:#848484;*/color:#000;font-size:1em;float:left;margin-top:8px}
+.campoFormulario{color:#000;font-size:1em;float:left;margin-top:4px;margin-right:10px;width:210px}
+.campoFormularioPequeno{color:#000;font-size:1em;float:left;margin-top:4px;margin-right:10px;width:160px}
+.campoFormularioReduzido{color:#000;font-size:1em;float:left;margin-top:4px;margin-right:10px;width:140px}
+.campoFormularioGrande{color:#000;font-size:1em;float:left;margin-top:4px;margin-right:10px;}
+
+
+.valorCampoReduzido{height:16px; width: 120px ;font-family:Verdana, Arial, Helvetica;font-size:1em;/*color:#879595;*/color:#333;border:1px #CDCDCD solid;padding-top:3px;float:left;margin-right:3px}
+.valorCampoData{height:16px; width: 100px ;font-family:Verdana, Arial, Helvetica;font-size:1em;/*color:#879595;*/color:#333;border:1px #CDCDCD solid;padding-top:3px;float:left;margin-right:3px}
+.valorCampo{height:16px;font-family:Verdana, Arial, Helvetica;font-size:1em;color:#333;padding-top:3px;border:1px solid #CDCDCD}
+.valorCampoTextArea{font-family:Verdana, Arial, Helvetica;font-size:1em;color:#333;padding-top:3px;border:1px solid #CDCDCD}
+.valorCampoNumero{height:16px;font-family:Verdana, Arial, Helvetica;font-size:1em;color:#333;padding-top:3px;text-align:right;border:1px solid #CDCDCD}
+.valorCampoNumeroPequeno{width: 80px; height:16px;font-family:Verdana, Arial, Helvetica;font-size:1em;color:#333;padding-top:3px;text-align:right;border:1px solid #CDCDCD}
+.valorCampoReadonly{height:16px; background:#CCCCC;font-family:Verdana, Arial, Helvetica;font-size:1em;color:#A69F94;border:1px #CDCDCD solid;padding-top:3px}
+
+
+.valorCampoRadio {float:none;}
+.valorCampoRadio label {width:165px;/*color:#848484;*/color:#000;font-size:1em;float:none !important;margin-top:8px}
+
+#filtros textarea{/*width:222px;*/height:40px;font-family:Verdana, Arial, Helvetica, sans-serif;font-size:1em;color:#333;border:1px #CDCDCD solid;margin-top:5px}
+
+fieldset{border:1px #CDCDCD solid;margin:5px;padding:5px; padding-bottom: 15px; display:block}
+
+.tituloFieldset{font-size:1em;color:#000;font-weight:bold;text-align:left;margin-left:5px}
+
+
+#lista{border:1px #C5C5C5 solid;width:98%;padding:5px}
+
+.bgTituloLista td{background:/*url(../imagens/bgTitulolista.png) repeat-x top*/ #e0e0e0;background-position:bottom;height:32px;font-size:10px;font-weight:bold;color:#706F6F;text-align:center;border:1px #FFF solid;padding-left:5px;padding-right:5px}
+.bgTituloLista th{background:/*url(../imagens/bgTitulolista.png) repeat-x top*/ #e0e0e0;background-position:bottom;height:32px;font-size:10px;font-weight:bold;color:#706F6F;text-align:center;border:1px #FFF solid;padding-left:5px;padding-right:5px}
+
+.barraFerramentas {background:#ECECEC;font-size:9px;color:#333;border:1px #FFF solid;padding-left:5px;}
+
+.linha1 td{background:#ECECEC;height:25px;font-size:9px;color:333;border:1px #FFF solid;padding-left:3px}
+.linha1 td a{color:333;text-decoration:none}
+.linha1 td a:hover{color:#DA251C}
+.linha1 .acaoListagem{width:10px}
+.linha1 img{text-align:center}
+
+.linha2 td{background:#FFF;height:25px;font-size:9px;color:333;border:1px #FFF solid;padding-left:3px}
+.linha2 td a{color:333;text-decoration:none}
+.linha2 td a:hover{color:#DA251C}
+.linha2 .acaoListagem{width:10px}
+.linha2 img{text-align:center}
+
+.linha1Cancelada td{background:#ECECEC;height:25px;font-size:9px;color:#ff0033;border:1px #FFF solid;padding-left:3px}
+.linha1Cancelada td a{color:#ff0033;text-decoration:none}
+.linha1Cancelada td a:hover{color:#DA251C}
+.linha1Cancelada .acaoListagem{width:10px}
+.linha1Cancelada img{text-align:center}
+
+.linha2Cancelada td{background:#FFF;height:25px;font-size:9px;color:#ff0033;border:1px #FFF solid;padding-left:3px}
+.linha2Cancelada td a{color:#ff0033;text-decoration:none}
+.linha2Cancelada td a:hover{color:#DA251C}
+.linha2Cancelada .acaoListagem{width:10px}
+.linha2Cancelada img{text-align:center}
+
+.colunaCodigo{width:25px}
+
+.ultimaLinha td{ background:url(../imagens/bgTitulolista.png) repeat-x #e0dfdf;background-position:bottom;height:28px;font-size:10px;font-weight:bold;color:#706F6F;border:1px #FFF solid;padding-left:5px;padding-right:5px}
+
+#containerBotoes{width:675px;text-align:left;float:left;padding:10px}
+
+#containerBotoesLista{width:99%;margin-bottom:10px}
+
+.botao{background:url(../imagens/botao_01.png) no-repeat top;font-size:11px;width:109px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botao:hover{background-position:bottom}
+
+.botaoExcluir{background:url(../imagens/bgButExit.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoExcluir:hover{background:url(../imagens/bgButExit.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoExcluirGrande{background:url(../imagens/bgButExitBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoExcluirGrande:hover{background:url(../imagens/bgButExitBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoNovo{background:url(../imagens/bgButNew.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoNovo:hover{background:url(../imagens/bgButNew.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoNovoGrande{background:url(../imagens/bgButNewBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoNovoGrande:hover{background:url(../imagens/bgButNewBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoSalvar{background:url(../imagens/bgButSave.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoSalvar:hover{background:url(../imagens/bgButSave.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoVoltar{background:url(../imagens/bgButSave.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoVoltar:hover{background:url(../imagens/bgButSave.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoSalvarGrande{background:url(../imagens/bgButSaveBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoSalvarGrande:hover{background:url(../imagens/bgButSaveBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoAdicionar{background:url(../imagens/bgButAdd.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoAdicionar:hover{background:url(../imagens/bgButAdd.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoAdicionarGrande{background:url(../imagens/bgButAddBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoAdicionarGrande:hover{background:url(../imagens/bgButAddBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoEnviar{background:url(../imagens/bgButUpload.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoEnviar:hover{background:url(../imagens/bgButUpload.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoEnviarGrande{background:url(../imagens/bgButUploadBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoEnviarGrande:hover{background:url(../imagens/bgButUploadBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoConsultar{background:url(../imagens/bgButFind.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoConsultar:hover{background:url(../imagens/bgButFind.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoConsultarGrande{background:url(../imagens/bgButFindBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoConsultarGrande:hover{background:url(../imagens/bgButFindBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoImportarGrande{background:url(../imagens/bgButImportBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoImportarGrande:hover{background:url(../imagens/bgButImportBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoImportar{background:url(../imagens/bgButImport.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoImportar:hover{background:url(../imagens/bgButImport.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+
+.botaoAnexarGrande{background:url(../imagens/bgButAnexarBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoAnexarGrande:hover{background:url(../imagens/bgButAnexarBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoAnexar{background:url(../imagens/bgButAnexar.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoAnexar:hover{background:url(../imagens/bgButAnexar.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+
+.botaoCalculadoraGrande{background:url(../imagens/bgButSugerirValorBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoCalculadoraGrande:hover{background:url(../imagens/bgButSugerirValorBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoCalculadora{background:url(../imagens/bgButSugerirValor.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoCalculadora:hover{background:url(../imagens/bgButSugerirValor.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoValidarGrande{background:url(../imagens/bgButValidarBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoValidarGrande:hover{background:url(../imagens/bgButValidarBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoValidar{background:url(../imagens/bgButValidar.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoValidar:hover{background:url(../imagens/bgButValidar.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoMoneyGrande{background:url(../imagens/bgButDepositarBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoMoneyGrande:hover{background:url(../imagens/bgButDepositarBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoMoney{background:url(../imagens/bgButDepositar.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoMoney:hover{background:url(../imagens/bgButDepositar.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+
+.botaoComunicar{background:url(../imagens/bgButEmail.png) no-repeat top;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+.botaoComunicar:hover{background:url(../imagens/bgButEmail.png) no-repeat bottom;font-size:11px;width:110px;height:24px;color:#FFF;border:0;cursor:pointer}
+
+.botaoComunicarGrande{background:url(../imagens/bgButEmailBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoComunicarGrande:hover{background:url(../imagens/bgButEmailBig.png) no-repeat bottom;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoGrande{background:url(../imagens/bgButG.png) no-repeat top;width:150px;height:24px;color:#FFF;border:0;font-size:11px;cursor:pointer;margin-left:10px}
+.botaoGrande:hover{background-position:bottom}
+
+.botaoConsultarManualmenteGrande{background:url(../imagens/bgButEditBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoConsultarManualmenteGrande:hover{background:url(../imagens/bgButEditBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+.botaoConsultarAutomaticamenteGrande{background:url(../imagens/bgButTopGearBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+.botaoConsultarAutomaticamenteGrande:hover{background:url(../imagens/bgButTopGearBig.png) no-repeat top;font-size:11px;width:150px;height:24px;color:#FFF;border:0;cursor:pointer;padding-left:25px}
+
+/* ***** Rodapé ***** */
+#containerRodape{background:url(../imagens/linhaRodape.png) no-repeat top;/*width:990px;*/width:100%;height:2px;text-align:center;padding-top:20px;float:left}
+#containerRodape p{color:#787777;margin-bottom:7px}
+
+/* ***** Paginacao ***** */
+div#paginacao{text-align:right;margin:15px 0}
+div#paginacao a{height:24px;width:24px;color:#58595B;text-decoration:none;padding:9px;text-align:center}
+div#paginacao a.simbolos{background:url(../imagens/bgPaginador.png) no-repeat center;height:24px;width:24px;text-align:center;display:inline}
+div#paginacao a.numero{background:url(../imagens/bgPaginador.png) no-repeat center;text-align:center}
+div#paginacao span em{background:url(../imagens/bgPaginador.png) no-repeat center;padding:10px;text-align:center;color:#DA251C;font-weight: bold}
+
+/* ***** Box Upload ***** */
+.boxUpload{float:left}
+
+.widthUpload{width:370px;margin-top:10px;}
+
+.editSelect{font-size:12px;float:left;font-size:1.em;color:#333;font-family:Verdana,Arial,Helvetica;border:1px solid #CDCDCD;background-color:#FFF;height:20px;min-width:140px;margin-right:5px;color:#333}
+
+.editSelectMultiple{font-size:12px;float:left;font-size:1.em;color:#333;font-family:Verdana,Arial,Helvetica;border:1px solid #CDCDCD;background-color:#FFF;min-width:150px;margin-right:5px;color:#333}
+
+.editParcerias{float:left;width:356px;padding-left:14px;padding-bottom:10px}
+
+
+
+.boxParcerias{float:left;width:370px;margin-top:4px}
+    .boxParcerias .botao{float:right}
+
+.uploadImagePanel{display:inline-block;float:left;width:360px}
+
+
+/* ***** Upload ***** */
+.formUpload{width:500px}
+.formUpload .botao{float:left}
+
+.imgUpload{float:left;padding-left:76px;width:250px;margin-bottom:20px}
+	.imgUpload img{border:4px solid #CCC}
+#divUpload{padding:10px}
+
+.legendBox{width:350px;float:left;margin-top:10px;padding:10px}
+.legendFilter{float:left;padding:10px; padding-bottom: 15px;}
+
+/* ***** Tab ***** */
+.tab-row{background:url("../imagens/tabs/bg.gif") repeat-x scroll center bottom ;float:left;line-height:normal;width:100%}
+    .tab-row ul{list-style:none outside none;margin:0;padding:10px 10px 0}
+    .tab-row li{background:url("../imagens/tabs/left.gif") no-repeat scroll left top transparent;float:left;margin:0;padding:0 0 0 9px}
+    .tab-row a{background:url("../imagens/tabs/right.gif") no-repeat scroll right top transparent;color:#999;display:block;font-weight:bold;font-size:11px;padding:5px 15px 4px 6px;text-decoration:none;white-space:nowrap}
+        .tab-row a:hover{color:#776655}
+.tab-row li.selected{background-image:url("../imagens/tabs/left_on.gif");margin-right:5px}
+.tab-row li.selected a{background-image:url("../imagens/tabs/right_on.gif");color:#776655;padding-bottom:5px}
+
+.tab-panel{clear:left;border-bottom:1px solid #CCC;border-left:1px solid #CCC;border-right:1px solid #CCC;padding:10px}
+
+.selected{color:#FFF}
+
+div2 div.tab-row{background:url("../imagens/tabs/bg.gif") repeat-x scroll center bottom #336699;float:left;font-size:85%;line-height:normal;width:100%}
+div2 div.tab-row ul{list-style:none outside none;margin:0;padding:10px 10px 0}
+div2 div.tab-row li{background:url("../imagens/tabs/right.gif") no-repeat scroll right top transparent;float:left;margin:0;padding:0 5px 0 0}
+div2 div.tab-row a{background:url("../imagens/tabs/left.gif") no-repeat scroll left top transparent;color:#9CF;display:block;float:left;font-weight:bold;padding:5px 7px 4px 20px;text-decoration:none;white-space:nowrap}
+div2 div.tab-row a{float:none}
+div2 div.tab-row a:hover{color:#FFF}
+div2 div.tab-row li.selected{background-image:url("../imagens/tabs/right_on.gif")}
+div2 div.tab-row li.selected a{background-image:url("../imagens/tabs/left_on.gif");color:#333;padding-bottom:5px}
+div3 div.tab-row{background:url("../imagens/tabs/bg.jpg") repeat-x scroll center top #EEE;float:left;line-height:normal;width:100%}
+div3 div.tab-row ul{list-style:none outside none;margin:0;padding:10px 10px 0}
+div3 div.tab-row li{background:url("../imagens/tabs/left.gif") no-repeat scroll left top transparent;float:left;margin:0;padding:0 0 0 28px}
+div3 div.tab-row a{background:url("../imagens/tabs/right.gif") no-repeat scroll right top transparent;color:#92A2AC;display:block;float:left;font-weight:bold;padding:9px 28px 4px 0;text-decoration:none}
+div3 div.tab-row a{float:none}
+div3 div.tab-row a:hover{color:#A56060}
+div3 div.tab-row li.selected{background-image:url("../imagens/tabs/left_on.gif")}
+div3 div.tab-row li.selected a{background-image:url("../imagens/tabs/right_on.gif");color:#A56060}
+div4 div.tab-row ul{background:url("../imagens/tabs/tab_bottom.gif") repeat-x scroll center bottom transparent;height:20px;margin:0;padding-left:10px}
+div4 div.tab-row li{display:inline;list-style-type:none;margin:0;padding:0}
+div4 div.tab-row a:link, div4 div.tab-row a:visited{background:none repeat scroll 0 0 #F3F3F3;border:1px solid #CCC;color:#666;float:left;font-size:10px;font-weight:bold;line-height:14px;margin-right:4px;padding:2px 10px;text-decoration:none}
+div4 div.tab-row li.selected a:link, div4 div.tab-row a.active:visited{background:none repeat scroll 0 0 #FFF;border-bottom:1px solid #FFF;color:#000}
+div4 div.tab-row a:hover{background:none repeat scroll 0 0 #FFF}
+
+/* ***** Cadastro de usuario ***** */
+.perfisAtuaisUsuario{float:left;width:730px}
+
+.fieldSetPerfisAtuaisUsuario{padding:10px}
+.fieldsetObrasPerfis{float:left;width:340px;padding:10px;padding-left:15px}
+.fieldsetEntradaSaida{float:left;width:330px;padding-left:14px;padding-bottom:10px}
+.fieldsetContaCorrente{float:left;width:350px;padding-left:14px;padding-bottom:10px}
+.fieldsetBox{float:left;width:345px;padding-left:14px;padding-bottom:10px}
+.fieldsetFaturamento{float:left;width:720px;padding:10px;padding-left:15px}
+
+.tituloObra{font-weight:bold}
+.tituloGrafico{font-weight:bold;font-size:12px;}
+
+.filterBox{width:756px}
+
+.erroFeeBack{color:#DA251C}
+
+/* ***** Auto Completar ***** */
+div.wicket-aa{font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana;font-size:12px;background-color:white;border-width:1px;border-color:#CCC;border-style:solid;padding:2px;margin:1px 0 0 0;text-align:left}
+div.wicket-aa ul{ list-style:none; padding:2px; margin:0}
+div.wicket-aa ul li.selected{ background-color:#CCC; padding:2px; margin:0}
+
+/* ***** FooterPanel List ***** */
+div.footerPanel{margin-top:20px}
+
+span.setaTitulo{ background-image:url("../imagens/setinhaTitulos.png");background-repeat:no-repeat;height:18px;width:16px;font-size:14px;font-weight:bold;padding-left:20px}
+
+.linhaSepara{border-bottom:1px solid #C5C5C5;width:100%;margin:15px 0}
+.linhaSeparaTopo{border-bottom:1px solid #C5C5C5;width:100%;margin-top:15px;margin-bottom:0px}
+
+.filtroDir{float:right;width:330px}
+.filtroEsq{float:left;width:330px}
+.filtroEsq span.campoFormulario{width:165px;margin:0}
+.filtroDir span.campoFormulario{width:185px;margin:0}
+.filtroEsqGrande{float:left;width:380px}
+
+span.mensagem{padding:5px;font-size:medium;font-weight:bold}
+
+.alignNumero{text-align:right}
+.alignImg{text-align:center;clear:both}
+.alignImg img{clear:both}
+
+/* ***** Custom Upload Elements ***** */
+.customfile-input{ position:absolute; height:100px; cursor:pointer; background:transparent; border:0; opacity:0; -moz-opacity:0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); z-index:999}
+
+.customfile{ width:350px; background:#FFF; cursor:pointer; overflow:hidden; padding:2px; border:1px solid #ddd; position:relative}
+.customfile-disabled{ opacity:.5; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); cursor:default}
+.customfile-feedback{ display:block; margin:1px 1px 1px 5px; font-size:10px; color:#333; font-style:italic; padding:.3em .6em}
+.customfile-feedback-populated{ color:#000; font-style:normal; font-weight:bold; padding-left:20px}
+.customfile-button{ border:1px solid #CCC; background:#eee; color:#666; font-weight:bold; float:right;  padding:.3em .6em;  text-align:center; text-decoration:none;  font-size:10px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px}
+.customfile-hover .customfile-button, .customfile-focus .customfile-button { color:#666; background:#CCC; border-color:#bbb;  padding:.3em .6em}
+.customfile-focus .customfile-button{ outline:1px dotted #CCC}
+
+.customfile-ext-jpg, .customfile-ext-gif, .customfile-ext-png, .customfile-ext-jpeg, .customfile-ext-bmp{background-image:url(../images/icon-image.gif)}
+.customfile-ext-mp3, .customfile-ext-mp4, .customfile-ext-mov, .customfile-ext-swf, .customfile-ext-wav, .customfile-ext-m4v{background-image:url(../images/icon-media.gif)}
+.customfile-ext-zip, .customfile-ext-tar, .customfile-ext-sit{background-image:url(../images/icon-zip.gif)}
+
+#containerConteudo #conteudo a img.alignSetinha{float:left}
+
+/* ***** Modal ***** */
+.modalTitulo{background:#e1e1e1;height:20px;font-weight:bold;padding-top:3px;margin-bottom:10px;padding-left:10px}
+
+.modalPadding p{padding:10px}
+
+.modalPadding {padding:10px ; background:#F8F8F8 }
+
+div.wicket-modal {padding: 5px;}
+
+div.wicket-modal div.w_content {  background-color:#F8F8F8 !important; width:100%;}
+
+div.wicket-modal div.w_caption {
+    background-color:white !important;;
+    color:#666666;
+    cursor:default;
+    height:1.4em;
+    line-height:1.4em;
+    overflow:hidden;
+    position:relative;
+
+}
+
+.colunaAzul {background-color: #BBDDCC}
+.colunaVerde {background-color: #AAEE99}
+.colunaVermelha {background-color: #DD4422}
+.colunaLaranja {background-color: #EEBB44}
+.colunaAmarela {background-color: #FFFF00}
+.fundoAmareloClaro {background-color: #FFFFCC}

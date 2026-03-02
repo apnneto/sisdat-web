@@ -1,0 +1,36 @@
+<wicket:extend>
+
+<div>
+
+     <wicket:fragment wicket:id="botoesContainer" >
+
+     </wicket:fragment>
+<div style="max-width: 756px">
+    <form wicket:id="form" >
+
+        <div wicket:id="container" class="containerBotoes">
+            <input type="button" wicket:id="novo" class="botaoNovo"/>
+            <input type="button" wicket:id="salvar" class="botaoSalvar"/>
+            <input type="button" wicket:id="excluir" class="botaoExcluir"/>
+            <wicket:container wicket:id="botoesContainer"/>
+
+            <div class="linhaSeparaTopo"></div>
+
+        </div>
+        
+        <span style="color:#DA251C" wicket:id="feedback" />
+        <br clear="all" />
+
+        <wicket:child/>
+
+    </form>
+</div>
+    <div wicket:id="tabs"/>
+
+    <div wicket:id="uploadPanel" style="display:block"> </div>
+    <br clear="all" />
+    <br clear="all" />
+
+</div>
+
+</wicket:extend>

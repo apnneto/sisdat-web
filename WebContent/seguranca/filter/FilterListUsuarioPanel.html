@@ -1,0 +1,24 @@
+<wicket:panel>
+
+    <span wicket:id="messages"/>
+
+    <form wicket:id="filterForm">
+
+		<fieldset id="filtro" class="tam2 ci">
+        <legend><a href="#" class="expande-fieldset"><wicket:message key="label.filtro" /></a></legend>
+			<div><label><wicket:message key="label.login" /></label> <input type="text" wicket:id="login" class="valorCampo" /> </div>
+			<div><label><wicket:message key="label.nome" /></label>  <input type="text" wicket:id="nome" class="valorCampo" /> </div>
+			<div>	
+			<input type="button" wicket:id="buscarInformacoes" class="botaoConsultar"/>
+		    </div>
+		</fieldset>
+	
+	
+    </form>
+    
+<script type="text/javascript">
+$( ".expande-fieldset" ).click(function() {
+$( this.parentNode.parentNode ).toggleClass( "contrai-fieldset" );
+});
+</script>
+</wicket:panel>

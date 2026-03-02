@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.gov.sisdat</groupId>
+    <artifactId>sisdat-web</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>SisDAT Web (legacy)</name>
+    <description>Projeto legado SisDAT - pom.xml provisório para migração e build.</description>
+
+    <properties>
+        <!-- Default to Java 1.8 to match legacy runtime; use -Pjava17 to build with Java 17 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src</sourceDirectory>
+        <finalName>sisdat-web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <!-- Use existing WebContent as webapp source -->
+                    <warSourceDirectory>${project.basedir}/WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>java17</id>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <!-- Keep minimal dependencies by default; dependencies will be migrated incrementally.
+             Add container-provided APIs with provided scope as guidance -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Provided Java EE APIs for compile-time (IDE friendly) -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

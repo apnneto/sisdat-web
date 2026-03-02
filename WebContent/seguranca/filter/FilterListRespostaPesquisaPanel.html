@@ -1,0 +1,41 @@
+<wicket:extend>
+
+
+	<div class="f1">
+
+		<div class="tam3">
+			
+			<b><label wicket:id="labelQuestionario" style="font-weight: 200; font: 300 150%/100% CarroisGothic,sans-serif;">:
+			</label></b> <br/>
+			
+			<label> <wicket:message key="label.empresa" />:
+			</label> <select wicket:id="empresa"  style="min-width: 260px"
+				class="editSelect" />
+		</div>
+		
+		<div class="tam3">			
+			<label> <wicket:message key="label.usuarios" />:
+			</label> <select wicket:id="usuario"  style="min-width: 260px"
+				class="editSelect" />
+		</div>
+		
+		<div class="f1 tam1"></div>
+		
+		<div class="f3 tam4">
+			<label><wicket:message key="relatorio.entrega.data.inicio" /></label>
+			<input type="text" wicket:id="dataInicio" class="data" /> 
+		</div>
+
+		<div class="f3 tam4">
+			<label><wicket:message key="relatorio.entrega.data.fim" /></label>
+			<input type="text" wicket:id="dataFim" class="data" /> 
+		</div>
+
+
+	</div>
+	
+	<script type="text/javascript">
+		$('.data').mask('99/99/9999');
+	</script>
+
+</wicket:extend>

@@ -1,0 +1,24 @@
+<wicket:panel>
+    <form wicket:id="multipleSelectionForm">
+    <table border="0" >
+        <tr>
+            <td><span class="campoFormulario">Disponível:</span></td><td></td><td><span class="campoFormulario">Selecionado:</span></td>
+        </tr>
+        <tr>
+            <td>
+                <select wicket:id="available" class="editSelectMultiple" multiple style="width:300px" size="10"/>
+            </td>
+            <td>
+                <input type="button" class="botao" wicket:id="add" value="&gt;&gt;" /><br/><input type="button" class="botao" wicket:id="remove" value="<<" />
+            </td>
+            <td>
+                 <select  wicket:id="selected" class="editSelectMultiple"  multiple style="width:300px" size="10" />
+            </td>
+
+        </tr>
+
+    </table>
+
+    </form>
+
+</wicket:panel>

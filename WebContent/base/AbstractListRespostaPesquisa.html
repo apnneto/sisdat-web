@@ -1,0 +1,68 @@
+<wicket:panel>
+
+    <wicket:fragment wicket:id="botoesContainerAdded"></wicket:fragment>
+
+
+    <div  class="filterBox">
+        <wicket:container wicket:id="searchFilters"/>
+    </div>
+
+    <div id="containerBotoesLista">
+    	<p>
+        	<button wicket:id= "editPageLink" class="sub-incluir"><label wicket:id="caption"/></button>
+        	<button wicket:id= "btnExportarExcel" class="sub-salvar"><label wicket:id="captionExcel"/></button>
+        	<wicket:container wicket:id="botoesContainer"/>
+     	</p>
+    </div>
+
+    <span wicket:id="feedback" class="erroFeeBack"/>
+
+
+
+    <span wicket:id="listContainer">
+       
+            
+                <div class="barraFerramentas">
+                	
+                    <a wicket:id="btnExportarPDF" title="Exportar para PDF"><img wicket:id="downloadImagePDF" alt="Exportar para PDF"/><i>(Exportar para PDF)</i> </a>
+                </div>
+                
+              <div class="base-rolagem">
+                <table class="t1">
+                        <tr>
+                            <th class="colunaCodigo" wicket:id="headerAction" >&nbsp;</th>
+                            <th class="titulo-tabela"  wicket:id="headerColumns"><span wicket:id="headerColumn" /></th>
+                            <th wicket:id="lastActionColumn">&nbsp;</th>
+                        </tr>
+                    
+                        <tr wicket:id="list">
+                            <td wicket:id="bodyAction"><a href="#" wicket:id="editLink" class="icone editar" title="Editar">&nbsp;</a></td>
+                            <td wicket:id="bodyColumns"><span wicket:id="label" /></td>
+
+                            <td class="acaoListagem" wicket:id="colunaAcao">
+                            	 <input type="button" wicket:id="selectLink" value="Visualizar Respostas"/>
+                                <a href="#" wicket:id="removeLink" class="icone excluir" title="Excluir">&nbsp;</a>
+                            </td>
+
+                        </tr>
+                    
+
+                </table>
+                </div>
+                <div style="padding: 10px;" wicket:id="msgEmpty"> </div>
+            
+            <div id="navigator" wicket:id="navigator">[dataview navigator]</div>
+
+
+        <div class="footerPanel">
+            <div wicket:id="footerPanel"/>
+        </div>
+
+
+    </span>
+
+
+
+
+</wicket:panel>
+

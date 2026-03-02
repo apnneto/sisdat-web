@@ -1,0 +1,40 @@
+<wicket:panel>
+
+    <div  class="filterBox">
+        <wicket:container wicket:id="searchFilters"/>
+    </div>
+
+    <span wicket:id="feedback" class="erroFeeBack"/>
+
+    <span wicket:id="listContainer">
+        <div id="lista" >
+            <div style="overflow: auto;max-width: 98%">
+                <div class="barraFerramentas">
+                    <a wicket:id="btnExportarExcel" title="Exportar para Excel"><img wicket:id="downloadImage" alt="Exportar para Excel"/><i>(Exportar para Excel)</i> </a>
+                    <a wicket:id="btnExportarPDF" title="Exportar para PDF"><img wicket:id="downloadImagePDF" alt="Exportar para PDF"/><i>(Exportar para PDF)</i> </a>
+                </div>
+                <table cellpadding="0" cellspacing="0" width="100%" >
+                    <thead>
+                        <tr class="bgTituloLista">
+                            <td wicket:id="headerColumns"><span wicket:id="headerColumn" /></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr wicket:id="list">
+                            <td wicket:id="bodyColumns"><span wicket:id="label" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="padding: 10px;" wicket:id="msgEmpty"> </div>
+            </div>
+            
+            <div id="navigator" wicket:id="navigator">[dataview navigator]</div>
+        </div>
+
+        <div class="footerPanel">
+            <div wicket:id="footerPanel"/>
+        </div>
+
+    </span>
+
+</wicket:panel>

@@ -1,0 +1,33 @@
+<wicket:panel>
+<style type="text/css">
+div#map_container{
+	width:100%;
+	height:550px;
+}
+</style>
+ 
+<script type="text/javascript">
+  function loadMap(arraylng, arraylat, imgPin) {
+  	var mapOptions = { center: new google.maps.LatLng(-19.90000000, -44.00000000), 
+            zoom: 5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP };
+	map = new google.maps.Map(document.getElementById("map_container"), mapOptions);
+
+// 	var arraylng = [arraylng];
+// 	var arraylat = [arraylat];
+// 	var arrayPin = [imgPin];
+	var markers = [];
+	
+	for (var i = 0; i < arraylng.length; i++) { 
+		var marker = new google.maps.Marker({ 
+			position: new google.maps.LatLng(arraylat[i],arraylng[i]),
+			map: map,
+			icon: arrayPin[i] });
+		markers.push(marker); 
+	} 
+ 
+  }
+</script>
+ 
+<div id="map_container"></div>
+</wicket:panel>

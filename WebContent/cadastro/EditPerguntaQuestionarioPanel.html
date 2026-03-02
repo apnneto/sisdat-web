@@ -1,0 +1,105 @@
+<wicket:extend>
+
+	<fieldset class="ci">
+
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.id" />:
+			</label> <input type="text" wicket:id="id" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.ordem" />:
+			</label> <input type="text" wicket:id="ordem" class="valorCampo" />
+		</div>
+		
+		<div class="f1 tam3">
+			<label><wicket:message key="pergunta.label.dependencia.pergunta.id" /></label> 
+			<input type="text" wicket:id="dependenciaPerguntaId" /> 
+			<a href="#" wicket:id="selectDependenciaPerguntaId">&nbsp;</a> 
+			<a href="#"	wicket:id="limparDependenciaPerguntaId" class="icone excluir">&nbsp;</a>
+		</div>
+		
+		<div class="f1 tam3">
+			<label><wicket:message key="pergunta.label.dependencia.resposta.id" /></label> 
+			<input type="text" wicket:id="dependenciaRespostaId" /> 
+			<a href="#" wicket:id="selectDependenciaRespostaId">&nbsp;</a> 
+			<a href="#"	wicket:id="limparDependenciaRespostaId" class="icone excluir">&nbsp;</a>
+		</div>
+		
+		<div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.tipo" />:
+			</label> <select wicket:id="tipo" />
+		</div>
+		
+		<!-- <div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.tipo.lov" />:
+			</label> <select wicket:id="tipoLov" />
+		</div> -->
+		
+		<div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.tipo.dado" />:
+			</label> <select wicket:id="tipoDado" />
+		</div>
+		
+		<div class="f4 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="pergunta.label.quadrante" />:
+				</label> <input type="text" wicket:id="quadrante" />
+			</div>
+		
+		<div class="f2 tam2">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.descricao.resumida" />:
+			</label> <input type="text" wicket:id="descricaoResumida" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.precisao.inicial" />:
+			</label> <input type="text" wicket:id="precisaoInicial" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.precisao.final" />:
+			</label> <input type="text" wicket:id="precisaoFinal" class="valorCampo" />
+		</div>
+				
+		<div class="f2 tam2">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.subdescricao" />:
+			</label> <input type="text" wicket:id="subdescricao" class="valorCampo" />
+		</div>
+
+		<div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.questionario" />:
+			</label> <select wicket:id="questionario" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.obrigatoria" />:
+			</label> <input type="checkbox" wicket:id="obrigatoria" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label><wicket:message key="pergunta.label.multiplas.linhas" />:
+			</label> <input type="checkbox" wicket:id="multiplasLinhas" />
+		</div>
+
+		<div class="f1 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.descricao" />:
+			</label> <input type="text" wicket:id="descricao" class="valorCampo" />
+		</div>
+		
+		<div class="f1 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pergunta.label.comentario" />:
+			</label> <input type="text" wicket:id="comentario" class="valorCampo" />
+		</div>
+
+	</fieldset> 
+	
+</wicket:extend>

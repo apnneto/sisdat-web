@@ -1,0 +1,52 @@
+<wicket:panel>
+
+    <div class="filterBox">
+        <wicket:container wicket:id="searchFilters"/>
+    </div>
+
+    <div id="containerBotoes">
+        <button wicket:id= "editPanelLink" class="botaoNovo"><span wicket:id="caption"/></button>
+    </div>
+
+    <span wicket:id="feedback"/>
+
+    <div wicket:id="uploadFile"> </div>
+
+    <span wicket:id="listContainer">
+        <div id="lista">
+
+           
+                <div class="barraFerramentas">
+                    <a wicket:id="btnExportarPDF" title="Exportar para PDF"><img wicket:id="downloadImagePDF" alt="Exportar para PDF"/><i>(Exportar para PDF)</i> </a>
+                </div>
+                <table class="t1">
+                   
+                    <tr>
+                            <th class="colunaCodigo"></th>
+                    		<wicket:container wicket:id="header"/>
+                    		 <th>&nbsp;</th>
+                    </tr>
+                 
+                    <tr wicket:id="list">
+                    	<td><a href="#" class="icone editar"  wicket:id="editLink" title="Editar">&nbsp;</a></td>
+                    	<wicket:child />
+                    	<td class="acaoListagem" wicket:id="colunaAcao"><a href="#" wicket:id="removeLink" class="icone excluir" title="Excluir">&nbsp;</a></td>
+                    </tr>
+                    
+                </table>
+                
+                <div wicket:id="msgEmpty"> </div>
+
+            </div>
+
+            <div id="navigator" wicket:id="navigator">[dataview navigator]</div>
+            <br/>
+     
+
+        <div class="footerPanel">
+            <wicket:container wicket:id="footerPanel"/>
+        </div>
+
+    </span>
+
+</wicket:panel>

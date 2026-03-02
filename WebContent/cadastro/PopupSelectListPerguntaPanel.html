@@ -1,0 +1,53 @@
+<wicket:panel>
+
+	<style>
+		.w_close{display: none;}
+	</style>
+
+	<div wicket:id="filterPergunta" />
+
+				
+	<form wicket:id="form">
+					
+		<fieldset class="ci" >
+			<legend><wicket:message key="combo.label.perguntas" /></legend>
+		
+			<div class="f1 tam1">
+			
+				
+				<div wicket:id="listPerguntas" class="base-rolagem">
+					
+					<input type="button" wicket:id="adicionarTodas" style={width:24px;} />
+					<input type="button" wicket:id="confirmar" value="Confirmar"/>
+					
+					<table class="t1" >
+						<tbody>
+							<tr>
+								<th><wicket:message key="legend.pergunta" /></th>
+								<th><wicket:message key="label.palavra.chave" /></th>
+								<th><wicket:message key="pergunta.label.questionario" /></th>
+							</tr>
+							<tr wicket:id="listViewPerguntas">
+								<td><labek wicket:id="pergunta" /></td>
+								<td><labek wicket:id="palavraChave" /></td>
+								<td><labek wicket:id="questionario" /></td>
+								<td style="width:74px;"><input type="button" wicket:id="adicionarLink" /></td>
+							</tr>
+						</tbody>
+						
+						
+					</table>
+					<div id="navigator" wicket:id="navigator">[dataview navigator]</div>
+					<br/>
+
+				</div>
+				
+			</div>
+			
+		</fieldset>
+
+	</form>
+			
+	
+
+</wicket:panel>

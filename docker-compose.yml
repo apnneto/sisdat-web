@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sisdat
+      MYSQL_USER: sisdat
+      MYSQL_PASSWORD: sisdat
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "sisdat", "-psisdat"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  payara:
+    build:
+      context: .
+      dockerfile: Dockerfile.payara
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-data:

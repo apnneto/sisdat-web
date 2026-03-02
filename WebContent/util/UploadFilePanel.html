@@ -1,0 +1,17 @@
+<wicket:panel>
+    <fieldset class="upload">
+        <legend class="tituloFieldset"><span wicket:id="tituloUploadPanel"></span></legend>
+        <div id="divUpload">
+            <small>(1MB max)</small>
+            <br/>
+            <div class="formUpload">
+                <form wicket:id="form" >
+                    <span style="color:#DA251C" wicket:id="feedback"/>
+                    <input wicket:id="fileInput" id="fileInput" type="file" size="40"/><br><br>
+                    <input wicket:id="ajaxButton" type="button" value="Enviar Arquivo" class="botaoAnexarGrande"/>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+    <div wicket:id="uploadModal"></div>
+</wicket:panel>

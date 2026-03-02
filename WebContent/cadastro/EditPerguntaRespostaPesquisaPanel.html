@@ -1,0 +1,48 @@
+<wicket:extend>
+
+	<fieldset class="ci">
+
+		<div class="f1 tam3">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.id" />:
+			</label> <input type="text" wicket:id="id" class="valorCampo" />
+		</div>
+		
+		<div class="f1 tam2">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.questionario" />:
+			</label> <input type="text" wicket:id="questionario" class="valorCampo" />
+		</div>
+		
+		<div class="f1 tam2">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.usuario" />:
+			</label> <input type="text" wicket:id="usuario" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.data.abertura" />:
+			</label> <input type="text" wicket:id="dataAbertura" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.data.fechamento" />:
+			</label> <input type="text" wicket:id="dataFechamento" class="valorCampo" />
+		</div>
+		
+		<div class="f4 tam1">
+			<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+				<wicket:message key="pesquisa.label.data.sincronizacao" />:
+			</label> <input type="text" wicket:id="dataSincronizacao" class="valorCampo" />
+		</div>
+	</fieldset>
+		<br>
+	
+	<div class="f1 tam1">
+		<h3><wicket:message key="pesquisa.label.respostas"/></h3>
+		<span wicket:id="listPerguntaResposta" />
+	</div>
+		
+</wicket:extend>

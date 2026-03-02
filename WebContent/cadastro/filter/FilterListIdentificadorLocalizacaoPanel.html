@@ -1,0 +1,29 @@
+<wicket:panel>
+
+    <form wicket:id="filterForm">
+
+        <div class="filterBox">
+
+            <div class="campoFormularioGrande">
+                <wicket:message key="label.identificador.responsavel" />:<br/>
+                <input type="text" wicket:id="identificador" class="valorCampo" size="35px" />
+            </div>
+            
+			<div class="campoFormularioGrande">
+                <wicket:message key="label.data.cadastro" /><br/>
+                <input type="text" wicket:id="dataHora" class="data" size="35px"  />
+            </div>
+            
+            <br clear="all"/><br clear="all"/>
+
+            <input type="button" wicket:id="buscarInformacoes" class="botaoConsultar"/>
+
+        </div>
+
+        <div class="linhaSepara"/>
+        <script type="text/javascript">
+             $('.data').mask('99/99/9999');
+        </script>
+    </form>
+    <div id="map" style="width:100%; height:500px; display: none"></div>
+</wicket:panel>

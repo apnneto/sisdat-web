@@ -1,0 +1,52 @@
+name: Build and Publish Docker Image
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    outputs:
+      has-pom: ${{ steps.check_pom.outputs.has_pom }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for pom.xml
+        id: check_pom
+        run: |
+          if [ -f pom.xml ]; then echo "has_pom=true"; echo "::set-output name=has_pom::true"; else echo "has_pom=false"; echo "::set-output name=has_pom::false"; fi
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build with Maven (if pom exists)
+        if: steps.check_pom.outputs.has_pom == 'true'
+        run: mvn -B -DskipTests package
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/sisdat-web:latest
+            ghcr.io/${{ github.repository_owner }}/sisdat-web:${{ github.sha }}
+          build-args: |
+            HAS_POM=${{ steps.check_pom.outputs.has_pom }}
+
+      - name: Logout
+        run: docker logout ghcr.io

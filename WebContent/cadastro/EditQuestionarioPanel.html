@@ -1,0 +1,72 @@
+<wicket:extend>
+	<script src="/sisdat-web/resources/com.frw.base.web.pages.BasePage/js/jquery.maskedinput.js" type="text/javascript"></script>
+	<script src="/sisdat-web/resources/com.frw.base.web.pages.BasePage/js/jquery-maskmoney.js" type="text/javascript"></script>
+	<script src="/sisdat-web/resources/com.frw.base.web.pages.BasePage/js/jquery.format.js" type="text/javascript"></script>
+
+	<fieldset class="ci">
+	
+			<div class="f1 tam3">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.id" />:
+				</label> <input type="text" wicket:id="id" class="valorCampo" />
+			</div>
+			
+			<div class="f3 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.ordem" />:
+				</label> <input type="text" wicket:id="ordem" class="inteiro" />
+			</div>
+				
+			<div class="f3 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.codigo" />:
+				</label> <input type="text" wicket:id="codigo" class="valorCampo" />
+			</div>
+				
+			<div class="f3 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.versao" />:
+				</label> <input type="text" wicket:id="versao" class="valorCampo" />
+			</div>
+				
+			<div class="f2 tam2">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.orientacao" />:
+				</label> <input type="text" wicket:id="orientacao" class="valorCampo" />
+			</div>
+			
+			
+			<div class="f1 tam2">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="questionario.label.descricao" />:
+				</label> <input type="text" wicket:id="descricao" class="valorCampo" />
+			</div>
+			<div class="f4 tam1">
+				<label><wicket:message key="questionario.label.foto" /></label> <input
+					type="checkbox" wicket:id="foto" />
+			</div>
+			
+			<div class="f4 tam1">
+				<label><wicket:message key="questionario.label.editavel" /></label> <input
+					type="checkbox" wicket:id="editavel" />
+			</div>
+			
+			<div class="f4 tam1">
+				<label><wicket:message key="questionario.label.captura.coordenada" /></label> <input
+					type="checkbox" wicket:id="capturaCordenada" />
+			</div>
+			
+			<div class="f1 tam1">
+				<label> <wicket:message key="questionario.label.resumo" />: </label>
+				<textarea wicket:id="resumo" ></textarea>
+			</div>
+	
+	</fieldset>
+	
+	
+	<script>
+		$(".inteiro").mask("9999");
+
+	</script>
+
+</wicket:extend>

@@ -1,0 +1,11 @@
+FROM payara/server-full:5.2022.4
+
+# Inject JDBC datasource configuration before the WAR is deployed.
+# Payara's entrypoint appends the deploy command to post-boot-commands.asadmin;
+# by supplying our own base file the pool + resource are created first.
+COPY scripts/payara-post-boot.asadmin /opt/payara/config/post-boot-commands.asadmin
+
+# The WAR already contains everything (WebContent, WEB-INF/classes, WEB-INF/lib).
+COPY target/sisdat-web.war /opt/payara/deployments/sisdat-web.war
+
+EXPOSE 8080

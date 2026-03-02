@@ -1,0 +1,102 @@
+<wicket:extend>
+
+	<div class="f2 tam1">
+
+		<fieldset class="ci">
+			<legend>
+				<wicket:message key="legend.pergunta" />
+			</legend>
+
+
+			<div class="f1 tam2">
+				<label><wicket:message key="pergunta.label.questionario" />:
+				</label><select wicket:id="questionario" />
+			</div>
+			
+			<div class="f4 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="pergunta.label.ordem" />:
+				</label> <input type="text" wicket:id="ordem" />
+			</div>
+
+			<div class="f1 tam2">
+				<label> <span class="obrig"
+					title="Preenchimento obrigatório">&#8226;</span> <wicket:message
+						key="pergunta.label.descricao" />:
+				</label>
+				<textarea rows="20" draggable="false" wicket:id="descricao"
+					class="valorCampo"></textarea>
+			</div>
+
+			<div class="f1 tam2">
+				<label> <wicket:message key="pergunta.label.subdescricao" />:
+				</label>
+				<textarea rows="20" draggable="false" wicket:id="subdescricao"
+					class="valorCampo"></textarea>
+			</div>
+
+			<div class="f1 tam2">
+				<label> <wicket:message
+						key="pergunta.label.descricao.resumida" />:
+				</label>
+				<textarea rows="20" draggable="false" wicket:id="descricaoResumida"
+					class="valorCampo"> </textarea>
+			</div>
+
+			<div class="f1 tam2">
+				<label> <wicket:message key="pergunta.label.comentario" />:
+				</label>
+				<textarea rows="20" draggable="false" wicket:id="comentario"
+					class="valorCampo"></textarea>
+			</div>
+
+			<div class="f4 tam1">
+				<label><wicket:message key="pergunta.label.tipo" />: </label> <select
+					wicket:id="tipo" />
+			</div>
+			<div class="f4 tam1">
+				<label><wicket:message key="pergunta.label.tipo.dado" />: </label>
+				<select wicket:id="tipoDado" />
+			</div>
+			
+			<div class="f4 tam1">
+				<label> <span class="obrig" title="Preenchimento obrigatório">&#8226;</span>
+					<wicket:message key="pergunta.label.quadrante" />:
+				</label> <input type="text" wicket:id="quadrante" />
+			</div>
+			
+			<!-- <div class="f4 tam1">
+				<label><wicket:message key="pergunta.label.tipo.lov" />: </label><select
+					wicket:id="tipoLov" />
+			</div> -->
+
+			<div class="f4">
+				<label><wicket:message key="pergunta.label.obrigatoria" />:
+				</label> <input type="checkbox" wicket:id="obrigatoria" />
+			</div>
+
+			<div class="f4">
+				<label><wicket:message key="pergunta.label.multiplas.linhas" />:
+				</label> <input type="checkbox" wicket:id="multiplasLinhas" />
+			</div>
+
+		</fieldset>
+
+
+	</div>
+
+	<div class="f2 tam1">
+		<fieldset class="ci">
+			<legend>
+				<wicket:message key="legend.Resposta" />
+			</legend>
+			<div>
+				<div wicket:id="listRespostas" />
+
+			</div>
+		</fieldset>
+	</div>
+
+</wicket:extend>
+
+

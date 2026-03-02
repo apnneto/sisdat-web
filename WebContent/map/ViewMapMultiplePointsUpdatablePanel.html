@@ -1,0 +1,85 @@
+<wicket:panel>
+    <div id="map-canvas" class="mapa-view"></div>
+    <div id="pop-up"></div>
+    
+	<script type="text/javascript">
+	
+		function addMarkers(map, arrayPin, arraylat, arraylng, arrayTitle, isShowRaio, arrayRaio, arrayColorRaio, isShowInfoWindow, arrayBodyInfoView) {
+			var bounds = new google.maps.LatLngBounds();
+			
+			for (var i = 0; i < arraylng.length; i++) { 
+				if(arrayPin[i] != null && arrayPin[i] != "") {
+					var latLng = new google.maps.LatLng(arraylat[i],arraylng[i]);
+
+					var marker = new google.maps.Marker({
+					position: latLng, map: map, title: arrayTitle[i], icon: arrayPin[i]}); 
+		
+					appendRaio(isShowRaio, arrayColorRaio[i], arraylat[i], arraylng[i], arrayRaio[i]);
+						
+				} else {
+					var marker = new google.maps.Marker({ 
+						position: new google.maps.LatLng(arraylat[i],arraylng[i]),map: map, title: arrayTitle[i] }); 
+				}				
+				
+				appendInfoView(isShowInfoWindow, arrayBodyInfoView[i], marker);
+				
+				if(latLng !=null){
+					appendBestZoom(marker, latLng, bounds);
+				}
+				markers.push(marker); 
+			}
+	
+			map.fitBounds(bounds);
+		}	
+	
+		function appendRaio(isShowRaio, color, lat, lon, raio) {
+			if(isShowRaio) {
+			    var populationOptions = { 
+			    	strokeColor: color,
+			    	strokeOpacity: 0.8,
+			    	strokeWeight: 2,
+			    	fillColor: color,
+			    	fillOpacity: 0.35,
+			    	map: map,
+			    	center: new google.maps.LatLng(lat,lon),
+			    	radius: raio
+		    	};
+		    	cityCircle = new google.maps.Circle(populationOptions);
+			}
+		}
+	
+		function appendInfoView(isShowInfoWindow, bodyInfo, marker){
+			if(isShowInfoWindow){
+				if(bodyInfo != null){ 
+					var infowindow = new google.maps.InfoWindow(), marker; 	
+					google.maps.event.addListener(
+						marker, 'click', (
+							function(marker, i) {
+								return function() {
+									infowindow.setContent(bodyInfo);
+									infowindow.open(map, marker);		
+								}
+							}
+						)(marker)
+					)
+					
+				}//END if
+			}
+		}	
+		
+	function appendBestZoom(marker, latLng, bounds){
+		bounds.extend(latLng); 
+		map.setCenter(bounds.getCenter());
+	}
+		
+	function clearMarkers() {
+	  for (var i = 0; i < markers.length; i++ ) {
+		  markers[i].setMap(null);
+	  }
+	  markers = [];
+	}	
+	</script>
+    
+	<span wicket:id="javaScriptContainer">jscontainer</span>    
+    
+</wicket:panel>

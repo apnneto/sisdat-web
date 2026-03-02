@@ -1,0 +1,43 @@
+<wicket:extend>
+
+	<fieldset class="ci">
+
+		<div class="f2 tam3">
+			<label><wicket:message key="dispositivo.label.usuario" /></label> 
+			<input type="text" wicket:id="usuario" /> 
+			<a href="#" wicket:id="selectUsuario">&nbsp;</a> 
+			<a href="#"	wicket:id="limparUsuario" class="icone excluir">&nbsp;</a>
+		</div>
+		
+		<div class="f1 tam2">
+			<label>
+				<wicket:message key="usuario.label.nome" /></label> <input type="text"
+				wicket:id="nome" />
+		</div>
+
+		<div class="f2 tam3">
+			<label><wicket:message key="usuario.label.cpf" /></label> <input
+				type="text" wicket:id="cpf" class="cpf" />
+		</div>
+
+
+		<div class="f2 tam3">
+			<label> 
+				<wicket:message key="usuario.label.tipo.usuario" />
+			</label> <input type="text" wicket:id="tipoUsuario.descricao" />
+		</div>
+
+		<div class="f2 tam3">
+			<label>
+				<wicket:message key="usuario.label.login" /></label> <input type="text"
+				wicket:id="login" maxlength="45" />
+		</div>
+
+		<div class="f4 tam1">
+			<label><wicket:message key="usuario.label.ativo" /></label> <input
+				type="checkbox" wicket:id="ativo" />
+		</div>
+
+	</fieldset>
+
+</wicket:extend>

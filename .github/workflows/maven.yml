@@ -1,0 +1,30 @@
+name: Java CI - Maven
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+
+      - name: Build with Maven
+        run: mvn -B -DskipTests package
+
+      - name: Upload WAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sisdat-web-war
+          path: target/*.war
