@@ -1,7 +1,7 @@
 @echo off
 REM configure-glassfish-datasource.bat
 REM Uso: configure-glassfish-datasource.bat <GLASSFISH_HOME> <db_name> <db_user> <db_pass> <pool_name> <jndi_name>
-REM Ex: configure-glassfish-datasource.bat C:\glassfish3 sisdat root "senha" sisdatPool jdbc/sisdat
+REM Ex: configure-glassfish-datasource.bat C:\glassfish3 sisdat_schema root "senha" sisdatPool jdbc/sisdat
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 

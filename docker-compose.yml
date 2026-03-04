@@ -6,13 +6,15 @@ services:
     command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=1
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: sisdat
+      MYSQL_DATABASE: sisdat_schema
       MYSQL_USER: sisdat
       MYSQL_PASSWORD: sisdat
     volumes:
       - db-data:/var/lib/mysql
+      - ./scripts/mysql-init.sql:/docker-entrypoint-initdb.d/mysql-init.sql:ro
     ports:
       - "3307:3306"
+    restart: unless-stopped
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "sisdat", "-psisdat"]
       interval: 10s

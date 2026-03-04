@@ -41,6 +41,8 @@
                     <!-- Use existing WebContent as webapp source -->
                     <warSourceDirectory>${project.basedir}/WebContent</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <!-- Exclude JARs that conflict with Payara 5 built-in libraries -->
+                    <packagingExcludes>WEB-INF/lib/bean-validator.jar</packagingExcludes>
                 </configuration>
             </plugin>
 
@@ -102,6 +104,349 @@
             <artifactId>validation-api</artifactId>
             <version>1.1.0.Final</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- ===== Local JARs from WebContent/WEB-INF/lib ===== -->
+
+        <!-- Wicket 1.4.22 -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-1.4.22.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-extensions</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-extensions-1.4.22.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-auth-roles</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-auth-roles-1.4.22.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-datetime</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-datetime-1.4.22.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-ioc</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-ioc-1.4.22.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-devutils</artifactId>
+            <version>1.4.22</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wicket-devutils-1.4.22.jar</systemPath>
+        </dependency>
+
+        <!-- Apache POI (XLS export) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10-FINAL</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/poi-3.10-FINAL-20140208.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-old</artifactId>
+            <version>3.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/poi-3.9-20121203.jar</systemPath>
+        </dependency>
+
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-lang-2.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-beanutils-1.8.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-codec-1.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-collections-3.2.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-io-2.0.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-logging-1.1.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>1.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-digester-1.7.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>commons-discovery</groupId>
+            <artifactId>commons-discovery</artifactId>
+            <version>0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/commons-discovery-0.2.jar</systemPath>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.13</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/log4j-1.2.13.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.10</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/slf4j-api-1.5.10.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.5.10</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/slf4j-jdk14-1.5.10.jar</systemPath>
+        </dependency>
+
+        <!-- Google Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/gson-2.2.4.jar</systemPath>
+        </dependency>
+
+        <!-- iText PDF -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>5.0.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/iText-5.0.3.jar</systemPath>
+        </dependency>
+
+        <!-- JasperReports -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>4.7.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/jasperreports-4.7.1.jar</systemPath>
+        </dependency>
+
+        <!-- JFreeChart -->
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.16</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/jfreechart-1.0.16.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jcommon</artifactId>
+            <version>1.0.20</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/jcommon-1.0.20.jar</systemPath>
+        </dependency>
+
+        <!-- Joda Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.5.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/joda-time-1.5.1.jar</systemPath>
+        </dependency>
+
+        <!-- HTTP Client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/httpclient-4.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/httpcore-4.1.jar</systemPath>
+        </dependency>
+
+        <!-- JSON -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/json-lib-2.4-jdk15.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json-org</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/json-org.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ezmorph</groupId>
+            <artifactId>ezmorph</artifactId>
+            <version>1.0.6</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/ezmorph-1.0.6.jar</systemPath>
+        </dependency>
+
+        <!-- Simple XML -->
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple-xml</artifactId>
+            <version>2.7</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/simple-xml-2.7.jar</systemPath>
+        </dependency>
+
+        <!-- CGLib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.1_3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/cglib-nodep-2.1_3.jar</systemPath>
+        </dependency>
+
+        <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.16</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/mysql-connector-java-5.1.16-bin.jar</systemPath>
+        </dependency>
+
+        <!-- EclipseLink JPA -->
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/eclipselink-2.0.2.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink-full</artifactId>
+            <version>2.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/eclipselink.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink-javax-persistence</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/eclipselink-javax.persistence-2.0.jar</systemPath>
+        </dependency>
+
+        <!-- Axis (Web Services) -->
+        <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/axis.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxrpc</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/jaxrpc.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/wsdl4j.jar</systemPath>
+        </dependency>
+
+        <!-- LogicWicket -->
+        <dependency>
+            <groupId>com.logicq</groupId>
+            <artifactId>LogicWicket</artifactId>
+            <version>1.4</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/LogicWicket-1.4.jar</systemPath>
+        </dependency>
+
+        <!-- Bean Validator -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>bean-validator</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/bean-validator.jar</systemPath>
+        </dependency>
+
+        <!-- Portlet API -->
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/portlet-api-1.0.jar</systemPath>
+        </dependency>
+
+        <!-- PostgreSQL (legacy) -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901.jdbc4</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/WebContent/WEB-INF/lib/postgresql-9.1-901.jdbc4.jar</systemPath>
         </dependency>
 
     </dependencies>

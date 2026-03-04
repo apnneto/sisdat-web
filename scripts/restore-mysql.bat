@@ -1,7 +1,7 @@
 @echo off
 REM restore-mysql.bat
 REM Uso: restore-mysql.bat <mysql_exe_or_path> <db_name> <db_user> <db_password> <sql_file>
-REM Exemplo: restore-mysql.bat mysql sisdat root "senha" src\META-INF\script.sql
+REM Exemplo: restore-mysql.bat mysql sisdat_schema root "senha" src\META-INF\script.sql
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 nSET MYSQL_EXE=%~1nSET DB_NAME=%~2nSET DB_USER=%~3nSET DB_PASS=%~4nSET SQL_FILE=%~5
