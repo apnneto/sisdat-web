@@ -22,6 +22,14 @@
     <build>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
         <finalName>sisdat-web</finalName>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -42,7 +50,15 @@
                     <warSourceDirectory>${project.basedir}/WebContent</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <!-- Exclude JARs that conflict with Payara 5 built-in libraries -->
-                    <packagingExcludes>WEB-INF/lib/bean-validator.jar</packagingExcludes>
+                    <packagingExcludes>
+                        WEB-INF/lib/bean-validator.jar,
+                        WEB-INF/lib/eclipselink-2.0.2.jar,
+                        WEB-INF/lib/eclipselink-javax.persistence-2.0.jar,
+                        WEB-INF/lib/eclipselink.jar,
+                        WEB-INF/lib/lib/eclipselink-2.0.2.jar,
+                        WEB-INF/lib/lib/eclipselink-javax.persistence-2.0.jar,
+                        WEB-INF/lib/lib/eclipselink.jar
+                    </packagingExcludes>
                 </configuration>
             </plugin>
 
