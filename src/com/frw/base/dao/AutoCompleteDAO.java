@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 public class AutoCompleteDAO<T> {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "xq.pu")
     protected EntityManager em;
 	
 	public List<String> findAutoComplete(final String input, final String propertyNameEntity, final Class<T> entityClass){

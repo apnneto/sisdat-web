@@ -36,7 +36,7 @@ public class BaseDAO<T extends EntidadeBase> {
 
     private static final String FOREIGN_KEY_VIOLATION_SQLSTATE = "23503";
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "xq.pu")
     protected EntityManager em;
 
     public void delete(T object) {

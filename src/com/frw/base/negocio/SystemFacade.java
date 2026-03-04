@@ -26,7 +26,7 @@ public class SystemFacade {
     @Inject
     private UsuarioDAO usuarioDAO;
 
-    @PersistenceContext(name = "quiz.pu")
+    @PersistenceContext(unitName = "xq.pu")
     protected EntityManager em;
 
 

@@ -5,6 +5,6 @@ import javax.persistence.PersistenceContext;
 
 public class GenericDAO {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "xq.pu")
 	protected EntityManager em;
 }
