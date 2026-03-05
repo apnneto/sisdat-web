@@ -17,8 +17,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <!-- lib.dir retained only for the few JARs with no Maven Central artifact -->
-        <lib.dir>${project.basedir}/WebContent/WEB-INF/lib</lib.dir>
+        <!-- Absolute path to local JARs with no Maven Central artifact — resolves Eclipse XML validator warning on systemPath -->
+        <lib.dir>C:\Projetos\sisdat-web\WebContent\WEB-INF\lib</lib.dir>
     </properties>
 
     <build>
