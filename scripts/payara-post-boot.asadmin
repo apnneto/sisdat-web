@@ -1,2 +1,2 @@
-create-jdbc-connection-pool --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property user=sisdat:password=sisdat:databaseName=sisdat_schema:serverName=db:port=3306:useSSL=false:useUnicode=true:characterEncoding=UTF-8 SisdatPool
+create-jdbc-connection-pool --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --restype javax.sql.DataSource --property user=sisdat:password=sisdat:databaseName=sisdat_schema:serverName=db:port=3306:useSSL=false:useUnicode=true:characterEncoding=UTF-8 SisdatPool
 create-jdbc-resource --connectionpoolid SisdatPool jdbc/sisdat-ds

@@ -12,6 +12,13 @@ New-Item $staging -ItemType Directory | Out-Null
 Write-Host "==> Copying WebContent..."
 Copy-Item "$base\WebContent\*" $staging -Recurse -Force
 
+# ── 2b. Remove old EclipseLink JARs that conflict with Payara 5's built-in JPA ─
+Write-Host "==> Removing conflicting EclipseLink JARs from staging..."
+@("eclipselink.jar", "eclipselink-2.0.2.jar", "eclipselink-javax.persistence-2.0.jar") | ForEach-Object {
+    $p = "$staging\WEB-INF\lib\$_"
+    if (Test-Path $p) { Remove-Item $p -Force; Write-Host "  Removed: $_" }
+}
+
 # ── 3. Ensure WEB-INF/classes exists, then merge build/classes ────────────────
 Write-Host "==> Merging compiled classes..."
 New-Item "$staging\WEB-INF\classes" -ItemType Directory -Force | Out-Null

@@ -103,7 +103,7 @@ Fase H — Release e Documentação ⏳ *Pendente*
 - **Bibliotecas sem artefato público (JARs customizados):** documentar e armazenar em repositório interno ou como assets versionados.
 - **Migração javax → jakarta:** pode exigir mudanças amplas. Mitigação: migrar incrementalmente; usar versões do runtime que ainda suportem `javax` se necessário (Payara 5 ainda usa `javax`).
 - **Banco sem DDL completo:** o `script.sql` é incremental — sem o dump DDL original as tabelas não existem. Risco alto para testes funcionais completos.
-- **Driver MySQL desatualizado:** o projeto usa `mysql-connector-java-5.1.16` (2011), incompatível com autenticação padrão do MySQL 8 (`caching_sha2_password`). Contornado via `--default-authentication-plugin=mysql_native_password` no container; solução definitiva é atualizar o driver para 8.x.
+- **Driver MySQL desatualizado:** ~~o projeto usa `mysql-connector-java-5.1.16` (2011), incompatível com autenticação padrão do MySQL 8 (`caching_sha2_password`). Contornado via `--default-authentication-plugin=mysql_native_password` no container; solução definitiva é atualizar o driver para 8.x.~~ ✅ **Resolvido em 2026-03-04:** driver atualizado para `mysql-connector-j-8.0.33`; workaround `mysql_native_password` removido do `docker-compose.yml`.
 - **Tempo e esforço de QA:** estimar sprints dedicados para testes de regressão; priorizar telas/fluxos críticos.
 
 ---
@@ -117,7 +117,7 @@ Nota: estimativas em dias úteis para uma equipe pequena (1–2 desenvolvedores)
 | Ambiente Docker local (Payara + MySQL + deploy) | 2–4 dias | ✅ Concluído |
 | Configurar Maven base e build reproduzível | 3–5 dias | 🔄 Base criada, compilação pendente |
 | Obter/recriar DDL completo do banco e validar app | 1–2 dias | ⏳ Pendente |
-| Atualizar driver MySQL (5.1 → 8.x) | 1 dia | ⏳ Pendente |
+| Atualizar driver MySQL (5.1 → 8.x) | 1 dia | ✅ Concluído em 2026-03-04 |
 | Migrar dependências para Maven e resolver conflitos | 4–8 dias | ⏳ Pendente |
 | Migrar runtime para Payara 6 / Java 17 | 5–15 dias | ⏳ Pendente |
 | Migração javax → jakarta (se necessário) | 5–15 dias | ⏳ Pendente |
@@ -174,6 +174,36 @@ Nota: estimativas em dias úteis para uma equipe pequena (1–2 desenvolvedores)
 
 ---
 
+### Ações realizadas em 2026-03-05 — Correção do HTTP 404 pós-Prioridade 2
+
+#### Causa raiz
+Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no deploy com `ClassNotFoundException: Glassfish` dentro do predeploy JPA do EclipseLink. O motivo: os JARs legados `eclipselink.jar` / `eclipselink-2.0.2.jar` / `eclipselink-javax.persistence-2.0.jar` ainda estavam em `WEB-INF/lib`. Com `delegate="false"` no `sun-web.xml`, o EclipseLink 2.0.2 bundled assumia precedência sobre o EclipseLink 2.7.9 do Payara; ao inicializar, a versão 2.0.2 tentava carregar `com.sun.enterprise.server.Glassfish` (target-server interna do GlassFish 3.x) que não existe no Payara 5.
+
+#### Problemas encontrados e resolvidos
+
+| # | Problema | Causa raiz | Solução aplicada |
+|---|----------|-----------|-----------------|
+| 8 | `ClassNotFoundException: Glassfish` no predeploy JPA | EclipseLink 2.0.2 bundled no WAR conflitava com EclipseLink 2.7.9 do Payara 5 | Removidos `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` de `WebContent/WEB-INF/lib` |
+| 9 | Classloader do WAR tinha precedência sobre o container | `sun-web.xml` com `delegate="false"` | Alterado para `delegate="true"` em `WebContent/WEB-INF/sun-web.xml` |
+| 10 | Pool JDBC falhava silenciosamente na criação | `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` removida no Connector/J 8.x | Atualizado para `com.mysql.cj.jdbc.MysqlDataSource` em `scripts/payara-post-boot.asadmin` |
+
+#### Arquivos modificados / criados
+| Arquivo | Modificação |
+|---------|------------|
+| `WebContent/WEB-INF/lib/` | Removidos `eclipselink.jar`, `eclipselink-2.0.2.jar`, `eclipselink-javax.persistence-2.0.jar` |
+| `WebContent/WEB-INF/sun-web.xml` | `<class-loader delegate="false"/>` → `<class-loader delegate="true"/>` |
+| `scripts/payara-post-boot.asadmin` | `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` → `com.mysql.cj.jdbc.MysqlDataSource` |
+| `scripts/build-war.ps1` | Adicionada etapa 2b para remover os 3 JARs EclipseLink do staging antes de empacotar |
+
+#### Estado final confirmado (2026-03-05)
+- `sisdat-web-db-1`: **Up (healthy)** — MySQL 8.0 na porta 3307
+- `sisdat-web-payara-1`: **Up** — Payara 5.2022.4 na porta 8080
+- EclipseLink em uso: `Eclipse Persistence Services - 2.7.9.payara-p2` (do Payara, não bundled) ✅
+- Deploy: `sisdat-web was successfully deployed in 7,478 milliseconds` ✅
+- HTTP: `GET http://localhost:8080/sisdat-web/` → **HTTP 200** ✅
+
+---
+
 ## 10. Checklist de Entrega (Status atual — 2026-02-27)
 
 ### Recuperação (Curto Prazo)
@@ -182,14 +212,14 @@ Nota: estimativas em dias úteis para uma equipe pequena (1–2 desenvolvedores)
 - [x] `docker-compose.yml` + `Dockerfile.payara` criado e **funcional** — concluído
 - [x] CI pipeline (workflow) criado — concluído
 - [x] DataSource JNDI `jdbc/sisdat-ds` configurado — concluído
-- [x] Aplicação acessível via `http://localhost:8080/sisdat-web/` — concluído
+- [x] Aplicação acessível via `http://localhost:8080/sisdat-web/` — ✅ confirmado novamente em 2026-03-05 após correção do 404 (EclipseLink bundled + delegate)
 - [ ] Dump DDL completo do banco restaurado (tabelas presentes) — **pendente**
 - [ ] Login funcional end-to-end com dados no banco — **pendente**
 
 ### Modernização (Médio/Longo Prazo)
 - [ ] Compilar com Maven (`mvn -DskipTests package`) sem erros — pendente
 - [ ] Mover dependências para Maven e resolver conflitos — pendente
-- [ ] Atualizar `mysql-connector-java` para versão 8.x — pendente
+- [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04 (`mysql-connector-j-8.0.33`)
 - [ ] Publicar JARs customizados em repositório interno — pendente
 - [ ] Migração para Java 17 / Payara 6 e validação de smoke tests — pendente
 - [ ] Migração `javax.*` → `jakarta.*` (se necessário) — pendente
@@ -254,6 +284,8 @@ docker-compose up --build -d
 ## 14. Histórico de Versões do Documento
 - **2026-02-20:** Versão inicial com registro das ações realizadas até a data (inventário, POM base, Docker, CI workflow).
 - **2026-02-27:** Atualização completa — ambiente Docker local totalmente operacional; registro detalhado de todos os problemas encontrados e soluções aplicadas; checklists e próximos passos revisados.
+- **2026-03-04:** Driver MySQL atualizado de `mysql-connector-java-5.1.16` para `mysql-connector-j-8.0.33`; workaround `--default-authentication-plugin=mysql_native_password` removido do `docker-compose.yml`; WAR reconstruído e containers redeploy com sucesso.
+- **2026-03-05:** Corrigido HTTP 404 causado por falha no deploy após atualização do driver MySQL (Prioridade 2). Três problemas resolvidos: (1) JARs `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` removidos de `WEB-INF/lib` — o EclipseLink 2.0.2 bundled conflitava com o EclipseLink 2.7.9 do Payara 5, causando `ClassNotFoundException: Glassfish` no predeploy JPA; (2) `sun-web.xml` atualizado de `delegate="false"` para `delegate="true"` para que o classloader do container tenha precedência; (3) `payara-post-boot.asadmin` corrigido de `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` para `com.mysql.cj.jdbc.MysqlDataSource` (classe correta do Connector/J 8.x). WAR reconstruído e deploy confirmado com HTTP 200.
 
 ---
 

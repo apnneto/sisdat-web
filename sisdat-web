@@ -1,0 +1,13 @@
+warning: in the working copy of 'Plano de Trabalho SisDAT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'WebContent/WEB-INF/sun-web.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docker-compose.yml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/build-war.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/payara-post-boot.asadmin', LF will be replaced by CRLF the next time Git touches it
+ Plano de Trabalho SisDAT.md      | 40 [32m+++++++++++++++[m[31m--[m
+ WebContent/WEB-INF/sun-web.xml   |  2 [32m+[m[31m-[m
+ docker-compose.yml               |  2 [32m+[m[31m-[m
+ pom.xml                          | 97 [32m+++++++++++++++++++++[m[31m-------------------[m
+ scripts/build-war.ps1            |  7 [32m+++[m
+ scripts/payara-post-boot.asadmin |  2 [32m+[m[31m-[m
+ 6 files changed, 96 insertions(+), 54 deletions(-)
