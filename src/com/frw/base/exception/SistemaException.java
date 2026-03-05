@@ -1,6 +1,6 @@
 package com.frw.base.exception;
 
-import jakarta.ejb.ApplicationException;
+import javax.ejb.ApplicationException;
 
 /**
  * @author Carlos Santos

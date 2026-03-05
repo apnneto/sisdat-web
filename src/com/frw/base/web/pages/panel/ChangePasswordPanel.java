@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.panel;
 
-import jakarta.ejb.EJB;
+import javax.ejb.EJB;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;

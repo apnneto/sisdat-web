@@ -2,10 +2,10 @@ package com.frw.base.web;
 
 import java.util.HashMap;
 
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
-import jakarta.validation.metadata.BeanDescriptor;
-import jakarta.validation.metadata.PropertyDescriptor;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+import javax.validation.metadata.BeanDescriptor;
+import javax.validation.metadata.PropertyDescriptor;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.IBehavior;

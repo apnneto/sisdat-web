@@ -2,8 +2,8 @@ package com.frw.base.negocio.quiz;
 
 import java.util.List;
 
-import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.frw.base.dao.sisdat.ColetaPesquisaDAO;
 import com.frw.base.dao.sisdat.FotoDAO;

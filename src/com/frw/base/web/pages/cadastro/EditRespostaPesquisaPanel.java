@@ -3,7 +3,7 @@ package com.frw.base.web.pages.cadastro;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.ejb.EJB;
+import javax.ejb.EJB;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;

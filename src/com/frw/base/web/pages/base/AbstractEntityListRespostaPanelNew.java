@@ -10,8 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-import jakarta.ejb.EJB;
-import jakarta.inject.Inject;
+import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.AttributeModifier;

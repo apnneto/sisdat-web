@@ -2,7 +2,7 @@ package com.frw.base.web.pages.cadastro;
 
 import java.util.Date;
 
-import jakarta.ejb.EJB;
+import javax.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;

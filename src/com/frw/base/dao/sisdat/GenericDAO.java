@@ -1,7 +1,7 @@
 package com.frw.base.dao.sisdat;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 public class GenericDAO {
 

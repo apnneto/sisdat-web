@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.frw.base.dao.sisdat.EmpresaDAO;
 import com.frw.base.dominio.sisdat.Empresa;

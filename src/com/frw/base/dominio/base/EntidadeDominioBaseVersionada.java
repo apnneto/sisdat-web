@@ -5,8 +5,8 @@
 
 package com.frw.base.dominio.base;
 
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Version;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 /**
  *

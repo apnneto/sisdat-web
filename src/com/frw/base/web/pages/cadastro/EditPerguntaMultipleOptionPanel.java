@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import jakarta.ejb.EJB;
+import javax.ejb.EJB;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;

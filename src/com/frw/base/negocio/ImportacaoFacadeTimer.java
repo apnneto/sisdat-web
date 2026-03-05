@@ -2,7 +2,7 @@ package com.frw.base.negocio;
 
 import java.util.logging.Logger;
 
-import jakarta.ejb.Stateless;
+import javax.ejb.Stateless;
 
 @Stateless
 public class ImportacaoFacadeTimer {

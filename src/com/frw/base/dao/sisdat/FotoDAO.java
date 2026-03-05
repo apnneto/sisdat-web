@@ -3,7 +3,7 @@ package com.frw.base.dao.sisdat;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Query;
+import javax.persistence.Query;
 
 import com.frw.base.dao.BaseDAO;
 import com.frw.base.dominio.sisdat.Foto;
