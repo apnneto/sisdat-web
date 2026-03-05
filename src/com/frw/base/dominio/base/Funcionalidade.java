@@ -50,7 +50,9 @@ public class Funcionalidade extends EntidadeBase implements Comparable<Funcional
     private List<Perfil> perfis=new ArrayList<Perfil>();
 
     @ManyToMany
-    @JoinTable(name="funcionalidade_tipo_usuario")
+    @JoinTable(name="funcionalidade_tipo_usuario",
+        joinColumns = @JoinColumn(name = "funcionalidades_id"),
+        inverseJoinColumns = @JoinColumn(name = "tiposusuario_id"))
     private List<TipoUsuario> tiposUsuario=new ArrayList<TipoUsuario>();
 
     @Override

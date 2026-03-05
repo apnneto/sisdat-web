@@ -40,10 +40,12 @@ public class Perfil extends EntidadeDominioBase<Perfil>  implements Comparable<P
 
 
     @ManyToMany
-    @JoinTable(name="perfil_funcionalidade")
+    @JoinTable(name="perfil_funcionalidade",
+        joinColumns = @JoinColumn(name = "perfis_id"),
+        inverseJoinColumns = @JoinColumn(name = "funcionalidades_id"))
     private List<Funcionalidade> funcionalidades=new ArrayList<Funcionalidade>();
 
-    @Column(name="Nome", nullable = false)
+    @Column(name="nome", nullable = false)
     @NotNull
     private String nome;
 

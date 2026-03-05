@@ -205,6 +205,43 @@ Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no d
 
 ---
 
+### Ações realizadas em 2026-03-05 — Correção de mapeamentos JPA e validação do login com banco completo
+
+#### Contexto
+Com o banco de dados populado com tabelas e dados completos do sistema legado, o login com `adm/sdtweb` falhava silenciosamente. Análise do schema MySQL revelou que as colunas reais das tabelas de junção e de entidades diferiam dos nomes gerados pelo EclipseLink como padrão — causando erros de coluna não encontrada no momento das queries JPA.
+
+#### Problemas encontrados e resolvidos
+
+| # | Problema | Causa raiz | Solução aplicada |
+|---|----------|-----------|-----------------|
+| 11 | `usuario_perfil` não resolvia perfis do usuário | `@JoinTable` sem colunas explícitas — EclipseLink gerava `Usuario_id`/`Perfil_id`; DB usa `usuarios_id`/`perfis_id` | Adicionados `joinColumns` e `inverseJoinColumns` explícitos em `Usuario.java` |
+| 12 | `perfil_funcionalidade` não resolvia funcionalidades | Mesmo problema — EclipseLink gerava `Perfil_id`/`Funcionalidade_id`; DB usa `perfis_id`/`funcionalidades_id` | Adicionados `joinColumns` e `inverseJoinColumns` explícitos em `Perfil.java` |
+| 13 | `funcionalidade_tipo_usuario` não resolvia tipos | EclipseLink gerava `Funcionalidade_id`/`TipoUsuario_id`; DB usa `funcionalidades_id`/`tiposusuario_id` | Adicionados `joinColumns` e `inverseJoinColumns` explícitos em `Funcionalidade.java` |
+| 14 | `@Column(name="Nome")` falhava no MySQL | MySQL 8 com `lower_case_table_names=1` trata nomes de colunas como case-sensitive no modo estrito; coluna real é `nome` | Corrigido para `nome` (minúsculo) em `Perfil.java` |
+| 15 | `@Column(name="Data_Alteracao")`, `Excluido`, `Usuario` falhavam | Mesmo problema de case — colunas reais no DB são `data_alteracao`, `excluido`, `usuario` | Corrigidas as 3 anotações em `EntidadeDominioBase.java` |
+| 16 | `@Column(name="Descricao")` em `TipoUsuario` falhava | Coluna real no DB é `descricao` (minúsculo) | Corrigido em `TipoUsuario.java` |
+| 17 | `BaseDAO.delete()` nunca detectava FK violations no MySQL | Código checava `PSQLException` (PostgreSQL) — que jamais ocorre com MySQL | Substituído por `java.sql.SQLException` com verificação de SQLState `23000` (MySQL) e `23503` (PostgreSQL) |
+
+#### Arquivos modificados
+| Arquivo | Modificação |
+|---------|------------|
+| `src/com/frw/base/dominio/base/Usuario.java` | `@JoinTable(name="usuario_perfil")` → colunas explícitas `usuarios_id`/`perfis_id` |
+| `src/com/frw/base/dominio/base/Perfil.java` | `@JoinTable(name="perfil_funcionalidade")` → colunas explícitas `perfis_id`/`funcionalidades_id`; `@Column(name="Nome")` → `nome` |
+| `src/com/frw/base/dominio/base/Funcionalidade.java` | `@JoinTable(name="funcionalidade_tipo_usuario")` → colunas explícitas `funcionalidades_id`/`tiposusuario_id` |
+| `src/com/frw/base/dominio/base/EntidadeDominioBase.java` | `Data_Alteracao` → `data_alteracao`; `Excluido` → `excluido`; `Usuario` → `usuario` |
+| `src/com/frw/base/dominio/base/TipoUsuario.java` | `@Column(name="Descricao")` → `descricao` |
+| `src/com/frw/base/dao/BaseDAO.java` | Substituído `PSQLException` por `java.sql.SQLException`; adicionado suporte a SQLState MySQL `23000` |
+
+#### Estado final confirmado (2026-03-05)
+- `sisdat-web-db-1`: **Up (healthy)** — MySQL 8.0 na porta 3307, 22 tabelas, 141 usuários
+- `sisdat-web-payara-1`: **Up** — Payara 5.2022.4 na porta 8080
+- Build Maven: `mvn -DskipTests clean package` → 277 arquivos compilados, **BUILD SUCCESS** ✅
+- Deploy: `sisdat-web was successfully deployed in 9,092 milliseconds` ✅
+- Login `adm/sdtweb`: **HTTP 200** → `HomePage` (BasePage) renderizada com menu completo, CSS e JS ✅
+- Logs Payara: **zero exceptions JPA** durante o login ✅
+
+---
+
 ## 10. Checklist de Entrega (Status atual — 2026-02-27)
 
 ### Recuperação (Curto Prazo)
@@ -214,8 +251,8 @@ Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no d
 - [x] CI pipeline (workflow) criado — concluído
 - [x] DataSource JNDI `jdbc/sisdat-ds` configurado — concluído
 - [x] Aplicação acessível via `http://localhost:8080/sisdat-web/` — ✅ confirmado novamente em 2026-03-05 após correção do 404 (EclipseLink bundled + delegate)
-- [ ] Dump DDL completo do banco restaurado (tabelas presentes) — **pendente**
-- [ ] Login funcional end-to-end com dados no banco — **pendente**
+- [x] Dump DDL completo do banco restaurado (tabelas presentes) — ✅ **Concluído em 2026-03-05** (banco atualizado com tabelas e dados completos do legado)
+- [x] Login funcional end-to-end com dados no banco — ✅ **Concluído em 2026-03-05** (login `adm/sdtweb` → `HomePage` renderizada, zero erros JPA)
 
 ### Modernização (Médio/Longo Prazo)
 - [x] Compilar com Maven (`mvn -DskipTests package`) sem erros — ✅ Concluído em 2026-03-04 (277 arquivos compilados, zero erros)
@@ -229,38 +266,43 @@ Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no d
 
 ---
 
-## 11. Próximos Passos Imediatos (recomendados — 2026-02-27)
+## 11. Próximos Passos Imediatos (recomendados — 2026-03-05)
 
-### Prioridade 1 — Banco de dados (desbloqueador para testes funcionais)
-O banco sobe vazio (sem tabelas). Para ter a aplicação totalmente funcional:
-1. Obter o dump DDL completo do banco de produção/staging (via `mysqldump --no-data` ou dump completo).
-2. Salvar como `src/main/sql/sisdat-schema.sql` (arquivo UTF-8 sem comentários com `\\`).
-3. Montar o arquivo no `docker-compose.yml`:
+> **Status atual:** banco completo ✅ | login funcional ✅ | build Maven ✅ | deploy Payara 5 ✅
+> Todas as Prioridades 1–4 anteriores foram concluídas. Os próximos passos focam na modernização e qualidade.
+
+### Prioridade 1 — Upgrade do Wicket (desbloqueador para Payara 6 / Jakarta EE)
+O único bloqueador para Payara 6 é o Wicket 1.4.22. Passos:
+1. Avaliar Wicket 9.x (suporte Jakarta EE / `jakarta.servlet.Filter`).
+2. Mapear incompatibilidades de API entre Wicket 1.4 e Wicket 9 (componentes, painéis, forms).
+3. Planejar migração incremental de páginas.
+
+### Prioridade 2 — Validação funcional das telas principais
+Com o login funcionando, validar os fluxos críticos da aplicação:
+```
+http://localhost:8080/sisdat-web/   → Login ✅
+→ HomePage (menu) ✅
+→ Cadastros (Pesquisa, Questionário, Empresa)
+→ Segurança (Usuários, Perfis)
+→ Resultados / Relatórios
+```
+Registrar erros encontrados em issues no repositório.
+
+### Prioridade 3 — CI/CD (GitHub Actions)
 ```yaml
-- ./src/main/sql/sisdat-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
-```
-4. Rodar `docker-compose down -v && docker-compose up -d` para reinicializar o banco com o schema.
-
-### Prioridade 2 — Atualizar driver MySQL
-Substituir `mysql-connector-java-5.1.16-bin.jar` em `WebContent/WEB-INF/lib/` pelo conector 8.x:
-```powershell
-# Baixar mysql-connector-java-8.0.33.jar do Maven Central e substituir no WEB-INF/lib
-# Depois rodar scripts/build-war.ps1 e docker-compose up --build -d
+# Adicionar .github/workflows/maven.yml com:
+# - Checkout
+# - JDK 8 setup
+# - mvn -DskipTests clean package
+# - docker build (smoke test)
+# - OWASP Dependency-Check
 ```
 
-### Prioridade 3 — Rebuild completo para próximos ciclos
-Sempre que alterar código ou dependências:
-```powershell
-# 1. Recompilar classes no Eclipse (ou via javac manual)
-# 2. Reconstruir e redeployar:
-powershell -File scripts\build-war.ps1
-docker-compose up --build -d
-```
-
-### Prioridade 4 — Migrar build para Maven
-```bash
-# Pré-requisitos: JDK 8 ou 17 instalado, Maven 3.9+
-mvn -B -DskipTests package
+### Prioridade 4 — Rebuild para próximos ciclos de desenvolvimento
+Sempre que alterar código ou dependências Java:
+```cmd
+cd C:\Projetos\sisdat-web
+mvn -DskipTests clean package
 docker-compose up --build -d
 ```
 
@@ -288,6 +330,7 @@ docker-compose up --build -d
 - **2026-03-04:** Driver MySQL atualizado de `mysql-connector-java-5.1.16` para `mysql-connector-j-8.0.33`; workaround `--default-authentication-plugin=mysql_native_password` removido do `docker-compose.yml`; WAR reconstruído e containers redeploy com sucesso.
 - **2026-03-05:** Corrigido HTTP 404 causado por falha no deploy após atualização do driver MySQL (Prioridade 2). Três problemas resolvidos: (1) JARs `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` removidos de `WEB-INF/lib` — o EclipseLink 2.0.2 bundled conflitava com o EclipseLink 2.7.9 do Payara 5, causando `ClassNotFoundException: Glassfish` no predeploy JPA; (2) `sun-web.xml` atualizado de `delegate="false"` para `delegate="true"` para que o classloader do container tenha precedência; (3) `payara-post-boot.asadmin` corrigido de `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` para `com.mysql.cj.jdbc.MysqlDataSource` (classe correta do Connector/J 8.x). WAR reconstruído e deploy confirmado com HTTP 200.
 - **2026-03-05 (tentativa Payara 6 + revert):** Tentativa de migrar para Payara 6.2024.6 revertida. Causa raiz: `ClassCastException: WicketFilter cannot be cast to jakarta.servlet.Filter` — Wicket 1.4.22 implementa `javax.servlet.Filter` mas Payara 6 espera `jakarta.servlet.Filter`; as duas hierarquias são incompatíveis em classloaders separados. Todos os artefatos revertidos para Payara 5.2022.4 + `javax.*`. `index.jsp` corrigido: era um placeholder "Hello World" que impedia a página de login de carregar; substituído por redirect para `/wicket` que aciona o `WicketFilter` → `LoginPage`. Deploy confirmado: HTTP 200, página de login Wicket renderizada corretamente.
+- **2026-03-05 (JPA + login):** Corrigidos 7 mapeamentos JPA incompatíveis com o schema MySQL real: 3 `@JoinTable` sem colunas explícitas (`usuario_perfil`, `perfil_funcionalidade`, `funcionalidade_tipo_usuario`) geravam nomes de coluna errados pelo EclipseLink; 3 `@Column` com nomes mistos (`Nome`, `Data_Alteracao`, `Excluido`, `Usuario`, `Descricao`) falhavam no MySQL 8 com `lower_case_table_names=1`. `BaseDAO.delete()` adaptado de `PSQLException` para `java.sql.SQLException` para suportar FK violation detection no MySQL (SQLState `23000`). Build Maven → 277 arquivos, BUILD SUCCESS. Login `adm/sdtweb` validado: HTTP 200, `SisDAT - Pelli Sistemas` renderizado com menu completo, zero exceções JPA nos logs.
 - **2026-03-04 (Fase C+D completa):** Migração para Payara 6.2024.6 (Java 11/Zulu 11) e Jakarta EE concluída. `Dockerfile.payara` atualizado de `5.2022.4` para `6.2024.6`. `docker-compose.yml` atualizado (campo `version` deprecado removido; `restart: unless-stopped` adicionado ao serviço payara). 103 arquivos Java migrados de `javax.*` para `jakarta.*` (persistence, ejb, inject, validation, ws.rs, annotation); `javax.servlet.*` mantido nos 7 arquivos que interagem com Wicket 1.4.22 (que usa `javax.servlet` internamente). `persistence.xml` migrado para namespace `jakarta.ee/xml/ns/persistence` versão 3.0. `web.xml` migrado para namespace Jakarta EE 5.0. `beans.xml` migrado para CDI 3.0 (`bean-discovery-mode="all"`). `sun-web.xml` substituído por `payara-web.xml`. `pom.xml` atualizado: provided-scope APIs migradas para coordenadas `jakarta.*` (jakarta.persistence 3.0.0, jakarta.ejb 4.0.0, jakarta.inject 2.0.0, jakarta.validation 3.0.0, jakarta.ws.rs 3.0.0, jakarta.servlet 5.0.0, jakarta.annotation 2.0.0, eclipselink 3.0.3); `javax.servlet-api 3.1.0` mantido como provided para compatibilidade de compilação com Wicket. Build validado: `mvn -DskipTests clean package` → 277 arquivos, BUILD SUCCESS. Deploy em Payara 6 confirmado: `sisdat-web deployed in 8,547ms` → HTTP 200 em `http://localhost:8080/sisdat-web/`.
 - **2026-03-04 (Fase B completa):** Todas as dependências migradas de `system`-scope para Maven Central. 38 JARs removidos de `WebContent/WEB-INF/lib`: Wicket 1.4.22 (6 artefatos), Apache Commons (8), logging (3), Gson, POI 3.10-FINAL, iText → `com.itextpdf:itextpdf:5.5.13.3`, JasperReports 6.20.6, JFreeChart 1.5.4, Joda-Time 2.12.5, HttpClient 4.5.14, json-lib, json-org → `org.json:json`, ezmorph, simple-xml, cglib-nodep 3.3.0, mysql-connector-j 8.0.33, Axis 1.4, jaxrpc-api 1.1, wsdl4j 1.6.3. JARs container-provided (javax.ejb, javax.inject, javax.servlet-api, bean-validator, portlet-api) removidos de `WEB-INF/lib`. PostgreSQL driver adicionado como `org.postgresql:postgresql:42.7.3` (necessário para `PSQLException` em `BaseDAO`). Apenas `LogicWicket-1.4.jar` permanece como `system`-scope (sem artefato público). Build final validado: `mvn -DskipTests clean package` → 277 arquivos compilados, BUILD SUCCESS.
 - **2026-03-04 (complemento):** `pom.xml` corrigido — removidas 3 entradas `system`-scope de EclipseLink que apontavam para JARs inexistentes (`eclipselink-2.0.2.jar`, `eclipselink.jar`, `eclipselink-javax.persistence-2.0.jar`); substituídas por dependência `provided`-scope `eclipselink:2.7.9` (versão bundled no Payara 5). Projeto Eclipse configurado como Maven (M2E): `.project` com `maven2Nature` + `maven2Builder`; `.classpath` substituído por `MAVEN2_CLASSPATH_CONTAINER`, removendo entradas quebradas de `USER_LIBRARY` (`Glassfish3-JavaEE`, `EclipseLink 2.5.2`) que causavam erros na aba Problems.

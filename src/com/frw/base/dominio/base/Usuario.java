@@ -52,7 +52,9 @@ public class Usuario extends EntidadeDominioBase<Usuario> implements Comparable<
 	private String nome;
 
 	@ManyToMany(fetch= FetchType.LAZY)
-	@JoinTable(name = "usuario_perfil")
+	@JoinTable(name = "usuario_perfil",
+		joinColumns = @JoinColumn(name = "usuarios_id"),
+		inverseJoinColumns = @JoinColumn(name = "perfis_id"))
 	private List<Perfil> perfis = new ArrayList<Perfil>();
 
 	@Column(name = "password")

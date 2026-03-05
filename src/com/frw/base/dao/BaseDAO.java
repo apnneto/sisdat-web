@@ -21,8 +21,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 
+import java.sql.SQLException;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.postgresql.util.PSQLException;
+// PostgreSQL driver kept as compile dependency — import retained for legacy compatibility
+// import org.postgresql.util.PSQLException;
 
 import com.frw.base.dominio.base.Entidade;
 import com.frw.base.dominio.base.EntidadeBase;
@@ -34,7 +37,9 @@ import com.frw.base.exception.ObjetoObsoletoException;
  */
 public class BaseDAO<T extends EntidadeBase> {
 
-    private static final String FOREIGN_KEY_VIOLATION_SQLSTATE = "23503";
+    // MySQL FK violation = 23000; PostgreSQL = 23503
+    private static final String FOREIGN_KEY_VIOLATION_SQLSTATE = "23000";
+    private static final String FOREIGN_KEY_VIOLATION_SQLSTATE_PG = "23503";
 
     @PersistenceContext(unitName = "xq.pu")
     protected EntityManager em;
@@ -50,10 +55,10 @@ public class BaseDAO<T extends EntidadeBase> {
             if(root == null)
                 root = ex;
 
-            if(root instanceof PSQLException) {
-                String SQLState = ((PSQLException) root).getSQLState();
+            if(root instanceof SQLException) {
+                String SQLState = ((SQLException) root).getSQLState();
 
-                if(SQLState != null && SQLState.equals(FOREIGN_KEY_VIOLATION_SQLSTATE)) {
+                if(SQLState != null && (SQLState.equals(FOREIGN_KEY_VIOLATION_SQLSTATE) || SQLState.equals(FOREIGN_KEY_VIOLATION_SQLSTATE_PG))) {
                     System.err.println("CONSTRAINT VIOLATIONS DELETING : " + object.getClass().getName());
                     throw new ForeignKeyViolationException("exception.foreign.key.violation", object.getClass());
                 }

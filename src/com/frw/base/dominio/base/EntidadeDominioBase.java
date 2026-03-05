@@ -17,13 +17,13 @@ public abstract class EntidadeDominioBase<T> extends EntidadeBase implements Com
 	private static final long serialVersionUID = 1L;
 
 	@Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "Data_Alteracao")
+    @Column(name = "data_alteracao")
     private Date dataAlteracao;
 
-    @Column(name = "Excluido")
+    @Column(name = "excluido")
     private Boolean excluido = false;
 
-    @Column(name = "Usuario")
+    @Column(name = "usuario")
     private String usuarioAlteracao;
 
     public Date getDataAlteracao() {

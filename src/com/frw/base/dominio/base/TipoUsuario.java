@@ -23,7 +23,7 @@ public class TipoUsuario extends EntidadeBase implements Comparable<TipoUsuario>
     private static final long serialVersionUID = 1L;
 
     @NotNull
-    @Column(name = "Descricao", nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
     @ManyToMany(mappedBy = "tiposUsuario")
