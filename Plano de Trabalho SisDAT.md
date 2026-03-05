@@ -55,6 +55,8 @@ Fase A — Preparação e Inventário ✅ *Concluído*
 
 Fase B — Gerenciamento de Dependências (Maven) 🔄 *Parcialmente concluído*
 - ✅ Criar `pom.xml` minimal para encapsular o build (packaging war).
+- ✅ Corrigir `pom.xml`: removidas 3 entradas `system`-scope de EclipseLink apontando para JARs inexistentes; substituídas por `provided`-scope EclipseLink 2.7.9 (versão do Payara 5) — **concluído em 2026-03-04**.
+- ✅ Eclipse configurado como projeto Maven (M2E): `.project` com `maven2Nature` + `maven2Builder`; `.classpath` com `MAVEN2_CLASSPATH_CONTAINER` — **concluído em 2026-03-04**.
 - ⏳ Mover dependências que existem em `WEB-INF/lib` para dependências do Maven sempre que possível.
 - ⏳ Para JARs sem artefato público, adicionar a um repositório interno ou usar `system` scope temporariamente.
 
@@ -217,8 +219,8 @@ Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no d
 - [ ] Login funcional end-to-end com dados no banco — **pendente**
 
 ### Modernização (Médio/Longo Prazo)
-- [ ] Compilar com Maven (`mvn -DskipTests package`) sem erros — pendente
-- [ ] Mover dependências para Maven e resolver conflitos — pendente
+- [x] Compilar com Maven (`mvn -DskipTests package`) sem erros — ✅ Concluído em 2026-03-04 (277 arquivos compilados, zero erros)
+- [ ] Mover dependências para Maven e resolver conflitos — pendente (Fase B — próxima etapa)
 - [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04 (`mysql-connector-j-8.0.33`)
 - [ ] Publicar JARs customizados em repositório interno — pendente
 - [ ] Migração para Java 17 / Payara 6 e validação de smoke tests — pendente
@@ -286,6 +288,7 @@ docker-compose up --build -d
 - **2026-02-27:** Atualização completa — ambiente Docker local totalmente operacional; registro detalhado de todos os problemas encontrados e soluções aplicadas; checklists e próximos passos revisados.
 - **2026-03-04:** Driver MySQL atualizado de `mysql-connector-java-5.1.16` para `mysql-connector-j-8.0.33`; workaround `--default-authentication-plugin=mysql_native_password` removido do `docker-compose.yml`; WAR reconstruído e containers redeploy com sucesso.
 - **2026-03-05:** Corrigido HTTP 404 causado por falha no deploy após atualização do driver MySQL (Prioridade 2). Três problemas resolvidos: (1) JARs `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` removidos de `WEB-INF/lib` — o EclipseLink 2.0.2 bundled conflitava com o EclipseLink 2.7.9 do Payara 5, causando `ClassNotFoundException: Glassfish` no predeploy JPA; (2) `sun-web.xml` atualizado de `delegate="false"` para `delegate="true"` para que o classloader do container tenha precedência; (3) `payara-post-boot.asadmin` corrigido de `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` para `com.mysql.cj.jdbc.MysqlDataSource` (classe correta do Connector/J 8.x). WAR reconstruído e deploy confirmado com HTTP 200.
+- **2026-03-04 (complemento):** `pom.xml` corrigido — removidas 3 entradas `system`-scope de EclipseLink que apontavam para JARs inexistentes (`eclipselink-2.0.2.jar`, `eclipselink.jar`, `eclipselink-javax.persistence-2.0.jar`); substituídas por dependência `provided`-scope `eclipselink:2.7.9` (versão bundled no Payara 5). Projeto Eclipse configurado como Maven (M2E): `.project` com `maven2Nature` + `maven2Builder`; `.classpath` substituído por `MAVEN2_CLASSPATH_CONTAINER`, removendo entradas quebradas de `USER_LIBRARY` (`Glassfish3-JavaEE`, `EclipseLink 2.5.2`) que causavam erros na aba Problems.
 
 ---
 

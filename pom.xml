@@ -385,27 +385,15 @@
             <systemPath>${lib.dir}/mysql-connector-j-8.0.33.jar</systemPath>
         </dependency>
 
-        <!-- EclipseLink JPA -->
+        <!-- EclipseLink JPA — provided by Payara 5 container (EclipseLink 2.7.9).
+             The bundled eclipselink-2.0.2.jar / eclipselink.jar / eclipselink-javax.persistence-2.0.jar
+             were removed from WebContent/WEB-INF/lib on 2026-03-05 to fix ClassNotFoundException
+             caused by the old EclipseLink conflicting with Payara's built-in one. -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.0.2</version>
-            <scope>system</scope>
-            <systemPath>${lib.dir}/eclipselink-2.0.2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink-full</artifactId>
-            <version>2.0.2</version>
-            <scope>system</scope>
-            <systemPath>${lib.dir}/eclipselink.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink-javax-persistence</artifactId>
-            <version>2.0</version>
-            <scope>system</scope>
-            <systemPath>${lib.dir}/eclipselink-javax.persistence-2.0.jar</systemPath>
+            <version>2.7.9</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Axis (Web Services) -->
