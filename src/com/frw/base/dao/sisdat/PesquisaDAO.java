@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Query;
+import jakarta.persistence.Query;
 
 import com.frw.base.dao.BaseDAO;
 import com.frw.base.dominio.base.TipoUsuario;

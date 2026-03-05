@@ -2,8 +2,8 @@ package com.frw.base.web.pages;
 
 import java.text.DateFormat;
 
-import javax.ejb.EJB;
-import javax.validation.constraints.NotNull;
+import jakarta.ejb.EJB;
+import jakarta.validation.constraints.NotNull;
 
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Session;

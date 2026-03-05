@@ -1,4 +1,4 @@
-FROM payara/server-full:5.2022.4
+FROM payara/server-full:6.2024.6
 
 # Inject JDBC datasource configuration before the WAR is deployed.
 # Payara's entrypoint appends the deploy command to post-boot-commands.asadmin;

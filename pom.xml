@@ -12,7 +12,9 @@
     <description>Projeto legado SisDAT - pom.xml provisório para migração e build.</description>
 
     <properties>
-        <!-- Default to Java 1.8 to match legacy runtime; use -Pjava17 to build with Java 17 -->
+        <!-- Java 8 bytecode — compatible with Payara 6 runtime (Zulu 11).
+             To compile with Java 11+, install JDK 11+ and set JAVA_HOME accordingly.
+             Use -Pjava17 profile when a JDK 17 is available. -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -89,7 +91,9 @@
 
     <dependencies>
 
-        <!-- ===== Container-provided Java EE APIs (Payara 5) ===== -->
+        <!-- ===== Container-provided Jakarta EE 9.1 APIs (Payara 6, Java 8 compatible) ===== -->
+        <!-- Jakarta EE 9.1 = first release with jakarta.* namespace; JARs target Java 8 -->
+        <!-- javax.servlet-api kept for Wicket 1.4.22 which uses javax.servlet internally -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -97,40 +101,52 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-            <version>3.2</version>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- EclipseLink 2.7.9 bundled in Payara 5 — provided by container -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- EclipseLink 3.0.x bundled in Payara 6 — provided by container -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.7.9</version>
+            <version>3.0.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.0.0</version>
             <scope>provided</scope>
         </dependency>
 

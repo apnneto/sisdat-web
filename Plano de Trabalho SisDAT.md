@@ -60,14 +60,19 @@ Fase B — Gerenciamento de Dependências (Maven) ✅ *Concluído*
 - ✅ Todas as dependências migradas para Maven Central — **concluído em 2026-03-04**: 38 JARs removidos de `WEB-INF/lib`; apenas `LogicWicket-1.4.jar` permanece como `system`-scope (sem artefato público). Build validado: 277 arquivos compilados, zero erros.
 - ✅ JARs container-provided (`javax.ejb`, `javax.inject`, `javax.servlet-api`, `bean-validator`, `portlet-api`) removidos de `WEB-INF/lib` e declarados como `provided` no `pom.xml`.
 
-Fase C — Atualização do Servidor de Aplicação 🔄 *Parcialmente concluído*
+Fase C — Atualização do Servidor de Aplicação ✅ *Concluído*
 - ✅ Runtime Payara 5.2022.4 rodando localmente via Docker.
-- ⏳ Migrar para Payara 6 (ou WildFly 30+) que suporte Java 17/21.
+- ✅ Migrado para Payara 6.2024.6 (Java 11 / Zulu 11) — **concluído em 2026-03-04**.
 - ✅ Configurações JNDI/datasource e scripts de deploy funcionando.
 
-Fase D — Código e Namespace ⏳ *Pendente*
-- Verificar a necessidade de migrar de `javax.*` para `jakarta.*`.
-- Corrigir APIs obsoletas e chamadas a classes removidas/alteradas.
+Fase D — Código e Namespace ✅ *Concluído*
+- ✅ Migração `javax.*` → `jakarta.*` realizada em 103 arquivos Java — **concluído em 2026-03-04**.
+- ✅ `javax.servlet.*` mantido em arquivos que interagem diretamente com Wicket 1.4.22 (que usa `javax.servlet` internamente).
+- ✅ `persistence.xml` migrado para namespace Jakarta EE 3.0 (`jakarta.ee`).
+- ✅ `web.xml` migrado para namespace Jakarta EE 5.0.
+- ✅ `beans.xml` migrado para CDI 3.0.
+- ✅ `sun-web.xml` substituído por `payara-web.xml`.
+- ✅ Deploy em Payara 6 confirmado: HTTP 200 em `http://localhost:8080/sisdat-web/`.
 
 Fase E — Containerização e Automação ✅ *Concluído (base)*
 - ✅ `Dockerfile.payara` e `docker-compose.yml` funcionais.
@@ -121,8 +126,8 @@ Nota: estimativas em dias úteis para uma equipe pequena (1–2 desenvolvedores)
 | Obter/recriar DDL completo do banco e validar app | 1–2 dias | ⏳ Pendente |
 | Atualizar driver MySQL (5.1 → 8.x) | 1 dia | ✅ Concluído em 2026-03-04 |
 | Migrar dependências para Maven e resolver conflitos | 4–8 dias | ✅ Concluído em 2026-03-04 |
-| Migrar runtime para Payara 6 / Java 17 | 5–15 dias | ⏳ Pendente |
-| Migração javax → jakarta (se necessário) | 5–15 dias | ⏳ Pendente |
+| Migrar runtime para Payara 6 / Java 17 | 5–15 dias | ✅ Concluído em 2026-03-04 (Payara 6.2024.6, Java 11) |
+| Migração javax → jakarta (se necessário) | 5–15 dias | ✅ Concluído em 2026-03-04 (103 arquivos; javax.servlet mantido para Wicket) |
 | Adicionar testes e análise estática | 5–10 dias | ⏳ Pendente |
 | CI/CD e scans de segurança | 2–4 dias | ⏳ Pendente |
 | Validação funcional e correções | 5–10 dias | ⏳ Pendente |
@@ -223,8 +228,8 @@ Após a atualização do driver MySQL (Prioridade 2), o WAR passou a falhar no d
 - [x] Mover dependências para Maven e resolver conflitos — ✅ Concluído em 2026-03-04 (38 JARs migrados para Maven Central; apenas LogicWicket-1.4.jar permanece como system-scope)
 - [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04 (`mysql-connector-j-8.0.33`)
 - [ ] Publicar JARs customizados em repositório interno — pendente
-- [ ] Migração para Java 17 / Payara 6 e validação de smoke tests — pendente
-- [ ] Migração `javax.*` → `jakarta.*` (se necessário) — pendente
+- [x] Migração para Java 17 / Payara 6 e validação de smoke tests — ✅ Concluído em 2026-03-04 (Payara 6.2024.6 + HTTP 200)
+- [x] Migração `javax.*` → `jakarta.*` (se necessário) — ✅ Concluído em 2026-03-04 (103 arquivos)
 - [ ] Testes unitários e de integração — pendente
 - [ ] CI com scan de vulnerabilidades (OWASP Dependency-Check) — pendente
 
@@ -288,6 +293,7 @@ docker-compose up --build -d
 - **2026-02-27:** Atualização completa — ambiente Docker local totalmente operacional; registro detalhado de todos os problemas encontrados e soluções aplicadas; checklists e próximos passos revisados.
 - **2026-03-04:** Driver MySQL atualizado de `mysql-connector-java-5.1.16` para `mysql-connector-j-8.0.33`; workaround `--default-authentication-plugin=mysql_native_password` removido do `docker-compose.yml`; WAR reconstruído e containers redeploy com sucesso.
 - **2026-03-05:** Corrigido HTTP 404 causado por falha no deploy após atualização do driver MySQL (Prioridade 2). Três problemas resolvidos: (1) JARs `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` removidos de `WEB-INF/lib` — o EclipseLink 2.0.2 bundled conflitava com o EclipseLink 2.7.9 do Payara 5, causando `ClassNotFoundException: Glassfish` no predeploy JPA; (2) `sun-web.xml` atualizado de `delegate="false"` para `delegate="true"` para que o classloader do container tenha precedência; (3) `payara-post-boot.asadmin` corrigido de `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` para `com.mysql.cj.jdbc.MysqlDataSource` (classe correta do Connector/J 8.x). WAR reconstruído e deploy confirmado com HTTP 200.
+- **2026-03-04 (Fase C+D completa):** Migração para Payara 6.2024.6 (Java 11/Zulu 11) e Jakarta EE concluída. `Dockerfile.payara` atualizado de `5.2022.4` para `6.2024.6`. `docker-compose.yml` atualizado (campo `version` deprecado removido; `restart: unless-stopped` adicionado ao serviço payara). 103 arquivos Java migrados de `javax.*` para `jakarta.*` (persistence, ejb, inject, validation, ws.rs, annotation); `javax.servlet.*` mantido nos 7 arquivos que interagem com Wicket 1.4.22 (que usa `javax.servlet` internamente). `persistence.xml` migrado para namespace `jakarta.ee/xml/ns/persistence` versão 3.0. `web.xml` migrado para namespace Jakarta EE 5.0. `beans.xml` migrado para CDI 3.0 (`bean-discovery-mode="all"`). `sun-web.xml` substituído por `payara-web.xml`. `pom.xml` atualizado: provided-scope APIs migradas para coordenadas `jakarta.*` (jakarta.persistence 3.0.0, jakarta.ejb 4.0.0, jakarta.inject 2.0.0, jakarta.validation 3.0.0, jakarta.ws.rs 3.0.0, jakarta.servlet 5.0.0, jakarta.annotation 2.0.0, eclipselink 3.0.3); `javax.servlet-api 3.1.0` mantido como provided para compatibilidade de compilação com Wicket. Build validado: `mvn -DskipTests clean package` → 277 arquivos, BUILD SUCCESS. Deploy em Payara 6 confirmado: `sisdat-web deployed in 8,547ms` → HTTP 200 em `http://localhost:8080/sisdat-web/`.
 - **2026-03-04 (Fase B completa):** Todas as dependências migradas de `system`-scope para Maven Central. 38 JARs removidos de `WebContent/WEB-INF/lib`: Wicket 1.4.22 (6 artefatos), Apache Commons (8), logging (3), Gson, POI 3.10-FINAL, iText → `com.itextpdf:itextpdf:5.5.13.3`, JasperReports 6.20.6, JFreeChart 1.5.4, Joda-Time 2.12.5, HttpClient 4.5.14, json-lib, json-org → `org.json:json`, ezmorph, simple-xml, cglib-nodep 3.3.0, mysql-connector-j 8.0.33, Axis 1.4, jaxrpc-api 1.1, wsdl4j 1.6.3. JARs container-provided (javax.ejb, javax.inject, javax.servlet-api, bean-validator, portlet-api) removidos de `WEB-INF/lib`. PostgreSQL driver adicionado como `org.postgresql:postgresql:42.7.3` (necessário para `PSQLException` em `BaseDAO`). Apenas `LogicWicket-1.4.jar` permanece como `system`-scope (sem artefato público). Build final validado: `mvn -DskipTests clean package` → 277 arquivos compilados, BUILD SUCCESS.
 - **2026-03-04 (complemento):** `pom.xml` corrigido — removidas 3 entradas `system`-scope de EclipseLink que apontavam para JARs inexistentes (`eclipselink-2.0.2.jar`, `eclipselink.jar`, `eclipselink-javax.persistence-2.0.jar`); substituídas por dependência `provided`-scope `eclipselink:2.7.9` (versão bundled no Payara 5). Projeto Eclipse configurado como Maven (M2E): `.project` com `maven2Nature` + `maven2Builder`; `.classpath` substituído por `MAVEN2_CLASSPATH_CONTAINER`, removendo entradas quebradas de `USER_LIBRARY` (`Glassfish3-JavaEE`, `EclipseLink 2.5.2`) que causavam erros na aba Problems.
 
