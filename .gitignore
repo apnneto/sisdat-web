@@ -24,6 +24,10 @@ buildNumber.properties
 .classpath
 .project
 .settings/
+# Allow specific Eclipse settings needed to suppress false-positive IDE errors
+!.settings/org.eclipse.wst.common.project.facet.core.xml
+!.settings/org.eclipse.jpt.core.prefs
+!.settings/org.eclipse.wst.validation.prefs
 *.launch
 .metadata
 bin/
