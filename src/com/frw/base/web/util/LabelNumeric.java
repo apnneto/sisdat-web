@@ -7,8 +7,6 @@ package com.frw.base.web.util;
 import java.math.BigDecimal;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.MarkupStream;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
@@ -29,7 +27,7 @@ public class LabelNumeric extends LabelFrw {
     }
 
     public LabelNumeric(String id, BigDecimal value) {
-        super(id, new Model<BigDecimal>(value));
+        super(id, new Model<>(value));
     }
 
     public LabelNumeric(String id, IModel<?> model) {
@@ -37,11 +35,11 @@ public class LabelNumeric extends LabelFrw {
     }
 
     public LabelNumeric(String id, Number value) {
-        super(id, new Model<Number>(value));
+        super(id, new Model<>(value));
     }
 
     public LabelNumeric(String id, Number value, boolean isMilhar, boolean isDecimal, int decimalDigits) {
-        super(id, new Model<Number>(value));
+        super(id, new Model<>(value));
         this.isMilhar = isMilhar;
         this.isDecimal = isDecimal;
         this.decimalDigits = decimalDigits;
@@ -54,17 +52,16 @@ public class LabelNumeric extends LabelFrw {
     @Override
     protected void onBeforeRender() {
         super.onBeforeRender();
-        AttributeModifier modifier = new AttributeModifier("class", true, new Model<String>("alignNumero"));
-        this.add(modifier);
-    }
-
-    @Override
-    protected void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
+        add(AttributeModifier.replace("class", "alignNumero"));
         Object value = getDefaultModelObject();
-        if (value instanceof Integer) {
-            replaceComponentTagBody(markupStream, openTag, value == null ? "" : SistemaUtil.formatNumeric(value, isMilhar, false, 0));
-        } else {
-            replaceComponentTagBody(markupStream, openTag, value == null ? "" : SistemaUtil.formatNumeric(value, isMilhar, isDecimal, decimalDigits));
+        if (value != null) {
+            String formatted;
+            if (value instanceof Integer) {
+                formatted = SistemaUtil.formatNumeric(value, isMilhar, false, 0);
+            } else {
+                formatted = SistemaUtil.formatNumeric(value, isMilhar, isDecimal, decimalDigits);
+            }
+            setDefaultModelObject(formatted);
         }
     }
 }

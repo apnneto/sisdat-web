@@ -8,7 +8,6 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 
 /**
@@ -53,17 +52,11 @@ public class TextFieldFrw<T extends Object> extends TextField<T> implements IAja
     protected void onBeforeRender() {
         super.onBeforeRender();
         if (this.isEnabled() == false) {
-            modifier = new AttributeModifier("style", true, new AbstractReadOnlyModel() {
-                @Override
-                public String getObject() {
-                    return "background:#CCCCC;height:16px; font-family:Verdana, Arial, Helvetica;font-size:1em;color:#A69F94;border:1px #CDCDCD solid;padding-top:3px";
-                }
-            });
-
+            modifier = AttributeModifier.replace("style",
+                "background:#CCCCC;height:16px; font-family:Verdana, Arial, Helvetica;font-size:1em;color:#A69F94;border:1px #CDCDCD solid;padding-top:3px");
             this.add(modifier);
         } else {
-            if (modifier != null) {
-                if(this.getBehaviorsRawList().contains(modifier))
+            if (modifier != null && getBehaviors().contains(modifier)) {
                 this.remove(modifier);
             }
         }

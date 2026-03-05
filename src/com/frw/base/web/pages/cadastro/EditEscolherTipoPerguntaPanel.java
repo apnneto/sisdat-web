@@ -4,7 +4,7 @@
  */
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -58,14 +58,14 @@ public class EditEscolherTipoPerguntaPanel extends Panel {
         AjaxButtonFrw btnSalvar = new AjaxButtonFrw("btnAvancar") {
 			
 			@Override
-			protected void onError(AjaxRequestTarget target, Form<?> form) {
+			protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
 				avancar = Boolean.FALSE;
 				super.onError(target, form);
-				target.addComponent(feedback);
+				target.add(feedback);
 			}
 			
 			@Override
-			protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+			protected void onSubmit(AjaxRequestTarget art) {
 				
 				avancar = Boolean.TRUE;
 				
@@ -78,7 +78,7 @@ public class EditEscolherTipoPerguntaPanel extends Panel {
         AjaxButtonFrw btnCancelar = new AjaxButtonFrw("btnCancelar") {
 			
 			@Override
-			protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+			protected void onSubmit(AjaxRequestTarget art) {
 				avancar = Boolean.FALSE;
 				ModalWindow.closeCurrent(art);
 			}

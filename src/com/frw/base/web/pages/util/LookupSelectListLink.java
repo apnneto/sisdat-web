@@ -6,7 +6,7 @@ package com.frw.base.web.pages.util;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.IndicatingAjaxLink;
 import org.apache.wicket.markup.html.image.Image;
@@ -41,10 +41,10 @@ public class LookupSelectListLink extends IndicatingAjaxLink {
         this.title = title;
 
         if(showLookupImage) {
-            Image imgLookUp1 = new Image("imgLupa", new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/iconeLupa.png")));
+            Image imgLookUp1 = new Image("imgLupa", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/iconeLupa.png")));
             add(imgLookUp1);
          }else{
-        	 add(new AttributeModifier("class",true,new Model<String>("icone ver")));
+        	 add(new AttributeModifier("class", new Model<String>("icone ver")));
          }
      }
 

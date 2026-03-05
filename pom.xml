@@ -12,15 +12,12 @@
     <description>Projeto legado SisDAT - pom.xml provisório para migração e build.</description>
 
     <properties>
-        <!-- Java 8 bytecode — compatible with Payara 6 runtime (Zulu 11).
-             To compile with Java 11+, install JDK 11+ and set JAVA_HOME accordingly.
-             Use -Pjava17 profile when a JDK 17 is available. -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Java 11 bytecode — required by Wicket 9.x and Payara 6 (Zulu 11) -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <!-- Absolute path to local JARs with no Maven Central artifact — resolves Eclipse XML validator warning on systemPath -->
-        <lib.dir>C:\Projetos\sisdat-web\WebContent\WEB-INF\lib</lib.dir>
+        <wicket.version>9.18.0</wicket.version>
     </properties>
 
     <build>
@@ -38,7 +35,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -91,85 +88,84 @@
 
     <dependencies>
 
-        <!-- ===== Container-provided Java EE 8 APIs (Payara 5 — javax.* namespace) ===== -->
-        <!-- NOTE: Payara 6 migration blocked until Wicket is upgraded.
-             Wicket 1.4.22 implements javax.servlet.Filter which cannot be cast to
-             jakarta.servlet.Filter in Payara 6. -->
+        <!-- ===== Container-provided Jakarta EE 10 APIs (Payara 6) ===== -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
-            <version>2.2</version>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.ejb</groupId>
-            <artifactId>javax.ejb-api</artifactId>
-            <version>3.2</version>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>2.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- EclipseLink 2.7.9 bundled in Payara 5 — provided by container -->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>2.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- EclipseLink 3.0.x bundled in Payara 6 — provided by container -->
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.7.9</version>
+            <version>3.0.3</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- ===== Apache Wicket 1.4.22 ===== -->
+        <!-- ===== Apache Wicket 9.x (Jakarta EE / jakarta.servlet.Filter) ===== -->
         <dependency>
             <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket</artifactId>
-            <version>1.4.22</version>
+            <artifactId>wicket-core</artifactId>
+            <version>${wicket.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-extensions</artifactId>
-            <version>1.4.22</version>
+            <version>${wicket.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-auth-roles</artifactId>
-            <version>1.4.22</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-datetime</artifactId>
-            <version>1.4.22</version>
+            <version>${wicket.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-ioc</artifactId>
-            <version>1.4.22</version>
+            <version>${wicket.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-devutils</artifactId>
-            <version>1.4.22</version>
+            <version>${wicket.version}</version>
         </dependency>
+        <!-- wicket-datetime was removed in Wicket 8+; use wicket-extensions DateTextField instead -->
 
         <!-- ===== Apache Commons ===== -->
         <dependency>
@@ -343,16 +339,18 @@
             <version>2.7.1</version>
         </dependency>
 
-        <!-- ===== LogicWicket — no Maven Central artifact; kept as system ===== -->
+        <!-- ===== JAXB — removed from JDK 11+, needed by WS DTOs ===== -->
         <dependency>
-            <groupId>com.logicq</groupId>
-            <artifactId>LogicWicket</artifactId>
-            <version>1.4</version>
-            <scope>system</scope>
-            <systemPath>${lib.dir}/LogicWicket-1.4.jar</systemPath>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.3</version>
         </dependency>
 
     </dependencies>
 
 </project>
-

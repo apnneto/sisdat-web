@@ -3,7 +3,7 @@ package com.frw.manutencao.dominio.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "RetornoDTO")
 public class RetornoDTO {

@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.behavior.HeaderContributor;
+
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -66,7 +66,7 @@ public class ViewMapMultiplePointsUpdatablePanel extends Panel {
     public void updateListMapMarkerPoint(List<MapMarkerPoint> listMapMarkerPoint, AjaxRequestTarget target) {
 		
 		if (target != null) {
-			target.appendJavascript("clearMarkers();");
+			target.appendJavaScript("clearMarkers();");
 			StringBuilder js = new StringBuilder();
 			
 			/*if (listMapMarkerPoint != null && listMapMarkerPoint.isEmpty()) {
@@ -74,7 +74,7 @@ public class ViewMapMultiplePointsUpdatablePanel extends Panel {
 			}*/
 			
 			addMarkers(listMapMarkerPoint, js);
-			target.appendJavascript(js.toString());
+			target.appendJavaScript(js.toString());
 		}
 	}
     
@@ -185,7 +185,7 @@ public class ViewMapMultiplePointsUpdatablePanel extends Panel {
     }
     
     private String getUrlMark(String urlMark){
-    	ResourceReference rr = new ResourceReference(BasePage.class, "img/"+urlMark);
+    	ResourceReference rr = new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "img/"+urlMark);
     	return "'resources/"+rr.getScope().toString().replaceAll("class ", "")+"/"+rr.getName()+"'";
     }
     

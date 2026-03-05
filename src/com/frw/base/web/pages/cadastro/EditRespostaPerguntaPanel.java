@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -128,8 +128,8 @@ public class EditRespostaPerguntaPanel extends AbstractEntityEditPanel<Resposta>
     	replaceWith(panelList);
     	setOutputMarkupId(true);
     	//setOutputMarkupPlaceholderTag(true);
-    	target.addComponent(this);
-    	target.addComponent(panelList);
+    	target.add(this);
+    	target.add(panelList);
     	
     }
 
@@ -137,8 +137,8 @@ public class EditRespostaPerguntaPanel extends AbstractEntityEditPanel<Resposta>
 	protected void onBackPressed(AjaxRequestTarget target) {
 		replaceWith(panelList);
     	setOutputMarkupId(true);
-    	target.addComponent(this);
-    	target.addComponent(panelList);
+    	target.add(this);
+    	target.add(panelList);
 	}
 
 	

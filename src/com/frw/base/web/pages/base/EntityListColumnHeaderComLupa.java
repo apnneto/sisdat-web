@@ -22,7 +22,7 @@ public class EntityListColumnHeaderComLupa  extends DefaultListColumnHeader {
 
             @Override
             public void onClick(AjaxRequestTarget art) {
-               art.appendJavascript("alert('Lookup clicado')");
+               art.appendJavaScript("alert('Lookup clicado')");
             }
         };
 

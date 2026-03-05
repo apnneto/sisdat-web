@@ -51,8 +51,8 @@ public class FilterListUsuarioPanel extends Panel {
         /* botão de pesquisa */
         IndicatingAjaxButton buscarInformacoes = new IndicatingAjaxButton("buscarInformacoes") {
             @Override
-            protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
-                art.addComponent(listContainer);
+            protected void onSubmit(AjaxRequestTarget art) {
+                art.add(listContainer);
             }
         };
         buscarInformacoes.setModel(new ResourceModel("botao.buscarInformacoes"));

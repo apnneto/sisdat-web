@@ -5,11 +5,11 @@
 package com.frw.base.web;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.ResourceReference;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
-import org.apache.wicket.markup.html.IHeaderContributor;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 import com.frw.base.validation.ValidationInputMask;
 
@@ -17,7 +17,7 @@ import com.frw.base.validation.ValidationInputMask;
  *
  * @author juliano
  */
-public class ValidationMaskBehavior extends AbstractBehavior implements IHeaderContributor {
+public class ValidationMaskBehavior extends Behavior {
 
     private boolean acceptsNegative;
     private String centsSeparator = ",";
@@ -29,18 +29,14 @@ public class ValidationMaskBehavior extends AbstractBehavior implements IHeaderC
     public ValidationMaskBehavior(int maxInteger, int maxCents) {
         this.maxInteger = maxInteger;
         this.maxCents = maxCents;
-        pattern = null;
     }
 
     public ValidationMaskBehavior(int maxInteger, int maxCents, String centsSeparator, String thousandsSeparator, boolean acceptsNegative) {
         this.maxInteger = maxInteger;
         this.maxCents = maxCents;
-        pattern = null;
         this.centsSeparator = centsSeparator;
         this.thousandsSeparator = thousandsSeparator;
         this.acceptsNegative = acceptsNegative;
-
-
     }
 
     public ValidationMaskBehavior(String pattern) {
@@ -59,7 +55,6 @@ public class ValidationMaskBehavior extends AbstractBehavior implements IHeaderC
     @Override
     public void bind(Component component) {
         component.setOutputMarkupId(true);
-
     }
 
     @Override
@@ -67,25 +62,18 @@ public class ValidationMaskBehavior extends AbstractBehavior implements IHeaderC
 
         if (pattern != null && !pattern.equals("")) {
             tag.getAttributes().put("onfocus", "javascript:InputTextMask.processMaskFocus(this, '" + pattern + "', true);");
-        } else {
-           // tag.getAttributes().put("onfocus", "javascript:activatePriceMask('#" + component.getMarkupId() + "'," + (maxInteger + maxCents) + "," + maxCents + ",'" + centsSeparator + "','" + thousandsSeparator + "','" + acceptsNegative + "');");
         }
 
     }
 
     @Override
-    public void renderHead(IHeaderResponse response) {
+    public void renderHead(Component component, IHeaderResponse response) {
 
 
         if (pattern != null && !pattern.equals("")) {
-            response.renderJavascriptReference(new ResourceReference(ValidationMaskBehavior.class, "inputTextMask.js"));
-        } else {
-          //  response.renderJavascriptReference(new ResourceReference(ValidationMaskBehavior.class, "priceformat_jquery.js"));
-
-           // response.renderJavascript("function activatePriceMask(id,max,cents,centsSeparator,thousandsSeparator,acceptsNegative) { $(id).priceFormat({prefix: '',centsSeparator:centsSeparator,thousandsSeparator:thousandsSeparator,limit:max,centslimit:cents,acceptsNegative: acceptsNegative}) }", "activatePriceMaskFunction");
+            response.render(JavaScriptReferenceHeaderItem.forReference(
+                new PackageResourceReference(ValidationMaskBehavior.class, "inputTextMask.js")));
         }
-
-
 
     }
 }

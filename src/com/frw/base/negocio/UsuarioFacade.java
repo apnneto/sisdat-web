@@ -2,8 +2,8 @@ package com.frw.base.negocio;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import com.frw.base.dao.UsuarioDAO;
 import com.frw.base.dominio.base.Usuario;

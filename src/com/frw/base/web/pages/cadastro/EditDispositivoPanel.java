@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -51,7 +51,7 @@ public class EditDispositivoPanel extends AbstractEntityEditPanel<Dispositivo> {
             @Override
             public void onClick(AjaxRequestTarget target) {
             	entity.setUsuario(listUsuarioPanel.getSelectedEntity());
-                target.addComponent(txtUsuario);
+                target.add(txtUsuario);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -64,7 +64,7 @@ public class EditDispositivoPanel extends AbstractEntityEditPanel<Dispositivo> {
     		@Override
     		public void onClick(AjaxRequestTarget target) {
     			entity.setUsuario(null);
-    			target.addComponent(txtUsuario);
+    			target.add(txtUsuario);
     		}
     	};
     	form.add(limparUsuario);

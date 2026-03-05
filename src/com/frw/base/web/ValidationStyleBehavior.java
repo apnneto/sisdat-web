@@ -6,45 +6,24 @@
 package com.frw.base.web;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.feedback.FeedbackMessage;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.form.FormComponent;
-import org.apache.wicket.markup.transformer.AbstractTransformerBehavior;
 
 /**
- * This behavior sets a special css class on the component
- * tag in case it is not valid
- * @author juliano
+ * Sets a special css class on the component tag when invalid,
+ * and appends the validation message inline.
+ * Wicket 9: AbstractTransformerBehavior removed; use Behavior + onComponentTag.
  */
-public class ValidationStyleBehavior extends AbstractTransformerBehavior {
+public class ValidationStyleBehavior extends Behavior {
 
     @Override
     public void onComponentTag(Component component, ComponentTag tag) {
-
-        FormComponent c=(FormComponent)component;
-        if(!c.isValid()) {
-          
-            tag.put("class","form-invalid");
+        if (component instanceof FormComponent) {
+            FormComponent<?> c = (FormComponent<?>) component;
+            if (!c.isValid()) {
+                tag.put("class", "form-invalid");
+            }
         }
-        
-
     }
-
-    @Override
-    public CharSequence transform(Component component, CharSequence cs) throws Exception {
-
-        FormComponent c=(FormComponent)component;
-        if(!c.isValid()) {
-
-          FeedbackMessage message=c.getFeedbackMessage();
-
-          message.markRendered();
-            return cs+"<br/><span class=\"form-invalid-message\" >"+message.getMessage()+"</span>";
-        }
-
-        return cs;
-    }
-
-
-
 }

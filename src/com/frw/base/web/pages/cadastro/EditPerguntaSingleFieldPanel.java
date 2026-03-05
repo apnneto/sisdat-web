@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -216,7 +216,7 @@ public class EditPerguntaSingleFieldPanel extends AbstractEntityEditPanel<Pergun
 					cadastroPergunta.setOutputMarkupId(true);
 					editPanel = cadastroPergunta;
 					replaceWith(cadastroPergunta);
-					target.addComponent(cadastroPergunta);
+					target.add(cadastroPergunta);
 
 					tipoPerguntaPanel.setAvancarSelected(false);
 				}
@@ -236,22 +236,22 @@ public class EditPerguntaSingleFieldPanel extends AbstractEntityEditPanel<Pergun
 	protected void onAfterDeletEntity(AjaxRequestTarget target) {
 		replaceWith(panelList);
 		setOutputMarkupId(true);
-		target.addComponent(this);
-		target.addComponent(panelList);
+		target.add(this);
+		target.add(panelList);
 	}
 
 	@Override
 	protected void onAfterSaveEntity(AjaxRequestTarget target) {
 		feedback.setVisible(false);
-		target.addComponent(feedback);
+		target.add(feedback);
 	}
 
 	@Override
 	protected void onBackPressed(AjaxRequestTarget target) {
 		replaceWith(panelList);
 		setOutputMarkupId(true);
-		target.addComponent(this);
-		target.addComponent(panelList);
+		target.add(this);
+		target.add(panelList);
 	}
 	
 	@Override
@@ -266,7 +266,7 @@ public class EditPerguntaSingleFieldPanel extends AbstractEntityEditPanel<Pergun
 		}*/
 		
 		feedback.setVisible(!validate);
-		target.addComponent(feedback);
+		target.add(feedback);
 		
 		return validate;
 	}

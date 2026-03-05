@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.CheckBox;
@@ -105,7 +105,7 @@ public class EditQuestionarioPanel extends AbstractEntityEditPanel<Questionario>
 	@Override
     public Questionario newEntity(Questionario entity, AjaxRequestTarget target) throws SistemaException {
         final Questionario pojo = new Questionario();
-        target.addComponent(abas);
+        target.add(abas);
         
         return pojo;
     }
@@ -115,7 +115,7 @@ public class EditQuestionarioPanel extends AbstractEntityEditPanel<Questionario>
     public Questionario saveEntity(Questionario entity, AjaxRequestTarget target) throws SistemaException {
     	 SistemaSession.setUserAndCurrentDate(entity);
     	 Questionario questionario = questionarioFacade.salvarQuestionario(entity);
-		 target.addComponent(abas);
+		 target.add(abas);
     	 return questionario;
     }
 

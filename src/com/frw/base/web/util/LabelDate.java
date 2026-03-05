@@ -53,10 +53,12 @@ public class LabelDate extends LabelFrw {
     }
 
     @Override
-    protected void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
-         Date value = (Date)getDefaultModelObject();
-         replaceComponentTagBody(markupStream, openTag, SistemaUtil.formatDate(value, dateEnum));
-
+    protected void onBeforeRender() {
+        super.onBeforeRender();
+        Date value = (Date) getDefaultModelObject();
+        if (value != null) {
+            setDefaultModelObject(SistemaUtil.formatDate(value, dateEnum));
+        }
     }
     
 }

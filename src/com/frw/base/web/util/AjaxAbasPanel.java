@@ -6,6 +6,7 @@
 package com.frw.base.web.util;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
@@ -37,20 +38,19 @@ public class AjaxAbasPanel extends AbasPanel{
     @Override
     protected WebMarkupContainer newLink(String linkId, final int index)
     {
-            return new AjaxFallbackLink(linkId)
+            return new AjaxFallbackLink<Void>(linkId)
             {
 
                     private static final long serialVersionUID = 1L;
 
                     @Override
-                    public void onClick(AjaxRequestTarget target)
+                    public void onClick(Optional<AjaxRequestTarget> targetOpt)
                     {
                             setSelectedTab(index);
-                            if (target != null)
-                            {
-                                    target.addComponent(AjaxAbasPanel.this);
-                            }
-                            onAjaxUpdate(target);
+                            targetOpt.ifPresent(target -> {
+                                    target.add(AjaxAbasPanel.this);
+                            });
+                            onAjaxUpdate(targetOpt.orElse(null));
                     }
 
             };

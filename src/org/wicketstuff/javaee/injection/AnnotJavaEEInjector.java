@@ -16,48 +16,29 @@
  */
 package org.wicketstuff.javaee.injection;
 
-import org.apache.wicket.injection.ConfigurableInjector;
 import org.apache.wicket.injection.IFieldValueFactory;
+import org.apache.wicket.injection.Injector;
 import org.wicketstuff.javaee.naming.IJndiNamingStrategy;
 import org.wicketstuff.javaee.naming.StandardJndiNamingStrategy;
 
 /**
- * Injector that injects ejb references based on {@link javax.ejb.EJB}
- * annotation
- *
- * @author Filippo Diotalevi
+ * Injector that injects EJB references based on {@link jakarta.ejb.EJB} annotation.
+ * Wicket 9 compatible — ConfigurableInjector was removed; extends Injector directly.
  */
-public class AnnotJavaEEInjector extends ConfigurableInjector
-{
+public class AnnotJavaEEInjector extends Injector {
 
-    IFieldValueFactory factory;
+    private final IFieldValueFactory factory;
 
-    /**
-     * Constructor
-     */
-    public AnnotJavaEEInjector()
-    {
-        initFactory(new StandardJndiNamingStrategy());
+    public AnnotJavaEEInjector() {
+        this(new StandardJndiNamingStrategy());
     }
 
-    /**
-     * Constructor
-     * @param namingStrategy - naming strategy
-     */
-    public AnnotJavaEEInjector(IJndiNamingStrategy namingStrategy)
-    {
-        initFactory(namingStrategy);
-    }
-
-    private void initFactory(IJndiNamingStrategy namingStrategy)
-    {
-        factory = new JavaEEProxyFieldValueFactory(namingStrategy);
+    public AnnotJavaEEInjector(IJndiNamingStrategy namingStrategy) {
+        this.factory = new JavaEEProxyFieldValueFactory(namingStrategy);
     }
 
     @Override
-    protected IFieldValueFactory getFieldValueFactory()
-    {
-        return factory;
+    public void inject(Object object) {
+        inject(object, factory);
     }
-
 }

@@ -10,8 +10,8 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -23,7 +23,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -61,7 +61,7 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
     protected class EntityListView extends PageableListView<T> {
 
         public EntityListView(String id, IModel<? extends List<? extends T>> model, int rowsPerPage) {
-            super(id, model, rowsPerPage);
+            super(id, (IModel)model, (long)rowsPerPage);
         }
 
         @Override
@@ -140,7 +140,7 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
                 AbstractXLSExport ixlsExport = getXLSExportUtil();
                 ixlsExport.generateXLSTable(out, titulos, listaView.getList());
                 byte[] bytes  = out.toByteArray();
-                RequestCycle.get().setRequestTarget( new ShowAnexoPage(bytes, "parcerias_grid_export.xls"));
+                { jakarta.servlet.http.HttpServletResponse r = (jakarta.servlet.http.HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse(); try { r.setHeader("Content-Disposition","attachment;filename="+ "parcerias_grid_export.xls"); r.setHeader("Content-Type","application/octet-stream"); r.getOutputStream().write(bytes); r.flushBuffer(); } catch(Exception _ex){} }
             }
         };
         exportarExcelLink.setVisible(Boolean.FALSE);
@@ -153,16 +153,16 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
             @Override
             public void onClick() {
                 byte[] bytes  = generatePDFReport(listaView.getList());
-                RequestCycle.get().setRequestTarget( new ShowAnexoPage(bytes, "parcerias_grid_export.pdf"));
+                { jakarta.servlet.http.HttpServletResponse r = (jakarta.servlet.http.HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse(); try { r.setHeader("Content-Disposition","attachment;filename="+ "parcerias_grid_export.pdf"); r.setHeader("Content-Type","application/octet-stream"); r.getOutputStream().write(bytes); r.flushBuffer(); } catch(Exception _ex){} }
             }
         };
         exportarPDFLink.setVisible(Boolean.FALSE);
         exportarPDFLink.setOutputMarkupId(true);
 
-        Image imgExcel = new Image("downloadImage", new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/excel.png")));
+        Image imgExcel = new Image("downloadImage", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/excel.png")));
         exportarExcelLink.add(imgExcel);
 
-        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/pdf.png")));
+        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/pdf.png")));
         exportarPDFLink.add(imgPDF);
 
         /** add search filter fields */
@@ -234,7 +234,7 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
     public void hideColumn(EntityColumnInfo columnInfo, AjaxRequestTarget art) {
         columnInfo.visible = false;
         visibleColumnsModel.detach();
-        art.addComponent(listContainer);
+        art.add(listContainer);
     }
 
     public boolean isContentExportableToExcel() {
@@ -253,7 +253,7 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
     public void setSortingField(String field, AjaxRequestTarget target) {
         setSortingField(field);
         Collections.sort((List)model.getObject(),entityComparator);
-        target.addComponent(listContainer);
+        target.add(listContainer);
     }
 
     private List<EntityColumnInfo> getVisibleColumns() {
@@ -358,13 +358,8 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
 
         final T object = item.getModelObject();
 
-        item.add(new AttributeModifier("class", true, new AbstractReadOnlyModel<String>() {
-
-            @Override
-            public String getObject() {
-                return (item.getIndex() % 2 == 1) ? "linha2" : "linha1";
-            }
-        }));
+        item.add(new AttributeModifier("class",
+            org.apache.wicket.model.LambdaModel.of(() -> (item.getIndex() % 2 == 1) ? "linha2" : "linha1")));
 
 
         final EntityLabelMap bodyColumnMap = new EntityLabelMap();
@@ -382,7 +377,7 @@ public abstract class AbstractListPanel<T extends Entidade> extends Panel implem
                 li.add(labelComponent.component);
 
                 if (labelComponent.cssClass != null) {
-                    li.add(new AttributeModifier("class", true, new Model<String>(labelComponent.cssClass)));
+                    li.add(new AttributeModifier("class", new Model<String>(labelComponent.cssClass)));
                 }
 
             }

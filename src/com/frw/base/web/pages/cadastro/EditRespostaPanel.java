@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -56,7 +56,7 @@ public class EditRespostaPanel extends AbstractEntityEditPanel<Resposta> {
             @Override
             public void onClick(AjaxRequestTarget target) {
             	entity.setPergunta(listPerguntaPanel.getSelectedEntity());
-                target.addComponent(txtPergunta);
+                target.add(txtPergunta);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -69,7 +69,7 @@ public class EditRespostaPanel extends AbstractEntityEditPanel<Resposta> {
     		@Override
     		public void onClick(AjaxRequestTarget target) {
     			entity.setPergunta(null);
-    			target.addComponent(txtPergunta);
+    			target.add(txtPergunta);
     		}
     	};
     	form.add(limparPergunta);

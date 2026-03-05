@@ -6,14 +6,14 @@ import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.image.NonCachingImage;
-import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+import org.apache.wicket.request.resource.DynamicImageResource;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.util.time.Duration;
+import java.time.Duration;
 
 import com.frw.base.dominio.sisdat.Foto;
 
@@ -39,7 +39,7 @@ public class PicturePanel extends Panel {
 				
 				DynamicImageResource imageResource = new DynamicImageResource() {
 					@Override
-					protected byte[] getImageData() {
+					protected byte[] getImageData(org.apache.wicket.request.resource.IResource.Attributes attributes) {
 						return li.getModelObject() !=null ? li.getModelObject().getFoto() : new byte[0];
 					}
 				};
@@ -64,7 +64,7 @@ public class PicturePanel extends Panel {
 		add(linksView);
 		
 		
-		linksView.add(new AbstractAjaxTimerBehavior(Duration.seconds(5)) {
+		linksView.add(new AbstractAjaxTimerBehavior(java.time.Duration.ofSeconds(5)) {
 			int index = 0;
 			@Override
 			protected void onTimer(AjaxRequestTarget ajax) {
@@ -77,13 +77,13 @@ public class PicturePanel extends Panel {
 				final Foto p = listFotos.get(index);
 				DynamicImageResource imageResource = new DynamicImageResource() {
 					@Override
-					protected byte[] getImageData() {
+					protected byte[] getImageData(org.apache.wicket.request.resource.IResource.Attributes attributes) {
 						return p.getFoto();
 					}
 					
 				};
 				imagem.setImageResource(imageResource);
-				ajax.addComponent(PicturePanel.this);
+				ajax.add(PicturePanel.this);
 			}
 			
 		});

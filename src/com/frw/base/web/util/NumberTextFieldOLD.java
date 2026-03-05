@@ -11,7 +11,6 @@ import java.text.ParseException;
 import java.util.Locale;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.convert.ConversionException;
 import org.apache.wicket.util.convert.IConverter;
@@ -106,8 +105,8 @@ public class NumberTextFieldOLD<T extends Number> extends TextFieldFrw<T> {
         init();
     }
     @Override
-    public IConverter getConverter(Class<?> type) {
-        return new IConverter() {
+    public <C> org.apache.wicket.util.convert.IConverter<C> getConverter(Class<C> type) {
+        return (org.apache.wicket.util.convert.IConverter<C>) new org.apache.wicket.util.convert.IConverter() {
 
             @Override
             public Object convertToObject(String string, Locale locale) {
@@ -169,12 +168,7 @@ public class NumberTextFieldOLD<T extends Number> extends TextFieldFrw<T> {
     protected void onBeforeRender() {
         super.onBeforeRender();
         if(this.isEnabled() == false){
-            this.add(new AttributeModifier("style",true, new AbstractReadOnlyModel() {
-                @Override
-                public String getObject() {
-                    return "background-color:#EEEEEE";
-                }
-            }));
+            this.add(AttributeModifier.replace("style", "background-color:#EEEEEE"));
         }
     }
 

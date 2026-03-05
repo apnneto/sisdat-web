@@ -3,8 +3,8 @@ package com.frw.base.negocio.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import com.frw.base.dao.sisdat.RespostaDAO;
 import com.frw.base.dominio.sisdat.Pergunta;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
@@ -63,11 +63,11 @@ public class FilterListPerguntaPanel extends AbstractFilterListPanel<FilterListP
 	                @Override
 	                public void onClick(AjaxRequestTarget target) {
 	                	questionariosSelecionados.remove(li.getModelObject());
-	                	target.addComponent(questionariosListContainer);
+	                	target.add(questionariosListContainer);
 	                }
 	            };
 	            
-	            removeLink.add(new AttributeModifier("class", true,new Model<String>("icone excluir")));
+	            removeLink.add(new AttributeModifier("class", new Model<String>("icone excluir")));
 	            li.add(removeLink);
 			}
 		};
@@ -94,7 +94,7 @@ public class FilterListPerguntaPanel extends AbstractFilterListPanel<FilterListP
 				Questionario questionario =  questionarioFacade.buscarPorDescricaoCompleta(getModelObject());
 				if(questionario != null && (!questionariosSelecionados.contains(questionario))) {
 					questionariosSelecionados.add(questionario);
-					target.addComponent(questionariosListContainer);
+					target.add(questionariosListContainer);
 				}
 			}
 			

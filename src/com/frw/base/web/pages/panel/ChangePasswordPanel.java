@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.panel;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -44,26 +44,26 @@ public class ChangePasswordPanel extends Panel {
             buttonAlterar = new IndicatingAjaxButton("btnAlterarSenha") {
 
                 @Override
-                public void onSubmit(AjaxRequestTarget target, final Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
                     try {
 
                         SistemaSession session = (SistemaSession) Session.get();
                         cadastroFacade.changeUserPassword(session.getUsuarioLogado(), txtSenhaAtual.getInput(), txtSenhaNova.getInput(), txtConfirmacaoSenhaNova.getInput());
 
                         info(getString("user.change.password.sucessful"));
-                        target.addComponent(feedbackPanel);
+                        target.add(feedbackPanel);
 
                     } catch (SistemaException pe) {
                         info(getString(pe.getMessage()));
                         pe.printStackTrace();
-                        target.addComponent(feedbackPanel);
+                        target.add(feedbackPanel);
                         return;
                     }
                 }
 
                 @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
-                    target.addComponent(feedbackPanel);
+                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                    target.add(feedbackPanel);
                 }
             };
 

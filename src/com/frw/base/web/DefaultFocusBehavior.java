@@ -5,15 +5,12 @@
 package com.frw.base.web;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.AbstractBehavior;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.OnLoadHeaderItem;
 import org.apache.wicket.markup.html.form.FormComponent;
 
-/**
- *
- * @author Marelo
- */
-public class DefaultFocusBehavior extends AbstractBehavior {
+public class DefaultFocusBehavior extends Behavior {
 
     private static final long serialVersionUID = -4891399118136854774L;
     private Component component;
@@ -28,9 +25,9 @@ public class DefaultFocusBehavior extends AbstractBehavior {
     }
 
     @Override
-    public void renderHead(IHeaderResponse iHeaderResponse) {
-        super.renderHead(iHeaderResponse);
-        iHeaderResponse.renderOnLoadJavascript("document.getElementById('"
-                + component.getMarkupId() + "').focus();");
+    public void renderHead(Component component, IHeaderResponse response) {
+        super.renderHead(component, response);
+        response.render(OnLoadHeaderItem.forScript(
+            "document.getElementById('" + this.component.getMarkupId() + "').focus();"));
     }
 }

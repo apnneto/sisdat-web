@@ -2,13 +2,13 @@ package com.frw.base.web;
 
 import java.util.HashMap;
 
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.validation.metadata.BeanDescriptor;
-import javax.validation.metadata.PropertyDescriptor;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
+import jakarta.validation.metadata.BeanDescriptor;
+import jakarta.validation.metadata.PropertyDescriptor;
 
 import org.apache.wicket.Component;
-import org.apache.wicket.behavior.IBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -24,7 +24,7 @@ import com.frw.base.validation.ValidationInputMask;
 public class BaseWebBeanForm<T> extends Form<T> {
 
     private static transient ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    private IBehavior defaultBehaviour;
+    private Behavior defaultBehaviour;
     private boolean editMode;
 
     private T entity;
@@ -38,7 +38,7 @@ public class BaseWebBeanForm<T> extends Form<T> {
 
     }
 
-    public IBehavior getDefaultBehaviour() {
+    public Behavior getDefaultBehaviour() {
         return defaultBehaviour;
     }
 
@@ -53,7 +53,7 @@ public class BaseWebBeanForm<T> extends Form<T> {
         return editMode;
     }
 
-    public void setDefaultBehaviour(IBehavior defaultBehaviour) {
+    public void setDefaultBehaviour(Behavior defaultBehaviour) {
         this.defaultBehaviour = defaultBehaviour;
     }
 
@@ -107,7 +107,7 @@ public class BaseWebBeanForm<T> extends Form<T> {
 
     }
 
-    private IBehavior getMaskBehavior(PropertyDescriptor p) {
+    private Behavior getMaskBehavior(PropertyDescriptor p) {
 
 
 //        ValidationInputMask mask = findConstraintMask(p);
@@ -145,38 +145,15 @@ public class BaseWebBeanForm<T> extends Form<T> {
                 entityProperties.put(p.getPropertyName(), p);
             }
 
-            visitChildren(new IVisitor<Component>() {
-
-                public Object component(Component t) {
-
-                    if (t instanceof FormComponent) {
-                        FormComponent c = (FormComponent) t;
-
-
-
-                        PropertyDescriptor pd = entityProperties.get(t.getId());
-
-                        if (pd != null) {
-                            c.add(new JSR302Validator<T>(t.getId(), entityClass, editMode ? c.getModel() : null, BaseWebBeanForm.this));
-//                            IBehavior maskBehavior = getMaskBehavior(pd);
-//
-//                            if (maskBehavior != null) {
-//                                c.add(maskBehavior);
-//                            }
-
-
-                        }
-
-                        if (defaultBehaviour != null) {
-                            c.add(defaultBehaviour);
-                        }
-
-
-
+            visitChildren(FormComponent.class, (t, visit) -> {
+                    FormComponent c = (FormComponent) t;
+                    PropertyDescriptor pd = entityProperties.get(t.getId());
+                    if (pd != null) {
+                        c.add(new JSR302Validator<T>(t.getId(), entityClass, editMode ? c.getModel() : null, BaseWebBeanForm.this));
                     }
-
-                    return IVisitor.CONTINUE_TRAVERSAL;
-                }
+                    if (defaultBehaviour != null) {
+                        c.add(defaultBehaviour);
+                    }
             });
 
             validatorsAdded = true;

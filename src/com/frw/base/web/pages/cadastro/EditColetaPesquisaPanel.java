@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.image.NonCachingImage;
-import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+import org.apache.wicket.request.resource.DynamicImageResource;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import com.frw.base.dominio.sisdat.ColetaPesquisa;
@@ -70,7 +70,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             @Override
             public void onClick(AjaxRequestTarget target) {
             	entity.setPesquisa(listPesquisaPanel.getSelectedEntity());
-                target.addComponent(txtPesquisa);
+                target.add(txtPesquisa);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -84,7 +84,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
     		@Override
     		public void onClick(AjaxRequestTarget target) {
     			entity.setPesquisa(null);
-    			target.addComponent(txtPesquisa);
+    			target.add(txtPesquisa);
     		}
     	};
     	limparPesquisa.setVisible(false);
@@ -105,7 +105,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             public void onClick(AjaxRequestTarget target) {
             	entity.setPergunta(listPerguntaPanel.getSelectedEntity());
             	pergunta = entity.getPergunta();
-                target.addComponent(txtPergunta);
+                target.add(txtPergunta);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -118,7 +118,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
     		@Override
     		public void onClick(AjaxRequestTarget target) {
     			entity.setPergunta(null);
-    			target.addComponent(txtPergunta);
+    			target.add(txtPergunta);
     		}
     	};
     	form.add(limparPergunta);
@@ -135,7 +135,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             @Override
             public void onClick(AjaxRequestTarget target) {
             	entity.setResposta(listRespostaPanel.getSelectedEntity());
-                target.addComponent(txtResposta);
+                target.add(txtResposta);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -148,7 +148,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
     		@Override
     		public void onClick(AjaxRequestTarget target) {
     			entity.setResposta(null);
-    			target.addComponent(txtResposta);
+    			target.add(txtResposta);
     		}
     	};
     	form.add(limparResposta);
@@ -201,7 +201,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
 
 		DynamicImageResource imageResource = new DynamicImageResource() {
 			@Override
-			protected byte[] getImageData() {
+			protected byte[] getImageData(org.apache.wicket.request.resource.IResource.Attributes attributes) {
 				if (imageArray == null) {
 					return new byte[1];
 				}
@@ -223,19 +223,19 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
     		validate = false;
     		feedback.getString("campo.pergunta.obrigatorio");
     		feedback.setVisible(true);
-    		target.addComponent(feedback);
+    		target.add(feedback);
     	}
     	if(txtResposta.getModelObject() == null){
     		validate = false;
     		feedback.getString("campo.resposta.obrigatorio");
     		feedback.setVisible(true);
-    		target.addComponent(feedback);
+    		target.add(feedback);
     	}
     	if(txtPesquisa.getModelObject() == null){
     		validate = false;
     		feedback.getString("campo.pesquisa.obrigatorio");
     		feedback.setVisible(true);
-    		target.addComponent(feedback);
+    		target.add(feedback);
     	}
     	
     	return validate;

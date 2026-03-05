@@ -10,15 +10,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -33,7 +33,7 @@ import org.apache.wicket.markup.html.list.PageableListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
@@ -86,7 +86,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
 	protected class EntityListView extends PageableListView<T> {
 
 		public EntityListView(String id, IModel<? extends List<? extends T>> model, int rowsPerPage) {
-            super(id, model, rowsPerPage);
+            super(id, (IModel)model, (long)rowsPerPage);
         }
 
         @Override
@@ -115,7 +115,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
                         if (panel != null) {
                             panel.setOutputMarkupId(true);
                             editEntity(panel);
-                            target.addComponent(panel);
+                            target.add(panel);
                         }
                     }
                 }
@@ -129,7 +129,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
             //item.add(editLink);
             webBodyAction.add(editLink);
 
-           /* item.add(new AttributeModifier("class", true, new AbstractReadOnlyModel<String>() {
+           /* item.add(new AttributeModifier("class", new AbstractReadOnlyModel<String>() {
 
                 @Override
                 public String getObject() {
@@ -153,7 +153,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
                     li.add(labelComponent.component);
 
                     if (labelComponent.cssClass != null) {
-                        li.add(new AttributeModifier("class", true, new Model<String>(labelComponent.cssClass)));
+                        li.add(new AttributeModifier("class", new Model<String>(labelComponent.cssClass)));
                     }
 
 
@@ -173,7 +173,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
 
                 @Override
                 public void onClick(final AjaxRequestTarget target) {
-                    target.appendJavascript("Wicket.Window.unloadConfirmation=false");
+                    target.appendJavaScript("Wicket.Window.unloadConfirmation=false");
                     confirmationModal.setContent(new ModalConfirmationPanel(confirmationModal.getContentId(), "message.confirmation.delete") {
 
                         @Override
@@ -192,7 +192,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
                                 return false;
                             }
                             EntityListView.this.getModel().detach();
-                            tg.addComponent(listContainer);
+                            tg.add(listContainer);
                             return true;
                         }
                     });
@@ -204,7 +204,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
             removeLink.setVisible(enableDeleteLink);
             
             if (!removeLink.isEnabled()) {
-            	removeLink.add(new AttributeModifier("class", true, new Model<String>("sub-excluir")));
+            	removeLink.add(new AttributeModifier("class", new Model<String>("sub-excluir")));
             }
             
 
@@ -227,10 +227,10 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
             afterPopulateItem(item, removeLink, editLink);
 
             if (!editLink.isEnabled()) {
-            	editLink.add(new AttributeModifier("class", true, new Model<String>("icone editar disabled")));
+            	editLink.add(new AttributeModifier("class", new Model<String>("icone editar disabled")));
             }
 
-            editLink.add(new AttributeModifier("title", true, new Model<String>(""+item.getModelObject().getId())));
+            editLink.add(new AttributeModifier("title", new Model<String>(""+item.getModelObject().getId())));
         }
 
     }
@@ -317,7 +317,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
                     onBeforeNewLinkClick();
                 } catch(SistemaException e) {
                     error(getString(e.getMessage()));
-                    target.addComponent(feedback);
+                    target.add(feedback);
                     return;
                 }
 
@@ -329,7 +329,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
                     if (panel != null) {
                         panel.setOutputMarkupId(true);
                         editEntity(panel);
-                        target.addComponent(panel);
+                        target.add(panel);
                     }
                 }
             }
@@ -339,7 +339,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
         add(newLink);
         
         if (!newLink.isEnabled()) {
-        	newLink.add(new AttributeModifier("class", true, new Model<String>("sub-incluir")));
+        	newLink.add(new AttributeModifier("class", new Model<String>("sub-incluir")));
         }
         
         exportarExcelLink = new Link("btnExportarExcel") {
@@ -382,7 +382,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
 
 					// caso nao tenha fotos, nao sera gerado um arquivo zip
 					if (fotos == null || fotos.isEmpty()) {
-						RequestCycle.get().setRequestTarget(new ShowAnexoPage(planilhaXls, "RespostasPesquisa.xls"));
+						{ jakarta.servlet.http.HttpServletResponse r = (jakarta.servlet.http.HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse(); try { r.setHeader("Content-Disposition","attachment;filename="+ "RespostasPesquisa.xls"); r.setHeader("Content-Type","application/octet-stream"); r.getOutputStream().write(planilhaXls); r.flushBuffer(); } catch(Exception _ex){} }
 					} else {
 
 						byte[] zipFile = pesquisaFacade.generateZipFile(fotos, planilhaXls);
@@ -425,7 +425,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
             @Override
             public void onClick() {
                 byte[] bytes  = generatePDFReport(listaView.getList());
-                RequestCycle.get().setRequestTarget( new ShowAnexoPage(bytes, "grid_export.pdf"));
+                { jakarta.servlet.http.HttpServletResponse r = (jakarta.servlet.http.HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse(); try { r.setHeader("Content-Disposition","attachment;filename="+ "grid_export.pdf"); r.setHeader("Content-Type","application/octet-stream"); r.getOutputStream().write(bytes); r.flushBuffer(); } catch(Exception _ex){} }
             }
         };
         exportarPDFLink.setVisible(Boolean.FALSE);
@@ -445,7 +445,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
      	pesquisas = (List<Pesquisa>) listaView.getList();
      	pesquisaFacade.gerarNomeFotos(pesquisas);
 
-        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/pdf.png")));
+        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/pdf.png")));
         exportarPDFLink.add(imgPDF);
 
         /* add empty footer container */
@@ -564,7 +564,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
     public void hideColumn(EntityColumnInfo columnInfo, AjaxRequestTarget art) {
         columnInfo.visible = false;
         visibleColumnsModel.detach();
-        art.addComponent(listContainer);
+        art.add(listContainer);
     }
 
 
@@ -595,13 +595,13 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
         Collections.sort((List)model.getObject(),entityComparator);
         //model.detach();
         
-        target.addComponent(listContainer);
+        target.add(listContainer);
 
     }
 
     private String getRegistrosEncontrados() {
 		if (listaView.getList() != null && !listaView.getList().isEmpty()) {
-			return new StringResourceModel("label.resultados.encontrados", this, null, new Object[]{getPalavraResultadosEncontradosLabel(), listaView.getList().size()}).getObject();
+			return new StringResourceModel("label.resultados.encontrados", this).setParameters(new Object[]{getPalavraResultadosEncontradosLabel(), listaView.getList().size()}).getObject();
 		}else {
 			return getStringResultadosNaoEncontrados();
 		}

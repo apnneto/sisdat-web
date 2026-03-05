@@ -20,7 +20,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import org.apache.wicket.proxy.IProxyTargetLocator;
-import org.apache.wicket.util.lang.Objects;
 import org.wicketstuff.javaee.naming.IJndiNamingStrategy;
 
 /**
@@ -82,7 +81,7 @@ public class JavaEEBeanLocator implements IProxyTargetLocator
         {
             JavaEEBeanLocator other = (JavaEEBeanLocator) obj;
             return beanType.equals(other.beanType)
-                && Objects.equal(beanName, other.beanName);
+                && java.util.Objects.equals(beanName, other.beanName);
         }
         return false;
     }

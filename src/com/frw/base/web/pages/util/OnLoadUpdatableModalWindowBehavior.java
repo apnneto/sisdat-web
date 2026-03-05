@@ -4,9 +4,10 @@
  */
 package com.frw.base.web.pages.util;
 
+import java.time.Duration;
+
 import org.apache.wicket.ajax.AbstractAjaxTimerBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.util.time.Duration;
 
 import com.frw.base.web.util.BasePageUtil;
 
@@ -27,8 +28,8 @@ public class OnLoadUpdatableModalWindowBehavior extends AbstractAjaxTimerBehavio
 
     @Override
     protected void onTimer(AjaxRequestTarget art) {
-        stop();
+        stop(art);
         BasePageUtil.getInstance().ShowAlertMessage(message, art, modal);
-        art.addComponent(modal);
+        art.add(modal);
     }
 }

@@ -3,7 +3,7 @@ package com.frw.base.web.pages.cadastro;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
@@ -108,7 +108,7 @@ public class EditRespostaPesquisaPanel extends AbstractEntityListRespostaPanelNe
 
 						@Override
 						public void onClick(AjaxRequestTarget target) {
-							target.appendJavascript("Wicket.Window.unloadConfirmation=false");
+							target.appendJavaScript("Wicket.Window.unloadConfirmation=false");
 							ViewPicturePanel picturePanel = new ViewPicturePanel(confirmationModal.getContentId(), entity.getFotos());
 							confirmationModal.setContent(picturePanel);
 							confirmationModal.setInitialHeight(410);
@@ -117,7 +117,7 @@ public class EditRespostaPesquisaPanel extends AbstractEntityListRespostaPanelNe
 							confirmationModal.show(target);
 						}
 					};
-					showLocalLink.add(new AttributeModifier("class", true,	new Model<String>("icone picture cursor")));
+					showLocalLink.add(new AttributeModifier("class", new Model<String>("icone picture cursor")));
 					return showLocalLink;
 				}
 			}
@@ -141,7 +141,7 @@ public class EditRespostaPesquisaPanel extends AbstractEntityListRespostaPanelNe
 
 				@Override
 				public void onClick(AjaxRequestTarget target) {
-					target.appendJavascript("Wicket.Window.unloadConfirmation=false");
+					target.appendJavaScript("Wicket.Window.unloadConfirmation=false");
 					
 					MapSinglePointPanel mapPanel = new MapSinglePointPanel(confirmationModal.getContentId(), new MapMarkerPoint(entity));
 
@@ -154,7 +154,7 @@ public class EditRespostaPesquisaPanel extends AbstractEntityListRespostaPanelNe
 				}
 			};
 
-			showLocalLink.add(new AttributeModifier("class", true, new Model<String>("icone ver cursor")));
+			showLocalLink.add(new AttributeModifier("class", new Model<String>("icone ver cursor")));
 
 			return showLocalLink;
 

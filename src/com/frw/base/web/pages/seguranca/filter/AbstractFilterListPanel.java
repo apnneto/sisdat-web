@@ -37,9 +37,9 @@ public abstract class AbstractFilterListPanel<T extends AbstractFilterDTO> exten
         /* botao de pesquisa */
         btnConsultar = new IndicatingAjaxButton("buscarInformacoes") {
             @Override
-            protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+            protected void onSubmit(AjaxRequestTarget art) {
             	onSearch(art, form);
-                art.addComponent(listPanel);
+                art.add(listPanel);
             }
         };
         btnConsultar.setModel(new ResourceModel("botao.buscarInformacoes"));
@@ -66,9 +66,9 @@ public abstract class AbstractFilterListPanel<T extends AbstractFilterDTO> exten
         /* botao de pesquisa */
         btnConsultar = new IndicatingAjaxButton("buscarInformacoes") {
             @Override
-            protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+            protected void onSubmit(AjaxRequestTarget art) {
             	onSearch(art, form);
-                art.addComponent(listPanel);
+                art.add(listPanel);
             }
         };
         btnConsultar.setModel(new ResourceModel("botao.buscarInformacoes"));
@@ -80,7 +80,7 @@ public abstract class AbstractFilterListPanel<T extends AbstractFilterDTO> exten
 	
 	public void updateFilterDTO(T filterDTO, AjaxRequestTarget ajax) {
 		form.setEntity(filterDTO);
-		ajax.addComponent(form);
+		ajax.add(form);
 	}
 
 

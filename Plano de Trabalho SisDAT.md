@@ -65,8 +65,10 @@ Fase C — Atualização do Servidor de Aplicação ⏳ *Bloqueado — aguarda F
 - ⛔ **Payara 6 bloqueado:** Wicket 1.4.22 implementa `javax.servlet.Filter`; Payara 6 exige `jakarta.servlet.Filter` — `ClassCastException` impede o filtro de inicializar. Migração para Payara 6 requer primeiro upgrade do Wicket.
 - ✅ Configurações JNDI/datasource e scripts de deploy funcionando.
 
-Fase D — Código e Namespace ⏳ *Bloqueado — aguarda upgrade do Wicket*
-- ⛔ **Dependência circular:** `javax.*` → `jakarta.*` requer Payara 6; Payara 6 requer Wicket compatível com `jakarta.servlet`; Wicket 1.4.22 não tem versão Jakarta. Próximo passo: avaliar upgrade para Wicket 9.x (última versão LTS com Jakarta EE).
+Fase D — Código e Namespace 🔄 *Em andamento — Wicket 9 migration parcialmente concluída*
+- ✅ **Wicket 1.4.22 → 9.18.0:** `pom.xml` atualizado; imports `javax.*` → `jakarta.*` em 100+ arquivos via PowerShell; artefatos-chave migrados (`DefaultAjaxCallDecorator`, `BasePage`, `SistemaApplication`, `NumberTextField`, `AjaxButtonFrw`, `ValidationMaskBehavior`, `UpdatableModalWindow`, `LabelNumeric`, `LabelCurrency`, `LabelDate`, `LabelPercent`, `ShowAnexoPage`, `DateTextFieldCustom`, `DateTimeTextFieldCustom`).
+- ⏳ **Erros de compilação restantes (~30 únicos):** PageableListView genéric wildcard cast, onSubmit/onError assinaturas (sem Form param), MapSinglePointPanel `AjaxRequestTarget.get()` removido, ImageHint add(Image), DynamicImageResource.getImageData(Attributes) — ver detalhes no TODO list.
+- ⏳ **Deploy Payara 6 pendente:** aguarda BUILD SUCCESS.
 
 Fase E — Containerização e Automação ✅ *Concluído (base)*
 - ✅ `Dockerfile.payara` e `docker-compose.yml` funcionais.
@@ -88,14 +90,15 @@ Fase H — Release e Documentação ⏳ *Pendente*
 ---
 
 ## 6. Tabela de Versões (De → Para)
-| Componente    | Legado                  | Atual (2026-02-27)         | Meta                        |
-|---------------|-------------------------|----------------------------|-----------------------------|
-| Java          | 7/8                     | 8 (build local)            | 17 LTS → 21                 |
-| Servidor      | GlassFish 3.1.2.2       | Payara 5.2022.4 (Docker)   | Payara 6 / WildFly 30+      |
-| Dependências  | JARs manuais em WEB-INF | JARs no WAR + Jersey via PS| Maven Central / repo interno |
-| Banco         | MySQL (legado, dump)    | MySQL 8.0 (Docker)         | MySQL 8.0 (containers)      |
-| Build         | Ant/Eclipse-managed     | `build-war.ps1` + jar      | Maven 3.9+                  |
-| Containerização | Não existia           | Docker Compose funcional   | Docker Compose + CI         |
+| Componente    | Legado                  | Atual (2026-03-05)                 | Meta                        |
+|---------------|-------------------------|------------------------------------|-----------------------------|
+| Java          | 7/8                     | 21 (build local via Eclipse JRE)   | 17 LTS → 21                 |
+| Servidor      | GlassFish 3.1.2.2       | Payara 6 (Docker, aguarda build)   | Payara 6 / WildFly 30+      |
+| Wicket        | 1.4.22                  | 9.18.0 (migração em andamento)     | 9.18.0 estável              |
+| Dependências  | JARs manuais em WEB-INF | Maven Central (38 JARs migrados)   | Maven Central / repo interno |
+| Banco         | MySQL (legado, dump)    | MySQL 8.0 (Docker, dados completos)| MySQL 8.0 (containers)      |
+| Build         | Ant/Eclipse-managed     | Maven 3.9+                         | Maven 3.9+                  |
+| Containerização | Não existia           | Docker Compose funcional           | Docker Compose + CI         |
 
 ---
 
@@ -259,8 +262,8 @@ Com o banco de dados populado com tabelas e dados completos do sistema legado, o
 - [x] Mover dependências para Maven e resolver conflitos — ✅ Concluído em 2026-03-04 (38 JARs migrados para Maven Central; apenas LogicWicket-1.4.jar permanece como system-scope)
 - [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04 (`mysql-connector-j-8.0.33`)
 - [ ] Publicar JARs customizados em repositório interno — pendente
-- [x] Migração para Java 17 / Payara 6 e validação de smoke tests — ⛔ Bloqueado (Wicket 1.4.22 incompatível com jakarta.servlet.Filter — requer upgrade do Wicket primeiro)
-- [x] Migração `javax.*` → `jakarta.*` (se necessário) — ⛔ Bloqueado (requer Payara 6)
+- [~] Migração para Payara 6 / Java 17 e validação de smoke tests — ⏳ **Em andamento:** Wicket 9.18.0 sendo migrado; ~30 erros de compilação restantes (ver seção "Próximos Passos")
+- [~] Migração `javax.*` → `jakarta.*` — ⏳ **Em andamento:** 100+ arquivos convertidos; erros residuais em ~15 arquivos
 - [ ] Testes unitários e de integração — pendente
 - [ ] CI com scan de vulnerabilidades (OWASP Dependency-Check) — pendente
 
@@ -271,11 +274,47 @@ Com o banco de dados populado com tabelas e dados completos do sistema legado, o
 > **Status atual:** banco completo ✅ | login funcional ✅ | build Maven ✅ | deploy Payara 5 ✅
 > Todas as Prioridades 1–4 anteriores foram concluídas. Os próximos passos focam na modernização e qualidade.
 
-### Prioridade 1 — Upgrade do Wicket (desbloqueador para Payara 6 / Jakarta EE)
-O único bloqueador para Payara 6 é o Wicket 1.4.22. Passos:
-1. Avaliar Wicket 9.x (suporte Jakarta EE / `jakarta.servlet.Filter`).
-2. Mapear incompatibilidades de API entre Wicket 1.4 e Wicket 9 (componentes, painéis, forms).
-3. Planejar migração incremental de páginas.
+### Prioridade 1 — Continuar migração Wicket 9 (bloqueador para Payara 6 / Jakarta EE)
+
+**Estado ao pausar (2026-03-05, aguardando restart):** migração em andamento. Compilação falha com ~30 erros agrupados em categorias bem conhecidas. Todos os arquivos alterados estão commitados no git.
+
+**Para retomar:** `mvn -DskipTests clean package 2>&1 | findstr /C:"[ERROR]" | findstr ".java"` → lista exata de erros restantes.
+
+**Erros restantes classificados:**
+
+| # | Arquivo(s) | Erro | Correção pendente |
+|---|-----------|------|------------------|
+| A | `AjaxButtonFrw.java:41` | `cannot access javax.servlet.ServletContext` | Wicket 9's `getServletContext()` returns `jakarta.servlet.ServletContext`; o erro é cascade de outro arquivo — verificar se `javax.servlet-api` está como `provided` no pom |
+| B | `AbstractEntityEditPanel`, `AbstractEntityEditPage`, `ChangePasswordPanel`, `UploadFilePanel`, `AbstractFilterListPanel`, `MultipleSelectionPanel`, `FilterList*`, `EditEscolherTipoPerguntaPanel` | `method does not override…onSubmit/onError` | Remover parâmetro `Form<?>` — Wicket 9 não passa form; executar `scripts/fix-wicket9.ps1` |
+| C | `BasePage.java:84,89` | `method does not override…onSelectionChanged` | `onSelectionChanged(Locale)` → sem alteração de assinatura; verificar se `DropDownChoice` raw type causa problema |
+| D | `AbstractEntityListPanelNew`, `AbstractEntityListRespostaPanelNew`, `AbstractListPesquisa`, `AbstractListRespostaPesquisa`, `AbstractEntityListPage`, `AbstractListPanel` | `PageableListView` no suitable constructor | Cast `(IModel)` no argumento model da super() call no construtor interno `EntityListView` |
+| E | `TextAreaPanel.java:32` | `method does not override…onSubmit` | `AjaxSubmitLink.onSubmit(target, form)` → `onSubmit(target)` |
+| F | `AbstractEntityListRespostaPanelNew:397,460,461,567`, `AbstractListRespostaPesquisa:180,519` | `cannot find symbol` | Residual `addComponent`→`add` calls ou `StringResourceModel` constructor |
+| G | `ImageHint.java:39,42` | `method add in class Component cannot be applied` | `Image` não é `Behavior`; o `add(new Image(...))` deve chamar `super(id, imageRef)` no construtor |
+| H | `MapSinglePointPanel.java:48` | `AjaxRequestTarget.get()` | Removido em Wicket 9 — usar `RequestCycle.get()` ou injetar via `IRequestCycleListener` |
+| I | `PicturePanel.java:40,78` | `getImageData()` assinatura | `getImageData(Attributes)` — **já corrigido** por script; verificar se sobrou |
+| J | `LabelDate`, `LabelPercent`, `LabelNumeric`, `LabelCurrency` | `onComponentTagBody` is final | **Já corrigidos** — usar `onBeforeRender` |
+| K | `ShowAnexoPage` callers | Método `setRequestTarget`/`respond`/`detach` | `ShowAnexoPage` reescrito; callers devem chamar `.respond()` |
+| L | `AnexosPage.java:80` | residual import `RequestCycle` | Já corrigido pelo replace anterior — verificar |
+
+**Scripts já criados para facilitar correção:**
+- `scripts/fix-wicket9.ps1` — corrige onSubmit/onError signatures
+- `scripts/fix-wicket9b.ps1` — corrige AbstractReadOnlyModel, AjaxSubmitLink, RequestCycle.setRequestTarget
+
+**Ordem de execução para retomar:**
+```powershell
+cd C:\Projetos\sisdat-web
+# 1. Aplicar scripts de bulk-fix
+powershell -ExecutionPolicy Bypass -File scripts\fix-wicket9.ps1
+powershell -ExecutionPolicy Bypass -File scripts\fix-wicket9b.ps1
+# 2. Build para ver erros restantes
+set "JAVA_HOME=C:\eclipse-jee-2025-12-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.9.v20251105-0741\jre"
+set "PATH=%JAVA_HOME%\bin;%PATH%"
+mvn -DskipTests clean package 2>&1 | findstr /C:"[ERROR]" | findstr ".java"
+# 3. Corrigir erros individuais restantes (G, H, C acima)
+# 4. Deploy no Payara 6
+docker-compose up --build -d
+```
 
 ### Prioridade 2 — Validação funcional das telas principais
 Com o login funcionando, validar os fluxos críticos da aplicação:

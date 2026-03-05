@@ -3,7 +3,7 @@ package com.frw.base.web.pages.seguranca;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -74,13 +74,13 @@ public class ListQuestionarioEmpresaPanel extends AbstractEntityListPanelNew<Que
 				if (!empresa.getQuestionarios().contains(questionario)) {
 					empresa.getQuestionarios().add(questionario);
 					empresaFacade.salvarEmpresa(empresa);
-					target.addComponent(ListQuestionarioEmpresaPanel.this);
+					target.add(ListQuestionarioEmpresaPanel.this);
 
 				} else if (empresa.getQuestionarios() == null) {
 					empresa.setQuestionarios(new ArrayList<Questionario>());
 					empresa.getQuestionarios().add(questionario);
 					empresaFacade.salvarEmpresa(empresa);
-					target.addComponent(ListQuestionarioEmpresaPanel.this);
+					target.add(ListQuestionarioEmpresaPanel.this);
 				}
 				ModalWindow.closeCurrent(target);
 			}

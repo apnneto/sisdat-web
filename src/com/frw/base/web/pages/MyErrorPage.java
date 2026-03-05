@@ -63,7 +63,7 @@ public class MyErrorPage extends BasePage {
                     lblExcecao.setVisible(true);
                 }
 
-                art.addComponent(container);
+                art.add(container);
             }
         };
 

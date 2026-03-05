@@ -20,9 +20,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-import javax.persistence.PersistenceUnit;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
+import jakarta.persistence.PersistenceUnit;
 
 import org.apache.wicket.injection.IFieldValueFactory;
 import org.apache.wicket.proxy.IProxyTargetLocator;

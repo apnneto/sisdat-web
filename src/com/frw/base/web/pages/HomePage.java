@@ -4,9 +4,10 @@
  */
 package com.frw.base.web.pages;
 
-import org.apache.wicket.PageParameters;
-import org.apache.wicket.authorization.strategies.role.annotations.AuthorizeInstantiation;
+
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.frw.base.web.util.LabelFrw;
 
@@ -33,10 +34,8 @@ public class HomePage extends BasePage {
         LabelFrw message = new LabelFrw("msg");
         add(message);
 
-        if (params != null) {
-            if (params.containsKey("mensagem")) {
-                message.setDefaultModel(new ResourceModel(params.getString("mensagem", "message.page.tentenovamente")));
-            }
+        if (params != null && params.get("mensagem") != null && !params.get("mensagem").isNull()) {
+            message.setDefaultModel(new ResourceModel(params.get("mensagem").toString("message.page.tentenovamente")));
         }
 
     }

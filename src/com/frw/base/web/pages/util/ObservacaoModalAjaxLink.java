@@ -1,7 +1,7 @@
 package com.frw.base.web.pages.util;
 
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -53,9 +53,9 @@ public class ObservacaoModalAjaxLink extends AjaxLink {
         super.onBeforeRender();
 
         if (getModel().getObject() == null || getModel().getObject().toString().isEmpty()) {
-            image.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/anatation_32.png")));
+            image.setDefaultModel(new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/anatation_32.png")));
         } else {
-            image.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/anotation_blue_32.png")));
+            image.setDefaultModel(new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/anotation_blue_32.png")));
         }
 
     }

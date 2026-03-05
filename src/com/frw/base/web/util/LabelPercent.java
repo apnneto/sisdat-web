@@ -36,10 +36,12 @@ public class LabelPercent extends LabelFrw {
     }
 
     @Override
-    protected void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
-         Object value = getDefaultModelObject();
-         replaceComponentTagBody(markupStream, openTag, SistemaUtil.formatPercent(value));
-
+    protected void onBeforeRender() {
+        super.onBeforeRender();
+        Object value = getDefaultModelObject();
+        if (value != null) {
+            setDefaultModelObject(SistemaUtil.formatPercent(value));
+        }
     }
 
 }

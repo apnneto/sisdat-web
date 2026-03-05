@@ -3,7 +3,7 @@ package com.frw.base.web.pages.cadastro;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
@@ -160,7 +160,7 @@ public class ListPerguntaPanel extends AbstractEntityListPanelNew<Pergunta> {
 
 						cadastroPergunta.setOutputMarkupId(true);
 						editEntity(cadastroPergunta);
-						target.addComponent(cadastroPergunta);
+						target.add(cadastroPergunta);
 
 						tipoPerguntaPanel.setAvancarSelected(false);
 					}

@@ -16,44 +16,29 @@
  */
 package org.wicketstuff.javaee.injection;
 
-import org.apache.wicket.injection.ComponentInjector;
-import org.apache.wicket.injection.web.InjectorHolder;
+import org.apache.wicket.Component;
+import org.apache.wicket.application.IComponentInstantiationListener;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.wicketstuff.javaee.naming.IJndiNamingStrategy;
 
 /**
- * This injection must be initialized in the Wicket WebApplication in order to
- * enable Java EE 5 resource injection in Wicket Pages Add the initialization in
- * WebApplication's init() method, e.g.
- * <p/>
- * protected void init() { addComponentInstantiationListener(new
- * JavaEEComponentInjector(this)); }
- *
- * @author Filippo Diotalevi
+ * Wicket 9 compatible JavaEE component injector.
+ * Register via: getComponentInstantiationListeners().add(new JavaEEComponentInjector(app))
  */
-public class JavaEEComponentInjector extends ComponentInjector
-{
+public class JavaEEComponentInjector implements IComponentInstantiationListener {
 
-    /**
-     * Constructor
-     *
-     * @param webapp wicket web application
-     */
-    public JavaEEComponentInjector(WebApplication webapp)
-    {
-        InjectorHolder.setInjector(new AnnotJavaEEInjector());
+    private final AnnotJavaEEInjector injector;
+
+    public JavaEEComponentInjector(WebApplication webapp) {
+        this.injector = new AnnotJavaEEInjector();
     }
 
-    /**
-     * Constructor
-     *
-     * @param webapp   - wicket web application
-     * @param namingStrategy -  a jndi naming strategy to lookup ejb references
-     */
-    public JavaEEComponentInjector(WebApplication webapp,
-                                   IJndiNamingStrategy namingStrategy)
-    {
-        InjectorHolder.setInjector(new AnnotJavaEEInjector(namingStrategy));
-	}
+    public JavaEEComponentInjector(WebApplication webapp, IJndiNamingStrategy namingStrategy) {
+        this.injector = new AnnotJavaEEInjector(namingStrategy);
+    }
 
+    @Override
+    public void onInstantiation(Component component) {
+        injector.inject(component);
+    }
 }

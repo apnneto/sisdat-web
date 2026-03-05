@@ -1,14 +1,14 @@
 package com.frw.base.web.pages.util;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.AbstractReadOnlyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
 import com.frw.base.web.pages.BasePage;
@@ -48,12 +48,7 @@ public class ImageLink extends Panel {
                 onClickAction(art);
             }
         };
-        link.add( new AttributeModifier("title", true, new AbstractReadOnlyModel() {
-                @Override
-                public String getObject() {
-                    return titleKey;
-                }
-            }));
+        link.add( AttributeModifier.replace("title", titleKey));
         add(link);
         image = createImage(iconPath);
         link.add(image);
@@ -72,12 +67,7 @@ public class ImageLink extends Panel {
             }
         };
 
-        link.add( new AttributeModifier("title", true, new AbstractReadOnlyModel() {
-                @Override
-                public String getObject() {
-                    return getString(titleKey);
-                }
-            }));
+        link.add( AttributeModifier.replace("title", getString(titleKey)));
 
         add(link);
         image = createImage(iconPath);
@@ -86,7 +76,7 @@ public class ImageLink extends Panel {
 
 
     public Image createImage(String iconPath) {
-        return new Image("image", new Model<ResourceReference>(new ResourceReference(BasePage.class, iconPath)));
+        return new Image("image", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, iconPath)));
     }
 
     public AbstractLink getLink() {

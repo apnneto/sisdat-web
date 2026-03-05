@@ -7,10 +7,10 @@ package com.frw.base.web.pages.util;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.behavior.AbstractBehavior;
+import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
-import org.apache.wicket.markup.html.IHeaderContributor;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.model.IModel;
 
 /**
@@ -19,17 +19,14 @@ import org.apache.wicket.model.IModel;
  */
 public class UpdatableModalWindow extends ModalWindow implements ModalWindow.WindowClosedCallback {
 
-    private class DisableDefaultConfirmBehavior extends AbstractBehavior implements IHeaderContributor {
+    private class DisableDefaultConfirmBehavior extends Behavior {
+        private static final long serialVersionUID = 1L;
 
-	        private static final long serialVersionUID = 1L;
-
-	        @Override
-	        public void renderHead(IHeaderResponse response)
-	        {
-	                response.renderOnDomReadyJavascript("Wicket.Window.unloadConfirmation = false");
-	        }
-
-	}
+        @Override
+        public void renderHead(Component component, IHeaderResponse response) {
+            response.render(OnDomReadyHeaderItem.forScript("Wicket.Window.unloadConfirmation = false"));
+        }
+    }
 
     private UpdatableModalWindowPanel contentPanel;
 
@@ -81,7 +78,7 @@ public class UpdatableModalWindow extends ModalWindow implements ModalWindow.Win
     }
 
         public void update(AjaxRequestTarget target) {
-		    target.addComponent(contentPanel);
+		    target.add(contentPanel);
 		}
 
 

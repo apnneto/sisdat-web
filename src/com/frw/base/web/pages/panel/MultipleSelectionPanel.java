@@ -78,7 +78,7 @@ public class MultipleSelectionPanel<T> extends Panel {
         AjaxButtonFrw addButton=new AjaxButtonFrw("add") {
 
             @Override
-            protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+            protected void onSubmit(AjaxRequestTarget art) {
 
                 List toAdd=(List) availableList.getModelObject();
                 selectedChoicesModel.getObject().addAll(toAdd);
@@ -89,8 +89,8 @@ public class MultipleSelectionPanel<T> extends Panel {
                 availableList.modelChanged();
                 selectedList.modelChanged();
 
-                art.addComponent(availableList);
-                art.addComponent(selectedList);
+                art.add(availableList);
+                art.add(selectedList);
 
             }
         };
@@ -100,14 +100,14 @@ public class MultipleSelectionPanel<T> extends Panel {
         AjaxButtonFrw removeButton=new AjaxButtonFrw("remove") {
 
             @Override
-            protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
+            protected void onSubmit(AjaxRequestTarget art) {
 
                 List toRemove=(List) selectedList.getModelObject();
                 selectedChoicesModel.getObject().removeAll(toRemove);
                 selectedList.setModelObject(new ArrayList());
                 availableChoices.detach();
-                art.addComponent(availableList);
-                art.addComponent(selectedList);
+                art.add(availableList);
+                art.add(selectedList);
             }
         };
         

@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.cadastro;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -168,7 +168,7 @@ public class EditPerguntaPanel extends AbstractEntityEditPanel<Pergunta> {
 	public Pergunta newEntity(Pergunta entity, AjaxRequestTarget target) throws SistemaException {
 		Pergunta pojo = new Pergunta();
 		pojo.setQuestionario(questionario);
-		target.addComponent(listRespostas);
+		target.add(listRespostas);
 		return pojo;
 	}
 
@@ -176,7 +176,7 @@ public class EditPerguntaPanel extends AbstractEntityEditPanel<Pergunta> {
 	public Pergunta saveEntity(Pergunta entity, AjaxRequestTarget target)
 			throws SistemaException {
 		Pergunta pergunta = perguntaFacade .salvarPerguntaComPalavrasChaves(entity);
-		target.addComponent(listRespostas);
+		target.add(listRespostas);
 		return pergunta;
 	}
 
@@ -189,22 +189,22 @@ public class EditPerguntaPanel extends AbstractEntityEditPanel<Pergunta> {
 	protected void onAfterDeletEntity(AjaxRequestTarget target) {
 		replaceWith(panelList);
 		setOutputMarkupId(true);
-		target.addComponent(this);
-		target.addComponent(panelList);
+		target.add(this);
+		target.add(panelList);
 	}
 
 	@Override
 	protected void onAfterSaveEntity(AjaxRequestTarget target) {
 		feedback.setVisible(false);
-		target.addComponent(feedback);
+		target.add(feedback);
 	}
 
 	@Override
 	protected void onBackPressed(AjaxRequestTarget target) {
 		replaceWith(panelList);
 		setOutputMarkupId(true);
-		target.addComponent(this);
-		target.addComponent(panelList);
+		target.add(this);
+		target.add(panelList);
 	}
 	
 	@Override
@@ -219,7 +219,7 @@ public class EditPerguntaPanel extends AbstractEntityEditPanel<Pergunta> {
 		}*/
 		
 		feedback.setVisible(!validate);
-		target.addComponent(feedback);
+		target.add(feedback);
 		
 		return validate;
 	}

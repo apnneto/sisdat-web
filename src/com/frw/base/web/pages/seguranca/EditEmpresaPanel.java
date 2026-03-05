@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.seguranca;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -72,7 +72,7 @@ public class EditEmpresaPanel extends AbstractEntityEditPanel<Empresa> {
 
 	          @Override
 	          protected void onError(AjaxRequestTarget target, RuntimeException e) {
-	          	target.addComponent(feedback);
+	          	target.add(feedback);
 	          }
 	         
 			@Override
@@ -95,7 +95,7 @@ public class EditEmpresaPanel extends AbstractEntityEditPanel<Empresa> {
 							entity.setLogradouro(jsn.getString("tipo_logradouro") + " " +jsn.getString("logradouro"));
 							art.focusComponent(txtNumero);
 							feedback.setVisible(false);
-							art.addComponent(feedback);
+							art.add(feedback);
 						
 						}else{
 							error(getString("cep.invalido"));
@@ -105,7 +105,7 @@ public class EditEmpresaPanel extends AbstractEntityEditPanel<Empresa> {
 							entity.setSiglaEstado(null);
 							entity.setCidade(null);
 							entity.setNumero(null);
-							art.addComponent(feedback);
+							art.add(feedback);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -117,14 +117,14 @@ public class EditEmpresaPanel extends AbstractEntityEditPanel<Empresa> {
 					entity.setSiglaEstado(null);
 					entity.setCidade(null);
 					entity.setNumero(null);
-					art.addComponent(feedback);
+					art.add(feedback);
 				}
 				
-				art.addComponent(txtSiglaEstado);
-				art.addComponent(txtCidade);
-				art.addComponent(txtBairro);
-				art.addComponent(txtLogradouro);
-				art.addComponent(txtNumero);
+				art.add(txtSiglaEstado);
+				art.add(txtCidade);
+				art.add(txtBairro);
+				art.add(txtLogradouro);
+				art.add(txtNumero);
 	          }
 	      });
 
@@ -198,14 +198,14 @@ public class EditEmpresaPanel extends AbstractEntityEditPanel<Empresa> {
 	}
 	@Override
 	protected void onAfterSaveEntity(AjaxRequestTarget target) {
-		target.addComponent(abas);
+		target.add(abas);
 	}
 	@Override
 	protected boolean validateEntity(Empresa entity, AjaxRequestTarget target)	throws SistemaException {
         if ((txtEmail.getModelObject()!= null)&&(!validaEmail(txtEmail.getModelObject()))){
         	error("Email inválido.");
         	feedback.setVisible(true);
-        	target.addComponent(feedback);
+        	target.add(feedback);
             return false;
         }
 		return true;

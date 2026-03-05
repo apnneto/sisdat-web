@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 import com.frw.base.dao.FuncionalidadeDAO;
 import com.frw.base.dao.ModuloDAO;

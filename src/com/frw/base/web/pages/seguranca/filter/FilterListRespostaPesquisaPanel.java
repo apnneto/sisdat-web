@@ -3,7 +3,7 @@ package com.frw.base.web.pages.seguranca.filter;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -123,7 +123,7 @@ public class FilterListRespostaPesquisaPanel extends AbstractFilterListPanel<Fil
             	buscarDados();
             	usuarioChoice.setChoices(getListUsuarios());
                }
-                art.addComponent(usuarioChoice);
+                art.add(usuarioChoice);
             }
         });
         form.add(empresaChoice);

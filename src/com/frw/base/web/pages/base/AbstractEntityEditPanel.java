@@ -91,17 +91,17 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
             AjaxButtonFrw button = new AjaxButtonFrw("excluir") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
-                    target.addComponent(feedback);
+                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                    target.add(feedback);
                     feedback.setVisible(true);
                 }
 
                 @Override
-                protected void onSubmit(final AjaxRequestTarget target, final Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
 
                     /* não tenta abrir mensagem modal se este painel for um popup */
                     if (!getParent().getParent().getParent().getParent().getClass().isAssignableFrom(UpdatableModalWindowPanel.class)) {
-                        target.appendJavascript("Wicket.Window.unloadConfirmation=false");
+                        target.appendJavaScript("Wicket.Window.unloadConfirmation=false");
                         confirmationModal.setContent(new ModalConfirmationPanel("content", "message.confirmation.delete") {
                             @Override
                             protected boolean onConfirm(AjaxRequestTarget target) {
@@ -112,7 +112,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                                     Throwable root = ExceptionUtils.getRootCause(e);
                                     if(root instanceof ForeignKeyViolationException) {
                                         error(getString(root.getMessage()));
-                                        target.addComponent(feedback);
+                                        target.add(feedback);
                                         feedback.setVisible(true);
                                         ModalWindow.closeCurrent(target);
                                         return false;
@@ -131,7 +131,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                             if(root instanceof ForeignKeyViolationException) {
                                 error(getString(root.getMessage()));
                                 feedback.setVisible(true);
-                                target.addComponent(feedback);
+                                target.add(feedback);
                             } else {
                                 throw e;
                             }
@@ -150,7 +150,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
             AjaxButtonFrw button = new AjaxButtonFrw("novo") {
 
                 @Override
-                public void onSubmit(AjaxRequestTarget target, final Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
                     try {
 
                         entity = AbstractEntityEditPanel.this.newEntity(getEntity(), target);
@@ -158,7 +158,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                         onAfterNewEntityForm(target);
                         deleteButton.setEnabled(false);
                         feedback.setVisible(false);
-                        target.addComponent(EditEntityForm.this);
+                        target.add(EditEntityForm.this);
 
                     } catch (Exception e) {
                     	e.printStackTrace();
@@ -167,8 +167,8 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                 }
 
                 @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
-                    target.addComponent(feedback);
+                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                    target.add(feedback);
                     feedback.setVisible(true);
                 }
             };
@@ -183,7 +183,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
        	 
         	AjaxButtonFrw button = new AjaxButtonFrw("voltar") {
 				@Override
-				protected void onSubmit(AjaxRequestTarget target, Form<?> arg1) {
+				protected void onSubmit(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> arg1) {
 					try {
 						onBackPressed(target);
 					} catch (Exception e) {
@@ -204,13 +204,13 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
             AjaxButtonFrw button = new AjaxButtonFrw("salvar") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
+                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
                 	feedback.setVisible(true);
-                    target.addComponent(feedback);
+                    target.add(feedback);
                 }
 
                 @Override
-                protected void onSubmit(AjaxRequestTarget target, final Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
                     try {
                         if (validateEntity(getEntity(), target)) {
                             entity = saveEntitySuper(getEntity(), target);
@@ -236,7 +236,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                                 info(getString(getEntitySaveSuccessMessage()));
                             }
                             feedback.setVisible(false);
-                            target.addComponent(feedback);
+                            target.add(feedback);
                             deleteButton.setEnabled(true);
                             onAfterSaveEntity(target);
                         }
@@ -249,7 +249,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                             feedback.setVisible(true);
                         }
                         
-                        target.addComponent(feedback);
+                        target.add(feedback);
                     }
                 }
             };
@@ -397,7 +397,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
 
     protected void changeTabsStatus(AjaxRequestTarget target, boolean enabled) {
         tabbedPanel.setEnabled(tabbedPanel.getTabs().size() > 0 && enabled);
-        target.addComponent(tabbedPanel);
+        target.add(tabbedPanel);
     }
 
     protected BaseWebBeanForm createForm(T entity) {
@@ -472,10 +472,10 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
         returnButton.setEnabled(true);
     }
     protected void updateComponents(AjaxRequestTarget target) {
-        target.addComponent(feedback);
-        target.addComponent(container);
-        target.addComponent(webBeanForm);
-        target.addComponent(tabbedPanel);
+        target.add(feedback);
+        target.add(container);
+        target.add(webBeanForm);
+        target.add(tabbedPanel);
     }
     protected boolean validateEntity(T entity, AjaxRequestTarget target) throws SistemaException {
         return true;

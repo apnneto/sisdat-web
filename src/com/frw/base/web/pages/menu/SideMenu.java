@@ -7,10 +7,10 @@ package com.frw.base.web.pages.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.PageParameters;
+
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -19,6 +19,7 @@ import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.frw.base.dominio.base.Funcionalidade;
 import com.frw.base.dominio.base.Usuario;
@@ -90,7 +91,7 @@ public class SideMenu extends Panel {
 
                 if (((session.getFuncionalidadeSelecionada() != null && li.getModelObject().equals(session.getFuncionalidadeSelecionada())))
                         || (session.getFuncionalidadeSelecionada() == null && li.getIndex() == 0)) {
-                	menuItemLink.add(new AttributeModifier("class", true, new Model<String>("at")));
+                	menuItemLink.add(new AttributeModifier("class", new Model<String>("at")));
                 }
 
                 menuItemLink.add(menuLabel);
@@ -118,7 +119,7 @@ public class SideMenu extends Panel {
         Class o = FuncionalidadesMapper.getPageForFuncionalidade(funcionalidade);
 
         PageParameters parameters = new PageParameters();
-        parameters.add("funcionalidade", funcionalidade.getId().toString());
+        parameters.set("funcionalidade", funcionalidade.getId().toString());
         setResponsePage((Class) o, parameters);
     }
 }

@@ -4,20 +4,20 @@
  */
 package com.frw.base.web;
 
-import org.apache.wicket.ajax.IAjaxCallDecorator;
+import org.apache.wicket.ajax.attributes.AjaxCallListener;
+import org.apache.wicket.ajax.attributes.IAjaxCallListener;
 
 /**
- *
- * @author Marcelo Alves
+ * Wicket 9: IAjaxCallDecorator replaced by AjaxCallListener / IAjaxCallListener.
  */
-public class DefaultAjaxCallDecorator implements IAjaxCallDecorator {
+public class DefaultAjaxCallDecorator {
 
     private static DefaultAjaxCallDecorator decorator;
+
     public static DefaultAjaxCallDecorator getInstance(String webContext) {
-        if(decorator == null) {
+        if (decorator == null) {
             decorator = new DefaultAjaxCallDecorator(webContext);
         }
-
         return decorator;
     }
 
@@ -27,28 +27,11 @@ public class DefaultAjaxCallDecorator implements IAjaxCallDecorator {
         this.webContext = webContext;
     }
 
-    @Override
-    public CharSequence decorateOnFailureScript(CharSequence cs) {
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("alert('Ocorreu um erro durante a comunicação com o servidor. O sistema será redirecionado para a página inicial.');");
-        builder.append("window.location.href='"+getWebContext()+"/pages/HomePage';");
-
-
-        return cs + ";" + builder.toString();
-    }
-
-    @Override
-    public CharSequence decorateOnSuccessScript(CharSequence cs) {
-        return cs;
-    }
-
-    @Override
-    public CharSequence decorateScript(CharSequence cs) {
-        return cs;
-    }
-
-    private String getWebContext() {
-        return webContext;
+    /** Returns a Wicket 9 AjaxCallListener equivalent to the old IAjaxCallDecorator. */
+    public IAjaxCallListener getAjaxCallListener() {
+        final String ctx = webContext;
+        return new AjaxCallListener()
+            .onFailure("alert('Ocorreu um erro durante a comunicação com o servidor. O sistema será redirecionado para a página inicial.');"
+                + "window.location.href='" + ctx + "/pages/HomePage';");
     }
 }

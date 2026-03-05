@@ -3,8 +3,8 @@ package com.frw.base.web;
 import java.util.Iterator;
 
 import org.apache.wicket.Session;
-import org.apache.wicket.authorization.strategies.role.IRoleCheckingStrategy;
-import org.apache.wicket.authorization.strategies.role.Roles;
+import org.apache.wicket.authroles.authorization.strategies.role.IRoleCheckingStrategy;
+import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 
 /**
  *

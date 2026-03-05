@@ -1,0 +1,539 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< br.gov.sisdat:sisdat-web >----------------------
+[INFO] Building SisDAT Web (legacy) 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.1.0:clean (default-clean) @ sisdat-web ---
+[INFO] Deleting C:\Projetos\sisdat-web\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ sisdat-web ---
+[INFO] Copying 11 resources from src to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ sisdat-web ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 279 source files with javac [debug target 11] to target\classes
+[INFO] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ModalAlertPanel.java: Some input files use or override a deprecated API.
+[INFO] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ModalAlertPanel.java: Recompile with -Xlint:deprecation for details.
+[INFO] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java: Recompile with -Xlint:unchecked for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] system modules path not set in conjunction with -source 11
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/dao/BaseDAO.java:[209,76] non-varargs call of varargs method with inexact argument type for last parameter;
+  cast to java.lang.Class for a varargs call
+  cast to java.lang.Class[] for a non-varargs call and to suppress this warning
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/negocio/export/xls/AbstractXLSExport.java:[347,68] Double(java.lang.String) in java.lang.Double has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/dao/sisdat/PerguntaDAO.java:[181,32] Integer(int) in java.lang.Integer has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/seguranca/filter/AbstractFilterListPanel.java:[20,51] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/negocio/export/xls/AbstractXLSExportRespostasPesquisa.java:[373,68] Double(java.lang.String) in java.lang.Double has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/cadastro/EditPerguntaPanel.java:[213,36] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/negocio/export/xls/XLSExportRespostaPesquisa.java:[479,68] Double(java.lang.String) in java.lang.Double has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/cadastro/EditPerguntaSingleFieldPanel.java:[260,36] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/cadastro/EditPerguntaSingleOptionPanel.java:[272,36] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/cadastro/EditPerguntaMultipleFieldPanel.java:[259,36] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[WARNING] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/cadastro/EditPerguntaMultipleOptionPanel.java:[273,36] Boolean(boolean) in java.lang.Boolean has been deprecated and marked for removal
+[INFO] 12 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java:[15,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java:[16,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[10,34] cannot find symbol
+  symbol:   class AbstractBehavior
+  location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[13,37] cannot find symbol
+  symbol:   class IHeaderResponse
+  location: package org.apache.wicket.markup.html
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[11,34] cannot find symbol
+  symbol:   class IBehavior
+  location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[27,13] cannot find symbol
+  symbol:   class IBehavior
+  location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[41,12] cannot find symbol
+  symbol:   class IBehavior
+  location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[56,37] cannot find symbol
+  symbol:   class IBehavior
+  location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[110,13] cannot find symbol
+  symbol:   class IBehavior
+  location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[8,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[10,30] cannot find symbol
+  symbol:   class IAjaxCallDecorator
+  location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[41,15] cannot find symbol
+  symbol:   class IAjaxCallDecorator
+  location: class com.frw.base.web.util.AjaxButtonFrw
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/TextFieldFrw.java:[11,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[10,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[15,30] cannot find symbol
+  symbol:   class IAjaxCallDecorator
+  location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[20,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[24,49] package org.apache.wicket.util.convert.converters does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[35,20] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[37,20] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[39,33] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[50,33] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[61,13] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[121,26] cannot find symbol
+  symbol:   class DoubleConverter
+  location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/BasePageWithPanelContent.java:[3,67] package org.apache.wicket.authorization.strategies.role.annotations does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[7,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[11,25] cannot find symbol
+  symbol:   class PageParameters
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[21,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[24,39] cannot find symbol
+  symbol:   class WebResponse
+  location: package org.apache.wicket.protocol.http
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[25,46] package org.apache.wicket.request.target.basic does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/BasePageWithPanelContent.java:[12,2] cannot find symbol
+  symbol: class AuthorizeInstantiation
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/menu/SideMenu.java:[13,25] cannot find symbol
+  symbol:   class PageParameters
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[249,15] cannot find symbol
+  symbol:   class HttpServletResponse
+  location: class com.frw.base.web.pages.BasePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/DateTextFieldCustom.java:[9,49] package org.apache.wicket.extensions.yui.calendar does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[11,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[12,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[13,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[14,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[20,42] cannot find symbol
+  symbol: class HttpServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[40,26] cannot find symbol
+  symbol:   class HttpServletRequest
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[40,54] cannot find symbol
+  symbol:   class HttpServletResponse
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[41,12] cannot find symbol
+  symbol:   class ServletException
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[53,27] cannot find symbol
+  symbol:   class HttpServletRequest
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[53,55] cannot find symbol
+  symbol:   class HttpServletResponse
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[54,12] cannot find symbol
+  symbol:   class ServletException
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[65,35] cannot find symbol
+  symbol:   class HttpServletRequest
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[65,63] cannot find symbol
+  symbol:   class HttpServletResponse
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[66,12] cannot find symbol
+  symbol:   class ServletException
+  location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PerguntaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PerguntaWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RespostaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RespostaWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/VeiculoWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/VeiculoWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/map/ViewMapMultiplePointsUpdatablePanel.java:[7,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/map/ViewMapMultiplePointsUpdatablePanel.java:[9,34] cannot find symbol
+  symbol:   class HeaderContributor
+  location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/QuestionarioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/QuestionarioWSDTO.java:[7,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[20,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[21,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[36,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListPesquisa.java:[15,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListPesquisa.java:[16,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/BairroWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/BairroWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageHint.java:[8,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[8,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[9,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[21,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/AnexosPage.java:[10,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageLink.java:[4,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageLink.java:[11,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/UsuarioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/UsuarioWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[22,57] cannot find symbol
+  symbol:   class AbstractBehavior
+  location: class com.frw.base.web.pages.util.UpdatableModalWindow
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[27,40] cannot find symbol
+  symbol:   class IHeaderResponse
+  location: class com.frw.base.web.pages.util.UpdatableModalWindow.DisableDefaultConfirmBehavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PortaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PortaWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RotaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RotaWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListRespostaPesquisa.java:[15,25] cannot find symbol
+  symbol:   class RequestCycle
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListRespostaPesquisa.java:[16,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/manutencao/dominio/dto/RetornoDTO.java:[6,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/manutencao/dominio/dto/RetornoDTO.java:[8,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[7,25] cannot find symbol
+  symbol:   class PageParameters
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[8,67] package org.apache.wicket.authorization.strategies.role.annotations does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[17,2] cannot find symbol
+  symbol: class AuthorizeInstantiation
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[26,21] cannot find symbol
+  symbol:   class PageParameters
+  location: class com.frw.base.web.pages.HomePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[31,27] cannot find symbol
+  symbol:   class PageParameters
+  location: class com.frw.base.web.pages.HomePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/TextAreaFrw.java:[11,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/ConfirmLink.java:[9,34] cannot find symbol
+  symbol:   class SimpleAttributeModifier
+  location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextFieldOLD.java:[14,31] cannot find symbol
+  symbol:   class AbstractReadOnlyModel
+  location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/ImagePanel.java:[3,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/MunicipioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/MunicipioWSDTO.java:[5,2] cannot find symbol
+  symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/DefaultAjaxCallDecorator.java:[7,30] cannot find symbol
+  symbol:   class IAjaxCallDecorator
+  location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/DefaultAjaxCallDecorator.java:[13,50] cannot find symbol
+  symbol: class IAjaxCallDecorator
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ObservacaoModalAjaxLink.java:[4,25] cannot find symbol
+  symbol:   class ResourceReference
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DateTimeTextFieldCustom.java:[9,49] package org.apache.wicket.extensions.yui.calendar does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/MyRequestCycle.java:[12,25] cannot find symbol
+  symbol:   class Response
+  location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/MyRequestCycle.java:[15,39] cannot find symbol
+  symbol:   class WebRequest
+  location: package org.apache.wicket.protocol.http
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.714 s
+[INFO] Finished at: 2026-03-05T17:28:37-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project sisdat-web: Compilation failure: Compilation failure: 
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java:[15,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPanelNew.java:[16,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[10,34] cannot find symbol
+[ERROR]   symbol:   class AbstractBehavior
+[ERROR]   location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[13,37] cannot find symbol
+[ERROR]   symbol:   class IHeaderResponse
+[ERROR]   location: package org.apache.wicket.markup.html
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[11,34] cannot find symbol
+[ERROR]   symbol:   class IBehavior
+[ERROR]   location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class IBehavior
+[ERROR]   location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[41,12] cannot find symbol
+[ERROR]   symbol:   class IBehavior
+[ERROR]   location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[56,37] cannot find symbol
+[ERROR]   symbol:   class IBehavior
+[ERROR]   location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/BaseWebBeanForm.java:[110,13] cannot find symbol
+[ERROR]   symbol:   class IBehavior
+[ERROR]   location: class com.frw.base.web.BaseWebBeanForm<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[8,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[10,30] cannot find symbol
+[ERROR]   symbol:   class IAjaxCallDecorator
+[ERROR]   location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/AjaxButtonFrw.java:[41,15] cannot find symbol
+[ERROR]   symbol:   class IAjaxCallDecorator
+[ERROR]   location: class com.frw.base.web.util.AjaxButtonFrw
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/TextFieldFrw.java:[11,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[10,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[15,30] cannot find symbol
+[ERROR]   symbol:   class IAjaxCallDecorator
+[ERROR]   location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[20,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[24,49] package org.apache.wicket.util.convert.converters does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[35,20] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[37,20] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[39,33] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[50,33] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[61,13] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextField.java:[121,26] cannot find symbol
+[ERROR]   symbol:   class DoubleConverter
+[ERROR]   location: class com.frw.base.web.util.NumberTextField<T>
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/BasePageWithPanelContent.java:[3,67] package org.apache.wicket.authorization.strategies.role.annotations does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[7,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[11,25] cannot find symbol
+[ERROR]   symbol:   class PageParameters
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[21,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[24,39] cannot find symbol
+[ERROR]   symbol:   class WebResponse
+[ERROR]   location: package org.apache.wicket.protocol.http
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[25,46] package org.apache.wicket.request.target.basic does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/BasePageWithPanelContent.java:[12,2] cannot find symbol
+[ERROR]   symbol: class AuthorizeInstantiation
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/menu/SideMenu.java:[13,25] cannot find symbol
+[ERROR]   symbol:   class PageParameters
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/BasePage.java:[249,15] cannot find symbol
+[ERROR]   symbol:   class HttpServletResponse
+[ERROR]   location: class com.frw.base.web.pages.BasePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/DateTextFieldCustom.java:[9,49] package org.apache.wicket.extensions.yui.calendar does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[11,21] package javax.servlet does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[12,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[13,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[14,26] package javax.servlet.http does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[20,42] cannot find symbol
+[ERROR]   symbol: class HttpServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[40,26] cannot find symbol
+[ERROR]   symbol:   class HttpServletRequest
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[40,54] cannot find symbol
+[ERROR]   symbol:   class HttpServletResponse
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[41,12] cannot find symbol
+[ERROR]   symbol:   class ServletException
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[53,27] cannot find symbol
+[ERROR]   symbol:   class HttpServletRequest
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[53,55] cannot find symbol
+[ERROR]   symbol:   class HttpServletResponse
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[54,12] cannot find symbol
+[ERROR]   symbol:   class ServletException
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[65,35] cannot find symbol
+[ERROR]   symbol:   class HttpServletRequest
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[65,63] cannot find symbol
+[ERROR]   symbol:   class HttpServletResponse
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DownloadFileServlet.java:[66,12] cannot find symbol
+[ERROR]   symbol:   class ServletException
+[ERROR]   location: class com.frw.base.web.pages.util.DownloadFileServlet
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PerguntaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PerguntaWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RespostaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RespostaWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/VeiculoWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/VeiculoWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/map/ViewMapMultiplePointsUpdatablePanel.java:[7,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/map/ViewMapMultiplePointsUpdatablePanel.java:[9,34] cannot find symbol
+[ERROR]   symbol:   class HeaderContributor
+[ERROR]   location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/QuestionarioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/QuestionarioWSDTO.java:[7,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[20,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[21,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListRespostaPanelNew.java:[36,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListPesquisa.java:[15,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListPesquisa.java:[16,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/BairroWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/BairroWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageHint.java:[8,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[8,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[9,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractEntityListPage.java:[21,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/AnexosPage.java:[10,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageLink.java:[4,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ImageLink.java:[11,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/UsuarioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/UsuarioWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[22,57] cannot find symbol
+[ERROR]   symbol:   class AbstractBehavior
+[ERROR]   location: class com.frw.base.web.pages.util.UpdatableModalWindow
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/UpdatableModalWindow.java:[27,40] cannot find symbol
+[ERROR]   symbol:   class IHeaderResponse
+[ERROR]   location: class com.frw.base.web.pages.util.UpdatableModalWindow.DisableDefaultConfirmBehavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PortaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/PortaWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RotaWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/RotaWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListRespostaPesquisa.java:[15,25] cannot find symbol
+[ERROR]   symbol:   class RequestCycle
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/AbstractListRespostaPesquisa.java:[16,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/manutencao/dominio/dto/RetornoDTO.java:[6,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/manutencao/dominio/dto/RetornoDTO.java:[8,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[7,25] cannot find symbol
+[ERROR]   symbol:   class PageParameters
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[8,67] package org.apache.wicket.authorization.strategies.role.annotations does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[17,2] cannot find symbol
+[ERROR]   symbol: class AuthorizeInstantiation
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[26,21] cannot find symbol
+[ERROR]   symbol:   class PageParameters
+[ERROR]   location: class com.frw.base.web.pages.HomePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/HomePage.java:[31,27] cannot find symbol
+[ERROR]   symbol:   class PageParameters
+[ERROR]   location: class com.frw.base.web.pages.HomePage
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/TextAreaFrw.java:[11,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/ConfirmLink.java:[9,34] cannot find symbol
+[ERROR]   symbol:   class SimpleAttributeModifier
+[ERROR]   location: package org.apache.wicket.behavior
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/util/NumberTextFieldOLD.java:[14,31] cannot find symbol
+[ERROR]   symbol:   class AbstractReadOnlyModel
+[ERROR]   location: package org.apache.wicket.model
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/base/ImagePanel.java:[3,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/MunicipioWSDTO.java:[3,33] package javax.xml.bind.annotation does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/siclo/web/webservice/dto/MunicipioWSDTO.java:[5,2] cannot find symbol
+[ERROR]   symbol: class XmlRootElement
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/DefaultAjaxCallDecorator.java:[7,30] cannot find symbol
+[ERROR]   symbol:   class IAjaxCallDecorator
+[ERROR]   location: package org.apache.wicket.ajax
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/DefaultAjaxCallDecorator.java:[13,50] cannot find symbol
+[ERROR]   symbol: class IAjaxCallDecorator
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/ObservacaoModalAjaxLink.java:[4,25] cannot find symbol
+[ERROR]   symbol:   class ResourceReference
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/pages/util/DateTimeTextFieldCustom.java:[9,49] package org.apache.wicket.extensions.yui.calendar does not exist
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/MyRequestCycle.java:[12,25] cannot find symbol
+[ERROR]   symbol:   class Response
+[ERROR]   location: package org.apache.wicket
+[ERROR] /C:/Projetos/sisdat-web/src/com/frw/base/web/MyRequestCycle.java:[15,39] cannot find symbol
+[ERROR]   symbol:   class WebRequest
+[ERROR]   location: package org.apache.wicket.protocol.http
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

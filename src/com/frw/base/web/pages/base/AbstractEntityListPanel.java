@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -47,7 +47,7 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
     protected class EntityListView extends PageableListView<T> {
 
         public EntityListView(String id, IModel<? extends List<? extends T>> model, int rowsPerPage) {
-            super(id, model, rowsPerPage);
+            super(id, (IModel)model, (long)rowsPerPage);
         }
 
         @Override
@@ -76,13 +76,13 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
                     if (panel != null) {
                         panel.setOutputMarkupId(true);
                         editEntity(panel);
-                        target.addComponent(panel);
+                        target.add(panel);
                     }
                 }
             };
             item.add(editLink);
             
-            editLink.add(new AttributeModifier("title", true, new Model(object.getId() == null ? " - " : object.getId().toString())));
+            editLink.add(new AttributeModifier("title", new Model(object.getId() == null ? " - " : object.getId().toString())));
             
             colunaAcao = new WebMarkupContainer("colunaAcao");
             item.add(colunaAcao);
@@ -96,7 +96,7 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
                 @Override
                 public void onClick(final AjaxRequestTarget target) {
 
-                    target.appendJavascript("Wicket.Window.unloadConfirmation=false");
+                    target.appendJavaScript("Wicket.Window.unloadConfirmation=false");
                     confirmationModal.setContent(new ModalConfirmationPanel(confirmationModal.getContentId(), "message.confirmation.delete") {
 
                         @Override
@@ -110,14 +110,14 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
                                 
                                 if(root instanceof ForeignKeyViolationException) {
                                     error(getString(root.getMessage()));
-                                    target.addComponent(feedback);
+                                    target.add(feedback);
                                     ModalWindow.closeCurrent(target);
                                     return false;
                                 }
                                 throw e;
                             }
                             EntityListView.this.getModel().detach();
-                            target.addComponent(listContainer);
+                            target.add(listContainer);
                             return true;
                         }
                     });
@@ -132,9 +132,9 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
            afterPopulateItem(item, removeLink, editLink);
 
             if(editLink.isEnabled()){
-               // editImg.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/page_white_edit.png")));
+               // editImg.setDefaultModel(new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/page_white_edit.png")));
             }else{
-             //   editImg.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/page_white_edit_disabled.png")));
+             //   editImg.setDefaultModel(new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/page_white_edit_disabled.png")));
             }
 
             colunaAcao.setVisible(removeLink.isVisible());
@@ -175,7 +175,7 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
                 if (panel != null) {
                     panel.setOutputMarkupId(true);
                     editEntity(panel);
-                    target.addComponent(panel);
+                    target.add(panel);
                 }
             }
         };
@@ -188,13 +188,13 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
             @Override
             public void onClick() {
                 byte[] bytes  = generatePDFReport(listaView.getList());
-                RequestCycle.get().setRequestTarget( new ShowAnexoPage(bytes, "parcerias_grid_export.pdf"));
+                { jakarta.servlet.http.HttpServletResponse r = (jakarta.servlet.http.HttpServletResponse) RequestCycle.get().getResponse().getContainerResponse(); try { r.setHeader("Content-Disposition","attachment;filename="+ "parcerias_grid_export.pdf"); r.setHeader("Content-Type","application/octet-stream"); r.getOutputStream().write(bytes); r.flushBuffer(); } catch(Exception _ex){} }
             }
         };
         exportarPDFLink.setVisible(Boolean.FALSE);
         exportarPDFLink.setOutputMarkupId(true);
 
-        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/pdf.png")));
+        Image imgPDF = new Image("downloadImagePDF", new Model<ResourceReference>(new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "imagens/pdf.png")));
         exportarPDFLink.add(imgPDF);
 
         /** create detachable model for table */

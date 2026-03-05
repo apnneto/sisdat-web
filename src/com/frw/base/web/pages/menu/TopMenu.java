@@ -8,7 +8,7 @@ package com.frw.base.web.pages.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Session;
@@ -73,7 +73,7 @@ public class TopMenu extends Panel {
                 SistemaSession session=(SistemaSession)Session.get();
                 Modulo moduloSelectionado=session.getModuloSelecionado();
                 
-                IndicatingAjaxLink link=new IndicatingAjaxLink("moduleLink") {
+                IndicatingAjaxLink<Void> link=new IndicatingAjaxLink<Void>("moduleLink") {
 
                     @Override
                     public void onClick(AjaxRequestTarget art) {
@@ -83,15 +83,15 @@ public class TopMenu extends Panel {
                         refreshModel();
                         SideMenu sideMenu=((BasePage)getPage()).getSideMenu();
                         sideMenu.refreshModel();
-                        art.addComponent(TopMenu.this);
-                        art.addComponent(sideMenu);
+                        art.add(TopMenu.this);
+                        art.add(sideMenu);
                     }
                 };
                 li.add(link);
                 link.add(new LabelFrw("moduleName",li.getModelObject().getNome()));
                 
                 if(li.getModelObject().equals(moduloSelectionado)){
-                	 link.add(new AttributeModifier("class", true, new Model<String>("at")));
+                	 link.add(new AttributeModifier("class", new Model<String>("at")));
                 }
 
             }

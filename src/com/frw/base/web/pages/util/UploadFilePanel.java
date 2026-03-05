@@ -40,16 +40,16 @@ public class UploadFilePanel extends Panel {
             add(new AjaxButtonFrw("ajaxButton") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, Form<?> form) {
+                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
                     super.onError(target, form);
                     info("Erro ao fazer upload, Arquivo não é valido");
-                    target.addComponent(feedBackPanel);
+                    target.add(feedBackPanel);
 
 
                 }
 
                 @Override
-                protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
 
 
                     final FileUpload upload = fileUploadField.getFileUpload();
@@ -68,7 +68,7 @@ public class UploadFilePanel extends Panel {
 
                         anexoFile.setFileArray(imgArray);
                         afterUpload(target, form);
-                        target.addComponent(markupContainer);
+                        target.add(markupContainer);
                     }
                 }
             });

@@ -317,7 +317,7 @@ public abstract class AbstractXLSExport {
 
 
 				String property = (String) it.next();
-				String[] props = property.split("\\.");
+                                String[] props = property.split("\\.");
 
 				Object value = getPropertyValue(props, pojo);
 				String valueObject = ("");

@@ -1,6 +1,6 @@
 package com.frw.base.dominio.sisdat;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 import com.frw.base.dominio.base.EntidadeDominioBase;
 

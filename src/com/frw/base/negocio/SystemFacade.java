@@ -2,10 +2,10 @@ package com.frw.base.negocio;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import com.frw.base.dao.ModuloDAO;
 import com.frw.base.dao.UsuarioDAO;

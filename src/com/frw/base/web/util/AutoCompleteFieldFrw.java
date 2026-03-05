@@ -10,7 +10,7 @@ import org.apache.wicket.ajax.IAjaxIndicatorAware;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.extensions.ajax.markup.html.AjaxIndicatorAppender;
 import org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField;
-import org.apache.wicket.markup.html.CSSPackageResource;
+
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
@@ -63,8 +63,8 @@ public abstract class AutoCompleteFieldFrw<T extends Serializable> extends AutoC
 	 * Define CSS da lista com resultados da consulta.
 	 */
 	public void init() {
-		add(CSSPackageResource.getHeaderContribution( AutoCompleteFieldFrw.class, "DefaultCssAutoCompleteTextField.css"));
-		add(new AjaxFormComponentUpdatingBehavior("onChange") {
+		
+                add(new AjaxFormComponentUpdatingBehavior("change") {
 			@Override
 			protected void onUpdate(AjaxRequestTarget target) {
 				onChange(target);

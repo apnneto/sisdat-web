@@ -3,7 +3,7 @@ package com.frw.base.web.pages.seguranca;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
@@ -65,7 +65,7 @@ public class EditPerfilPanel extends AbstractEntityEditPanel<Perfil> {
             protected void onUpdate(AjaxRequestTarget art) {
             	entity.getFuncionalidades().clear();
                 selectPanel.modelChanged();
-                art.addComponent(selectPanel);
+                art.add(selectPanel);
             }
         });
         form.add(tiposUsuarioChoice);
@@ -77,7 +77,7 @@ public class EditPerfilPanel extends AbstractEntityEditPanel<Perfil> {
             @Override
             protected void onUpdate(AjaxRequestTarget art) {
                 selectPanel.modelChanged();
-                art.addComponent(selectPanel);
+                art.add(selectPanel);
             }
         });
         form.add(moduloCmb);

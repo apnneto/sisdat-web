@@ -2,7 +2,7 @@ package com.frw.base.web.pages.seguranca;
 
 import java.util.List;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -78,11 +78,11 @@ public class EditUsuarioEmpresaPanel extends AbstractEntityEditPanel<Usuario> {
             	txtLogin.setModelObject(entity.getLogin());
             	txtNome.setModelObject(entity.getNome());
             	
-                target.addComponent(txtUsuario);
-                target.addComponent(txtCpf);
-                target.addComponent(txtLogin);
-                target.addComponent(txtNome);
-                target.addComponent(txtTipoUsuario);
+                target.add(txtUsuario);
+                target.add(txtCpf);
+                target.add(txtLogin);
+                target.add(txtNome);
+                target.add(txtTipoUsuario);
                 ModalWindow.closeCurrent(target);
             }
         };
@@ -101,11 +101,11 @@ public class EditUsuarioEmpresaPanel extends AbstractEntityEditPanel<Usuario> {
             	txtNome.setModelObject(null);
             	txtTipoUsuario.setModelObject(null);
             	
-                target.addComponent(txtUsuario);
-                target.addComponent(txtCpf);
-                target.addComponent(txtLogin);
-                target.addComponent(txtNome);
-                target.addComponent(txtTipoUsuario);
+                target.add(txtUsuario);
+                target.add(txtCpf);
+                target.add(txtLogin);
+                target.add(txtNome);
+                target.add(txtTipoUsuario);
     		}
     	};
     	form.add(limparUsuario);

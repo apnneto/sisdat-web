@@ -1,6 +1,6 @@
 package com.frw.siclo.web.webservice.dto;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="LogradouroWSDTO")
 public class LogradouroWSDTO {

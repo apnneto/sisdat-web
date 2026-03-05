@@ -29,7 +29,7 @@ public class LabelFrw extends Label {
 
     public LabelFrw(String id, String label, String css) {
         super(id, label);
-        this.add(new AttributeModifier("class", true, new Model<String>(css)));
+        this.add(new AttributeModifier("class", new Model<String>(css)));
     }
     
     

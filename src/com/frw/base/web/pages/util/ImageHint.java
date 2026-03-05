@@ -5,10 +5,9 @@
 package com.frw.base.web.pages.util;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.ResourceReference;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.request.resource.PackageResourceReference;
 
 import com.frw.base.web.pages.BasePage;
 
@@ -28,7 +27,7 @@ public class ImageHint extends Image {
 
     private void configHint() {
         if(hintModel != null && hintModel.getObject() != null) {
-            this.add(new AttributeModifier("title", true, hintModel));
+            this.add(new AttributeModifier("title", hintModel));
         }
     }
 
@@ -37,9 +36,11 @@ public class ImageHint extends Image {
         super.onBeforeRender();
 
         if(hintModel == null || hintModel.getObject() == null) {
-            this.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/anatation_32.png")));
+            add(new org.apache.wicket.markup.html.image.Image("imgInner",
+                new PackageResourceReference(BasePage.class, "imagens/anatation_32.png")));
         } else {
-            this.setDefaultModel(new Model<ResourceReference>(new ResourceReference(BasePage.class, "imagens/anotation_blue_32.png")));
+            add(new org.apache.wicket.markup.html.image.Image("imgInner",
+                new PackageResourceReference(BasePage.class, "imagens/anotation_blue_32.png")));
         }
 
     }

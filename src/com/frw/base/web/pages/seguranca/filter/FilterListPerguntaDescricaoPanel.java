@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.seguranca.filter;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.IndicatingAjaxButton;
@@ -42,8 +42,8 @@ public class FilterListPerguntaDescricaoPanel extends Panel {
 		/* botão de pesquisa */
 		IndicatingAjaxButton buscarInformacoes = new IndicatingAjaxButton("buscarInformacoes") {
 			@Override
-			protected void onSubmit(AjaxRequestTarget art, Form<?> form) {
-				art.addComponent(listContainer);
+			protected void onSubmit(AjaxRequestTarget art) {
+				art.add(listContainer);
 			}
 		};
 		buscarInformacoes.setModel(new ResourceModel("botao.buscarInformacoes"));

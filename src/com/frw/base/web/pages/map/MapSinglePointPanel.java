@@ -1,6 +1,6 @@
 package com.frw.base.web.pages.map;
 
-import org.apache.wicket.ResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -35,9 +35,9 @@ public class MapSinglePointPanel extends Panel {
 		ResourceReference rr;
 		
 		if(point.isMarkCustomizado() && point.getMapMarkerPointEnum() !=null){
-			rr = new ResourceReference(BasePage.class, "img/"+point.getMapMarkerPointEnum().getImage());
+			rr = new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "img/"+point.getMapMarkerPointEnum().getImage());
 		}else {
-			rr = new ResourceReference(BasePage.class, "img/"+MapMarkerPointEnum.RED.getImage());
+			rr = new org.apache.wicket.request.resource.PackageResourceReference(BasePage.class, "img/"+MapMarkerPointEnum.RED.getImage());
 		}
 		return "resources/"+rr.getScope().toString().replaceAll("class ", "")+"/"+rr.getName();
 	}
@@ -45,7 +45,7 @@ public class MapSinglePointPanel extends Panel {
 	@Override
     protected void onAfterRender() {
     	super.onAfterRender();
-    	AjaxRequestTarget.get().appendJavascript(
+    	AjaxRequestTarget.get().appendJavaScript(
     			"loadMap("+point.getLatitude()+","+point.getLongitude()+",'"+point.getBodyInfoWindow()+"','"+ getIconPoint(point) +"');");
     }
 	

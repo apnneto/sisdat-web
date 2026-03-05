@@ -6,7 +6,7 @@
 package com.frw.base.web.pages.util;
 
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
-import org.apache.wicket.extensions.yui.calendar.DatePicker;
+
 import org.apache.wicket.model.IModel;
 
 /**
@@ -16,21 +16,10 @@ import org.apache.wicket.model.IModel;
 public class DateTimeTextFieldCustom extends DateTextField {
 
     public DateTimeTextFieldCustom(String id, IModel model) {
-        this(id, model, "dd/MM/yyyy");
+        this(id, model, "dd/MM/yyyy HH:mm");
     }
 
     public DateTimeTextFieldCustom(String id, IModel model, String pattern) {
         super(id, model, pattern);
-        add(new DatePicker() {
-        	
-            @Override
-            protected boolean notifyComponentOnDateSelected() {
-                return Boolean.TRUE;
-            }
-
-            
-        });
-        
     }
-
 }
