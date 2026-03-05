@@ -64,10 +64,12 @@ nbdist/
 # Docker
 .dockerignore
 
-# Database backups
+# Database backups — ignore dumps but allow Docker init scripts
 *.sql
 *.dump
 *.backup
+# Allow init scripts under scripts/ — these are not dumps
+!scripts/*.sql
 
 # Logs
 *.log
