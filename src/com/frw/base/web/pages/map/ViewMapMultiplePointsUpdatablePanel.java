@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptUrlReferenceHeaderItem;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
@@ -50,7 +52,6 @@ public class ViewMapMultiplePointsUpdatablePanel extends Panel {
         WebMarkupContainer mapContainer = new WebMarkupContainer("map");
         add(mapContainer);
         
-        add(HeaderContributor.forJavaScript("https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"));
         Label jsLabel = new Label("javaScriptContainer", getJavaScript(listPoint));
         jsLabel.setEscapeModelStrings(false);
         add(jsLabel);

@@ -91,7 +91,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
             AjaxButtonFrw button = new AjaxButtonFrw("excluir") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedback);
                     feedback.setVisible(true);
                 }
@@ -106,7 +106,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                             @Override
                             protected boolean onConfirm(AjaxRequestTarget target) {
                                 try {
-                                    deleteEntity(target, entity, form);
+                                    deleteEntity(target, entity, getForm());
                                     onAfterDeletEntity(target);
                                 } catch (RuntimeException e) {
                                     Throwable root = ExceptionUtils.getRootCause(e);
@@ -125,7 +125,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                         confirmationModal.show(target);
                     } else {
                         try {
-                            deleteEntity(target, entity, form);
+                            deleteEntity(target, entity, getForm());
                         } catch (RuntimeException e) {
                             Throwable root = ExceptionUtils.getRootCause(e);
                             if(root instanceof ForeignKeyViolationException) {
@@ -167,7 +167,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                 }
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedback);
                     feedback.setVisible(true);
                 }
@@ -183,7 +183,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
        	 
         	AjaxButtonFrw button = new AjaxButtonFrw("voltar") {
 				@Override
-				protected void onSubmit(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> arg1) {
+				protected void onSubmit(AjaxRequestTarget target) {
 					try {
 						onBackPressed(target);
 					} catch (Exception e) {
@@ -204,7 +204,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
             AjaxButtonFrw button = new AjaxButtonFrw("salvar") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                 	feedback.setVisible(true);
                     target.add(feedback);
                 }

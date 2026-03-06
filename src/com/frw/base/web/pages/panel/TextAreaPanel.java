@@ -30,7 +30,7 @@ public class TextAreaPanel extends Panel {
          add(confirmLink=new AjaxSubmitLink("confirm") {
 
                 @Override
-                protected void onSubmit(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
                     if(markupContainner != null)
                         target.add(markupContainner);
 

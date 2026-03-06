@@ -77,7 +77,7 @@ public abstract class AbstractEntityEditPage<T extends EntidadeDominioBase> exte
             AjaxButtonFrw button = new AjaxButtonFrw("excluir") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedback);
                 }
 
@@ -132,7 +132,7 @@ public abstract class AbstractEntityEditPage<T extends EntidadeDominioBase> exte
                 }
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedback);
                 }
             };
@@ -147,12 +147,12 @@ public abstract class AbstractEntityEditPage<T extends EntidadeDominioBase> exte
             AjaxButtonFrw button = new AjaxButtonFrw("salvar") {
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedback);
                 }
 
                 @Override
-                protected void onSubmit(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onSubmit(AjaxRequestTarget target) {
                     try {
                         saveEntitySuper(entity, target);
                         ((BasePage) getPage()).ShowAlertMessage(getString(getEntitySaveSuccessMessage()), target);

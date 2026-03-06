@@ -62,7 +62,7 @@ public class ChangePasswordPanel extends Panel {
                 }
 
                 @Override
-                protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+                protected void onError(AjaxRequestTarget target) {
                     target.add(feedbackPanel);
                 }
             };

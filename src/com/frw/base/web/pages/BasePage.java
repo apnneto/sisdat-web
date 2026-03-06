@@ -8,6 +8,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Page;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -80,18 +81,14 @@ public class BasePage extends WebPage {
         languages.add(Locale.US);
         languages.add(new Locale("pt", "BR"));
 
-        DropDownChoice<Locale> language = new DropDownChoice<>("language", languages) {
+        DropDownChoice<Locale> language = new DropDownChoice<>("language", new Model<>(), languages);
+        language.add(new AjaxFormComponentUpdatingBehavior("change") {
             @Override
-            protected void onSelectionChanged(Locale newSelection) {
-                Session.get().setLocale(getModelObject());
+            protected void onUpdate(AjaxRequestTarget target) {
+                Session.get().setLocale(language.getModelObject());
                 setResponsePage(HomePage.class, new PageParameters());
             }
-            @Override
-            protected boolean wantOnSelectionChangedNotifications() {
-                return true;
-            }
-        };
-        language.setModel(new Model<>());
+        });
         add(language);
         language.setVisible(false);
 

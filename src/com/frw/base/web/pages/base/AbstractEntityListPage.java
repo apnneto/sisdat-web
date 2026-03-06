@@ -76,13 +76,8 @@ public abstract class AbstractEntityListPage<T extends EntidadeBase> extends Bas
             editLink.setEnabled(enableEditLink && getEditPageClass() != null);
             editImg.setVisible(object.getId() != null);
 
-            item.add(new AttributeModifier("class", new AbstractReadOnlyModel<String>() {
-
-                @Override
-                public String getObject() {
-                    return (item.getIndex() % 2 == 1) ? "linha2" : "linha1";
-                }
-            }));
+            item.add(new AttributeModifier("class",
+                org.apache.wicket.model.LambdaModel.of(() -> (item.getIndex() % 2 == 1) ? "linha2" : "linha1")));
 
             addTableItems(item);
 

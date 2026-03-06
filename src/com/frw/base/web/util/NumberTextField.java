@@ -17,7 +17,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.util.convert.ConversionException;
 import org.apache.wicket.util.convert.IConverter;
 import org.apache.wicket.util.convert.converter.DoubleConverter;
@@ -125,7 +125,8 @@ public class NumberTextField<T extends Object> extends TextField<T> {
             @Override
             protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                 super.updateAjaxAttributes(attributes);
-                String ctx = WebApplication.get().getServletContext().getContextPath();
+                String ctx = RequestCycle.get().getUrlRenderer().getBaseUrl().toString();
+                int slash = ctx.indexOf('/', 1); ctx = (slash > 0) ? ctx.substring(0, slash) : ctx;
                 attributes.getAjaxCallListeners().add(DefaultAjaxCallDecorator.getInstance(ctx).getAjaxCallListener());
             }
 
@@ -151,7 +152,8 @@ public class NumberTextField<T extends Object> extends TextField<T> {
             @Override
             protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
                 super.updateAjaxAttributes(attributes);
-                String ctx = WebApplication.get().getServletContext().getContextPath();
+                String ctx = RequestCycle.get().getUrlRenderer().getBaseUrl().toString();
+                int slash = ctx.indexOf('/', 1); ctx = (slash > 0) ? ctx.substring(0, slash) : ctx;
                 attributes.getAjaxCallListeners().add(DefaultAjaxCallDecorator.getInstance(ctx).getAjaxCallListener());
             }
 

@@ -5,11 +5,13 @@
 
 package com.frw.base.web.util;
 
+import jakarta.servlet.ServletContext;
+
 import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.extensions.ajax.markup.html.IndicatingAjaxButton;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.cycle.RequestCycle;
 
 import com.frw.base.web.DefaultAjaxCallDecorator;
 
@@ -38,7 +40,10 @@ public abstract class AjaxButtonFrw extends IndicatingAjaxButton {
     @Override
     protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
         super.updateAjaxAttributes(attributes);
-        String ctx = WebApplication.get().getServletContext().getContextPath();
+        String ctx = RequestCycle.get().getUrlRenderer().getBaseUrl().toString();
+        // Extract just the context path (first path segment)
+        int slash = ctx.indexOf('/', 1);
+        ctx = (slash > 0) ? ctx.substring(0, slash) : ctx;
         attributes.getAjaxCallListeners().add(DefaultAjaxCallDecorator.getInstance(ctx).getAjaxCallListener());
     }
 }

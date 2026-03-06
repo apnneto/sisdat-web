@@ -36,11 +36,9 @@ public class ImageHint extends Image {
         super.onBeforeRender();
 
         if(hintModel == null || hintModel.getObject() == null) {
-            add(new org.apache.wicket.markup.html.image.Image("imgInner",
-                new PackageResourceReference(BasePage.class, "imagens/anatation_32.png")));
+            setImageResourceReference(new PackageResourceReference(BasePage.class, "imagens/anatation_32.png"));
         } else {
-            add(new org.apache.wicket.markup.html.image.Image("imgInner",
-                new PackageResourceReference(BasePage.class, "imagens/anotation_blue_32.png")));
+            setImageResourceReference(new PackageResourceReference(BasePage.class, "imagens/anotation_blue_32.png"));
         }
 
     }

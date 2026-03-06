@@ -394,7 +394,7 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
 
 						logger.severe("Download de Zip -> " + zipAnexo.getFileName());
 
-						RequestCycle.get().setRequestTarget(zipAnexo);
+						zipAnexo.respond();
 						
 					}// END if fotos
 				} catch (Exception e) {
@@ -457,12 +457,8 @@ public abstract class AbstractEntityListRespostaPanelNew<T extends EntidadeBase>
         listContainer.setOutputMarkupId(true);
         listContainer.add(listaView);
         
-        lblRegistrosEncontrados = new Label("registrosEncontrados", new AbstractReadOnlyModel() {
-			@Override
-			public Object getObject() {
-				return getRegistrosEncontrados();
-			}
-		});
+        lblRegistrosEncontrados = new Label("registrosEncontrados",
+            org.apache.wicket.model.LambdaModel.of(() -> getRegistrosEncontrados()));
         lblRegistrosEncontrados.setEscapeModelStrings(false);
 		listContainer.add(lblRegistrosEncontrados);
 		

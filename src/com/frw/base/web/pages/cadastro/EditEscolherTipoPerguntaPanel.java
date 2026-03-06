@@ -58,9 +58,9 @@ public class EditEscolherTipoPerguntaPanel extends Panel {
         AjaxButtonFrw btnSalvar = new AjaxButtonFrw("btnAvancar") {
 			
 			@Override
-			protected void onError(AjaxRequestTarget target, @SuppressWarnings("unused") Form<?> form) {
+			protected void onError(AjaxRequestTarget target) {
 				avancar = Boolean.FALSE;
-				super.onError(target, form);
+				super.onError(target);
 				target.add(feedback);
 			}
 			

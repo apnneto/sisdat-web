@@ -48,13 +48,6 @@ public class LabelDate extends LabelFrw {
     @Override
     protected void onBeforeRender() {
         super.onBeforeRender();
-//        AttributeModifier modifier = new AttributeModifier("class", true , new Model<String>("alignNumero"));
-//        this.add(modifier);
-    }
-
-    @Override
-    protected void onBeforeRender() {
-        super.onBeforeRender();
         Date value = (Date) getDefaultModelObject();
         if (value != null) {
             setDefaultModelObject(SistemaUtil.formatDate(value, dateEnum));

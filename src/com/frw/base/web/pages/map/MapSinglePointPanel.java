@@ -1,7 +1,8 @@
 package com.frw.base.web.pages.map;
 
+import org.apache.wicket.core.request.handler.IPartialPageRequestHandler;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.ResourceReference;
-import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import com.frw.base.util.enumeration.MapMarkerPointEnum;
@@ -45,8 +46,8 @@ public class MapSinglePointPanel extends Panel {
 	@Override
     protected void onAfterRender() {
     	super.onAfterRender();
-    	AjaxRequestTarget.get().appendJavaScript(
-    			"loadMap("+point.getLatitude()+","+point.getLongitude()+",'"+point.getBodyInfoWindow()+"','"+ getIconPoint(point) +"');");
+    	final String js = "loadMap("+point.getLatitude()+","+point.getLongitude()+",'"+point.getBodyInfoWindow()+"','"+getIconPoint(point)+"');";
+    	RequestCycle.get().find(IPartialPageRequestHandler.class).ifPresent(t -> t.appendJavaScript(js));
     }
 	
 }

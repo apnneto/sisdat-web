@@ -7,7 +7,6 @@ package com.frw.base.web.pages;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -77,13 +76,9 @@ public class AnexosPage extends WebPage {
 
                     @Override
                     public void onClick() {
-                        byte[] data = item.getModelObject().getFileArray();
-                        String name = item.getModelObject().getFileName();
-                        org.apache.wicket.request.cycle.RequestCycle.get().scheduleRequestHandlerAfterCurrent(
-                            new org.apache.wicket.request.handler.resource.ResourceStreamRequestHandler(
-                                new org.apache.wicket.util.resource.ByteArrayResourceStream(data, "application/octet-stream"))
-                                .setFileName(name)
-                                .setContentDisposition(org.apache.wicket.request.resource.ContentDisposition.ATTACHMENT));
+                        final byte[] data = item.getModelObject().getFileArray();
+                        final String name = item.getModelObject().getFileName();
+                        new com.frw.base.web.pages.ShowAnexoPage(data, name).respond();
                     }
                 };
 

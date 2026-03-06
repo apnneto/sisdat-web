@@ -6,12 +6,13 @@ package com.frw.base.web.pages;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.handler.resource.ResourceStreamRequestHandler;
 import org.apache.wicket.request.resource.ContentDisposition;
-import org.apache.wicket.util.resource.ByteArrayResourceStream;
+import org.apache.wicket.util.resource.AbstractResourceStreamWriter;
 
 /**
  * Wicket 9: IRequestTarget removed. Use scheduleRequestHandlerAfterCurrent.
@@ -34,9 +35,18 @@ public class ShowAnexoPage {
 
     /** Schedules the file for download in the current request cycle. */
     public void respond() {
+        AbstractResourceStreamWriter writer = new AbstractResourceStreamWriter() {
+            @Override
+            public void write(OutputStream output) throws IOException {
+                output.write(file);
+            }
+            @Override
+            public String getContentType() {
+                return "application/octet-stream";
+            }
+        };
         RequestCycle.get().scheduleRequestHandlerAfterCurrent(
-            new ResourceStreamRequestHandler(
-                new ByteArrayResourceStream(file, "application/octet-stream"))
+            new ResourceStreamRequestHandler(writer)
                 .setFileName(fileName)
                 .setContentDisposition(ContentDisposition.ATTACHMENT));
     }
