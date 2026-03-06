@@ -4,7 +4,7 @@ import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextArea;
@@ -71,7 +71,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             public void onClick(AjaxRequestTarget target) {
             	entity.setPesquisa(listPesquisaPanel.getSelectedEntity());
                 target.add(txtPesquisa);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         };
         listPesquisaPanel.setOnClickHandler(onClickPesquisa);
@@ -106,7 +106,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             	entity.setPergunta(listPerguntaPanel.getSelectedEntity());
             	pergunta = entity.getPergunta();
                 target.add(txtPergunta);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         };
         listPerguntaPanel.setOnClickHandler(onClickPergunta);
@@ -136,7 +136,7 @@ public class EditColetaPesquisaPanel extends AbstractEntityEditPanel<ColetaPesqu
             public void onClick(AjaxRequestTarget target) {
             	entity.setResposta(listRespostaPanel.getSelectedEntity());
                 target.add(txtResposta);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         };
         listRespostaPanel.setOnClickHandler(onClickResposta);

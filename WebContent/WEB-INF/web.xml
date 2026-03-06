@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         id="WebApp_ID" version="3.1">
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
   <display-name>sisdat-web</display-name>
   <filter>
     <filter-name>sisdat-web</filter-name>
@@ -23,13 +23,18 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>wicket</welcome-file>
   </welcome-file-list>
+  <!--
+    Payara 6 / Servlet 6.0: a Filter mapped /* is only invoked when a Servlet
+    also matches the URL. This no-op servlet ensures the WicketFilter runs for
+    every request. Wicket intercepts all pages before the servlet body executes.
+  -->
   <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <servlet-name>WicketEntryPoint</servlet-name>
+    <servlet-class>com.frw.base.web.WicketEntryPointServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <servlet-name>WicketEntryPoint</servlet-name>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>

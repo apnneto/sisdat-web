@@ -60,15 +60,15 @@ Fase B — Gerenciamento de Dependências (Maven) ✅ *Concluído*
 - ✅ Todas as dependências migradas para Maven Central — **concluído em 2026-03-04**: 38 JARs removidos de `WEB-INF/lib`; apenas `LogicWicket-1.4.jar` permanece como `system`-scope (sem artefato público). Build validado: 277 arquivos compilados, zero erros.
 - ✅ JARs container-provided (`javax.ejb`, `javax.inject`, `javax.servlet-api`, `bean-validator`, `portlet-api`) removidos de `WEB-INF/lib` e declarados como `provided` no `pom.xml`.
 
-Fase C — Atualização do Servidor de Aplicação ✅ *Desbloqueado — aguarda deploy Payara 6*
-- ✅ Runtime Payara 5.2022.4 rodando localmente via Docker.
-- ✅ **Payara 6 desbloqueado:** bloqueador era Wicket 1.4.22 (`javax.servlet.Filter` vs `jakarta.servlet.Filter`). Wicket 9 migration concluída em 2026-03-06 — deploy em Payara 6 pode ser executado.
+Fase C — Atualização do Servidor de Aplicação ✅ *Concluído — Payara 6.2024.6-jdk21 operacional*
+- ✅ Runtime Payara 6.2024.6-jdk21 rodando localmente via Docker.
+- ✅ **Deploy validado em 2026-03-06:** `sisdat-web deployed in 8,145ms`; HTTP 200; login `adm/sdtweb` → HomePage funcional.
 - ✅ Configurações JNDI/datasource e scripts de deploy funcionando.
 
-Fase D — Código e Namespace ✅ *Concluído — Wicket 9 migration completa em 2026-03-06*
-- ✅ **Wicket 1.4.22 → 9.18.0:** `pom.xml` atualizado; imports `javax.*` → `jakarta.*` em 100+ arquivos; artefatos-chave migrados.
-- ✅ **Todos os erros de compilação corrigidos em 2026-03-06:** 279 arquivos compilados, BUILD SUCCESS, zero erros.
-- ✅ **Deploy Payara 6 pendente:** build pronto — executar `docker-compose up --build -d` com `Dockerfile.payara` apontando para Payara 6.
+Fase D — Código e Namespace ✅ *Concluído — Wicket 10.8.0 + Jakarta EE em 2026-03-06*
+- ✅ **Wicket 1.4.22 → 10.8.0:** `pom.xml` atualizado; imports `javax.*` → `jakarta.*` em 100+ arquivos; artefatos-chave migrados.
+- ✅ **280 arquivos compilados, BUILD SUCCESS, zero erros** em 2026-03-06.
+- ✅ **Deploy Payara 6 confirmado:** HTTP 200, LoginPage + HomePage renderizados com dados reais.
 
 Fase E — Containerização e Automação ✅ *Concluído (base)*
 - ✅ `Dockerfile.payara` e `docker-compose.yml` funcionais.
@@ -90,15 +90,15 @@ Fase H — Release e Documentação ⏳ *Pendente*
 ---
 
 ## 6. Tabela de Versões (De → Para)
-| Componente    | Legado                  | Atual (2026-03-06)                 | Meta                        |
-|---------------|-------------------------|------------------------------------|-----------------------------|
-| Java          | 7/8                     | 21 (build local via Eclipse JRE)   | 17 LTS → 21                 |
-| Servidor      | GlassFish 3.1.2.2       | Payara 6 (Docker, aguarda deploy)  | Payara 6 / WildFly 30+      |
-| Wicket        | 1.4.22                  | 9.18.0 ✅ migração completa        | 9.18.0 estável              |
-| Dependências  | JARs manuais em WEB-INF | Maven Central (38 JARs migrados)   | Maven Central / repo interno |
-| Banco         | MySQL (legado, dump)    | MySQL 8.0 (Docker, dados completos)| MySQL 8.0 (containers)      |
-| Build         | Ant/Eclipse-managed     | Maven 3.9+ (279 arquivos, zero erros) | Maven 3.9+               |
-| Containerização | Não existia           | Docker Compose funcional           | Docker Compose + CI         |
+| Componente    | Legado                  | Atual (2026-03-06)                          | Meta                        |
+|---------------|-------------------------|---------------------------------------------|-----------------------------|
+| Java          | 7/8                     | 21 (build via Eclipse Temurin JRE 21) target 17 | 17 LTS → 21             |
+| Servidor      | GlassFish 3.1.2.2       | Payara 6.2024.6-jdk21 ✅ deploy funcional   | Payara 6 / WildFly 30+      |
+| Wicket        | 1.4.22                  | 10.8.0 ✅ migração completa + deploy OK     | 10.x estável                |
+| Dependências  | JARs manuais em WEB-INF | Maven Central (38 JARs migrados)            | Maven Central / repo interno |
+| Banco         | MySQL (legado, dump)    | MySQL 8.0 (Docker, dados completos)         | MySQL 8.0 (containers)      |
+| Build         | Ant/Eclipse-managed     | Maven 3.9+ (280 arquivos, zero erros)       | Maven 3.9+                  |
+| Containerização | Não existia           | Docker Compose funcional (Payara 6 + MySQL) | Docker Compose + CI         |
 
 ---
 
@@ -123,8 +123,8 @@ Nota: estimativas em dias úteis para uma equipe pequena (1–2 desenvolvedores)
 | Obter/recriar DDL completo do banco e validar app | 1–2 dias | ⏳ Pendente |
 | Atualizar driver MySQL (5.1 → 8.x) | 1 dia | ✅ Concluído em 2026-03-04 |
 | Migrar dependências para Maven e resolver conflitos | 4–8 dias | ✅ Concluído em 2026-03-04 |
-| Migrar runtime para Payara 6 / Java 17 | 5–15 dias | ⛔ Bloqueado — requer upgrade do Wicket antes |
-| Migração javax → jakarta (se necessário) | 5–15 dias | ⛔ Bloqueado — requer Payara 6 (requer Wicket upgrade) |
+| Migrar runtime para Payara 6 / Java 17 | 5–15 dias | ✅ Concluído em 2026-03-06 |
+| Migração javax → jakarta (se necessário) | 5–15 dias | ✅ Concluído em 2026-03-06 |
 | Adicionar testes e análise estática | 5–10 dias | ⏳ Pendente |
 | CI/CD e scans de segurança | 2–4 dias | ⏳ Pendente |
 | Validação funcional e correções | 5–10 dias | ⏳ Pendente |
@@ -270,14 +270,82 @@ Retomada da migração Wicket 9 com `build_errors.txt` listando ~100 erros. Apó
 | 31 | `AnexosPage.java` | `ByteArrayResourceStream` removido do pacote `org.apache.wicket.util.resource` | Substituído por `new ShowAnexoPage(data, name).respond()` |
 | 32 | `MapSinglePointPanel.java` | `AjaxRequestTarget.get()` removido no Wicket 9 | Substituído por `RequestCycle.get().find(IPartialPageRequestHandler.class).ifPresent(t -> t.appendJavaScript(...))` |
 
-#### Estado final confirmado (2026-03-06)
+#### Estado final confirmado (2026-03-06 — sessão Wicket 9)
 - Build Maven: `mvn -DskipTests clean package` → **279 arquivos compilados, BUILD SUCCESS, zero erros** ✅
 - Wicket 9.18.0 + Jakarta EE: migration **completa** ✅
-- Próximo passo: deploy em Payara 6 (`docker-compose up --build -d`)
 
 ---
 
-## 10. Checklist de Entrega (Status atual — 2026-02-27)
+### Ações realizadas em 2026-03-06 — Deploy Payara 6, Java 17, Wicket 10 (BUILD SUCCESS + HTTP 200)
+
+#### Contexto
+Com o build Wicket 9 validado, iniciado o deploy em Payara 6. Encontrados 4 bloqueadores sequenciais, todos resolvidos na mesma sessão.
+
+#### Problemas encontrados e resolvidos
+
+| # | Problema | Causa raiz | Solução aplicada |
+|---|----------|-----------|-----------------|
+| 33 | `Fatal error compiling: invalid target release: 11` | Maven usava JDK 8 (`JAVA_HOME=C:\Program Files\Java\jdk-1.8`); target `11` inválido para JDK 8 | `maven.compiler.source/target` alterado de `11` para `17` em `pom.xml`; `JAVA_HOME` redirecionado ao JRE 21 do Eclipse (`setx`) |
+| 34 | Maven continuava usando JDK 8 em novas sessões | `JAVA_HOME` de sistema ainda apontava para JDK 8 | `setx JAVA_HOME <eclipse-jre21-path>` (user scope); `scripts/setenv.bat` criado para configuração rápida por sessão |
+| 35 | Deploy falhou silenciosamente: `MarkupNotFoundException: Can not determine Markup… LoginPage` | Wicket não encontrava os HTML markup files — eles estavam em `WebContent/` raiz/subpastas, mas precisam estar em `WEB-INF/classes/com/frw/base/web/pages/` (co-localizados com as `.class`) | Adicionadas 12 entradas `<resource>` no `pom.xml` mapeando cada subdiretório de `WebContent` (base, cadastro, segurança, menu, panel, util, map, graficos/fusioncharts) para o `targetPath` do pacote Java correspondente |
+| 36 | `persistence.xml` ainda usava namespace JPA 2.2 (`xmlns.jcp.org`) | Arquivo não atualizado na sessão anterior | Atualizado para Jakarta Persistence 3.0 (`https://jakarta.ee/xml/ns/persistence`, versão `3.0`) |
+
+#### Artefatos criados / modificados
+| Arquivo | Modificação |
+|---------|------------|
+| `pom.xml` | `maven.compiler.source/target` `11` → `17`; Wicket `9.18.0` → `10.8.0`; 12 entradas `<resource>` adicionadas para HTML markup files; `persistence.xml` namespace atualizado |
+| `src/META-INF/persistence.xml` | Namespace `xmlns.jcp.org/xml/ns/persistence` versão `2.2` → `jakarta.ee/xml/ns/persistence` versão `3.0` |
+| `scripts/setenv.bat` | Novo script: configura `JAVA_HOME` e `PATH` para o JRE 21 do Eclipse para uso em sessão cmd |
+
+#### Estado final confirmado (2026-03-06 — Payara 6 deploy)
+- JDK: Eclipse Temurin 21.0.9 (`JAVA_HOME` corrigido) ✅
+- Build Maven: `mvn -DskipTests clean package` → **280 arquivos compilados, BUILD SUCCESS, zero erros** ✅
+- Wicket: **10.8.0** (Jakarta EE, `jakarta.servlet.Filter`) ✅
+- `sisdat-web-db-1`: **Up (healthy)** — MySQL 8.0 na porta 3307 ✅
+- `sisdat-web-payara-1`: **Up** — Payara 6.2024.6-jdk21 na porta 8080 ✅
+- Deploy: `sisdat-web was successfully deployed in 8,145 milliseconds` ✅
+- HTTP: `GET http://localhost:8080/sisdat-web/` → **HTTP 302 → HTTP 200 LoginPage** ✅
+- Login: `POST adm/sdtweb` → **HTTP 200 HomePage** (`<title>SisDAT - Pelli Sistemas</title>`) ✅
+- Logs Payara: **zero exceptions Wicket/JPA** (apenas warnings benignos de byte-buddy/asm JDK24) ✅
+
+---
+
+### Ações realizadas em 2026-03-06 — CSS, JS e menus corrigidos (smoke tests completos)
+
+#### Problema 1: CSS/imagens retornavam HTTP 404
+
+| # | Problema | Causa raiz | Solução aplicada |
+|---|----------|-----------|-----------------|
+| 37 | `GET /sisdat-web/css/estilo.css` → HTTP 404 | `WicketEntryPointServlet` chamava `sendError(404)` para todo request que o Wicket não tratava, incluindo arquivos estáticos | `WicketEntryPointServlet.service()`: substituído `sendError(404)` por `getServletContext().getNamedDispatcher("default").forward(req, resp)` |
+| 38 | CSS com HTTP 200 mas sem estilo na tela | `<wicket:link>` no HTML resolvia caminhos relativos (`css/estilo.css`) a partir do pacote Java (`WEB-INF/classes/com/frw/base/web/pages/`); browser resolvia como `/sisdat-web/pages/css/estilo.css` (404) | Removidos todos os `<wicket:link>` de `LoginPage.html` e `BasePage.html`; CSS/JS injetados via `renderHead()` em `LoginPage.java` e `BasePage.java` com `getRequest().getContextPath() + "/css/estilo.css"` |
+
+#### Problema 2: Links de menu não funcionavam (jQuery 1.4.2 vs Wicket jQuery 3.7.1)
+
+| # | Problema | Causa raiz | Solução aplicada |
+|---|----------|-----------|-----------------|
+| 39 | Cliques no menu lateral e superior não respondiam | `BasePage.renderHead()` carregava `jquery-1.4.2.min.js` após o Wicket 10 já ter carregado jQuery 3.7.1, sobrescrevendo `$` global e quebrando `Wicket.Ajax` | Removido `jquery-1.4.2.min.js` de `renderHead()` — Wicket 10 gerencia seu próprio jQuery 3.7.1 internamente; mantidos apenas JS da aplicação sem dependência de versão jQuery específica |
+
+#### Artefatos modificados
+| Arquivo | Modificação |
+|---------|------------|
+| `src/com/frw/base/web/WicketEntryPointServlet.java` | `sendError(404)` → `getNamedDispatcher("default").forward(req, resp)` |
+| `src/com/frw/base/web/pages/LoginPage.java` | Adicionado `renderHead()`: injeta `/sisdat-web/css/estilo.css` via `CssUrlReferenceHeaderItem` |
+| `src/com/frw/base/web/pages/BasePage.java` | Adicionado `renderHead()`: injeta 3 CSS + 6 JS app-specific; **removido** `jquery-1.4.2.min.js` |
+| `WebContent/LoginPage.html` | Removido `<wicket:link>` block (CSS/favicon) |
+| `WebContent/BasePage.html` | Removidos ambos os `<wicket:link>` blocks (CSS + JS) |
+
+#### Estado final confirmado (2026-03-06 — CSS/JS/menus)
+- `GET /sisdat-web/css/estilo.css` → **HTTP 200** ✅
+- `GET /sisdat-web/img/favicon.ico` → **HTTP 200** ✅
+- `GET /sisdat-web/js/fw.js` → **HTTP 200** ✅
+- HomePage renderizada com `href="/sisdat-web/css/estilo.css"` (absoluto) ✅
+- Ajax click `menuItemsList-0-menuItemLink` → **HTTP 200**, `Ajax-Location: ListUsuarioPage` ✅
+- `GET ListUsuarioPage` → **HTTP 200**, página completa com filtros e autocomplete ✅
+- Apenas jQuery **3.7.1** (Wicket) carregado — nenhum conflito ✅
+
+---
+
+## 10. Checklist de Entrega (Status atual — 2026-03-06)
 
 ### Recuperação (Curto Prazo)
 - [x] Inventário de dependências (MD + JSON) — concluído
@@ -285,18 +353,20 @@ Retomada da migração Wicket 9 com `build_errors.txt` listando ~100 erros. Apó
 - [x] `docker-compose.yml` + `Dockerfile.payara` criado e **funcional** — concluído
 - [x] CI pipeline (workflow) criado — concluído
 - [x] DataSource JNDI `jdbc/sisdat-ds` configurado — concluído
-- [x] Aplicação acessível via `http://localhost:8080/sisdat-web/` — ✅ confirmado novamente em 2026-03-05 após correção do 404 (EclipseLink bundled + delegate)
-- [x] Dump DDL completo do banco restaurado (tabelas presentes) — ✅ **Concluído em 2026-03-05** (banco atualizado com tabelas e dados completos do legado)
-- [x] Login funcional end-to-end com dados no banco — ✅ **Concluído em 2026-03-05** (login `adm/sdtweb` → `HomePage` renderizada, zero erros JPA)
+- [x] Aplicação acessível via `http://localhost:8080/sisdat-web/` — ✅ confirmado
+- [x] Dump DDL completo do banco restaurado (tabelas presentes) — ✅ Concluído em 2026-03-05
+- [x] Login funcional end-to-end com dados no banco — ✅ Concluído em 2026-03-05
+- [x] CSS/JS carregando corretamente — ✅ **Concluído em 2026-03-06**
+- [x] Menus lateral e superior funcionando (Ajax) — ✅ **Concluído em 2026-03-06**
 
 ### Modernização (Médio/Longo Prazo)
-- [x] Compilar com Maven (`mvn -DskipTests package`) sem erros — ✅ Concluído em 2026-03-04 (277 arquivos compilados, zero erros)
-- [x] Mover dependências para Maven e resolver conflitos — ✅ Concluído em 2026-03-04 (38 JARs migrados para Maven Central; apenas LogicWicket-1.4.jar permanece como system-scope)
-- [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04 (`mysql-connector-j-8.0.33`)
+- [x] Compilar com Maven (`mvn -DskipTests package`) sem erros — ✅ Concluído em 2026-03-06 (280 arquivos, Java 17 target)
+- [x] Mover dependências para Maven e resolver conflitos — ✅ Concluído em 2026-03-04
+- [x] Atualizar `mysql-connector-java` para versão 8.x — ✅ Concluído em 2026-03-04
+- [x] Migração para Wicket 10 / Jakarta EE — ✅ Concluído em 2026-03-06
+- [x] Deploy em Payara 6 / Java 17 e smoke tests — ✅ Concluído em 2026-03-06
+- [x] Migração `javax.*` → `jakarta.*` — ✅ Concluído em 2026-03-06
 - [ ] Publicar JARs customizados em repositório interno — pendente
-- [x] Migração para Wicket 9 / Jakarta EE — ✅ **Concluído em 2026-03-06:** todos os erros de compilação corrigidos; 279 arquivos compilados, BUILD SUCCESS
-- [~] Deploy em Payara 6 / Java 17 e validação de smoke tests — ⏳ **Próximo passo:** build pronto, executar `docker-compose up --build -d`
-- [x] Migração `javax.*` → `jakarta.*` — ✅ **Concluído em 2026-03-06**
 - [ ] Testes unitários e de integração — pendente
 - [ ] CI com scan de vulnerabilidades (OWASP Dependency-Check) — pendente
 
@@ -304,38 +374,17 @@ Retomada da migração Wicket 9 com `build_errors.txt` listando ~100 erros. Apó
 
 ## 11. Próximos Passos Imediatos (recomendados — 2026-03-06)
 
-> **Status atual:** banco completo ✅ | login funcional (Payara 5) ✅ | build Maven (279 arquivos) ✅ | Wicket 9 + Jakarta EE ✅ | Payara 6 deploy pendente ⏳
+> **Status atual:** banco completo ✅ | login funcional (Payara 6) ✅ | build Maven (280 arquivos) ✅ | Wicket 10 + Jakarta EE ✅ | Payara 6 deploy ✅ | smoke tests ✅
 
-### Prioridade 1 — Deploy em Payara 6 (desbloqueado)
+### Prioridade 1 — ~~Deploy em Payara 6~~ ✅ Concluído
 
-O único bloqueador para Payara 6 era a migração Wicket (resolvida). Executar:
-
-```powershell
-cd C:\Projetos\sisdat-web
-# 1. Garantir que Dockerfile.payara aponta para Payara 6
-# (verificar: FROM payara/server-full:6.2024.6)
-
-# 2. Reconstruir o WAR e subir containers
-mvn -DskipTests clean package
-docker-compose up --build -d
-
-# 3. Acompanhar logs do deploy
-docker-compose logs -f payara
-
-# 4. Validar HTTP
-# curl http://localhost:8080/sisdat-web/
-```
-
-**Se o deploy falhar**, verificar logs por:
-- `ClassCastException` no WicketFilter → confirmar que `web.xml` declara o filtro com classe do Wicket 9 (`org.apache.wicket.protocol.http.WicketFilter`)
-- Erros JPA → `persistence.xml` já migrado para namespace Jakarta 3.0 ✅
-- Erros CDI → `beans.xml` já migrado para CDI 3.0 ✅
+Deploy em Payara 6.2024.6-jdk21 validado com HTTP 200 e login funcional.
 
 ### Prioridade 2 — Validação funcional das telas principais
-Com o login funcionando, validar os fluxos críticos da aplicação:
+Com o login funcionando em Payara 6, validar os fluxos críticos da aplicação:
 ```
-http://localhost:8080/sisdat-web/   → Login
-→ HomePage (menu)
+http://localhost:8080/sisdat-web/   → Login ✅
+→ HomePage (SisDAT - Pelli Sistemas) ✅
 → Cadastros (Pesquisa, Questionário, Empresa)
 → Segurança (Usuários, Perfis)
 → Resultados / Relatórios
@@ -346,7 +395,7 @@ Registrar erros encontrados em issues no repositório.
 ```yaml
 # Adicionar .github/workflows/maven.yml com:
 # - Checkout
-# - JDK 17 setup
+# - JDK 17 setup (Temurin)
 # - mvn -DskipTests clean package
 # - docker build (smoke test)
 # - OWASP Dependency-Check
@@ -356,6 +405,7 @@ Registrar erros encontrados em issues no repositório.
 Sempre que alterar código ou dependências Java:
 ```cmd
 cd C:\Projetos\sisdat-web
+call scripts\setenv.bat
 mvn -DskipTests clean package
 docker-compose up --build -d
 ```
@@ -385,6 +435,9 @@ docker-compose up --build -d
 - **2026-03-05:** Corrigido HTTP 404 causado por falha no deploy após atualização do driver MySQL (Prioridade 2). Três problemas resolvidos: (1) JARs `eclipselink.jar`, `eclipselink-2.0.2.jar` e `eclipselink-javax.persistence-2.0.jar` removidos de `WEB-INF/lib` — o EclipseLink 2.0.2 bundled conflitava com o EclipseLink 2.7.9 do Payara 5, causando `ClassNotFoundException: Glassfish` no predeploy JPA; (2) `sun-web.xml` atualizado de `delegate="false"` para `delegate="true"` para que o classloader do container tenha precedência; (3) `payara-post-boot.asadmin` corrigido de `com.mysql.jdbc.jdbc2.optional.MysqlDataSource` para `com.mysql.cj.jdbc.MysqlDataSource` (classe correta do Connector/J 8.x). WAR reconstruído e deploy confirmado com HTTP 200.
 - **2026-03-05 (tentativa Payara 6 + revert):** Tentativa de migrar para Payara 6.2024.6 revertida. Causa raiz: `ClassCastException: WicketFilter cannot be cast to jakarta.servlet.Filter` — Wicket 1.4.22 implementa `javax.servlet.Filter` mas Payara 6 espera `jakarta.servlet.Filter`; as duas hierarquias são incompatíveis em classloaders separados. Todos os artefatos revertidos para Payara 5.2022.4 + `javax.*`. `index.jsp` corrigido: era um placeholder "Hello World" que impedia a página de login de carregar; substituído por redirect para `/wicket` que aciona o `WicketFilter` → `LoginPage`. Deploy confirmado: HTTP 200, página de login Wicket renderizada corretamente.
 - **2026-03-05 (JPA + login):** Corrigidos 7 mapeamentos JPA incompatíveis com o schema MySQL real: 3 `@JoinTable` sem colunas explícitas (`usuario_perfil`, `perfil_funcionalidade`, `funcionalidade_tipo_usuario`) geravam nomes de coluna errados pelo EclipseLink; 3 `@Column` com nomes mistos (`Nome`, `Data_Alteracao`, `Excluido`, `Usuario`, `Descricao`) falhavam no MySQL 8 com `lower_case_table_names=1`. `BaseDAO.delete()` adaptado de `PSQLException` para `java.sql.SQLException` para suportar FK violation detection no MySQL (SQLState `23000`). Build Maven → 277 arquivos, BUILD SUCCESS. Login `adm/sdtweb` validado: HTTP 200, `SisDAT - Pelli Sistemas` renderizado com menu completo, zero exceções JPA nos logs.
+- **2026-03-06 (menus/Ajax fix — jQuery 1.4.2 conflito):** Links dos menus lateral e superior não respondiam ao clique após o deploy em Payara 6. Causa raiz: `BasePage.renderHead()` carregava `jquery-1.4.2.min.js` **depois** que o Wicket 10 já havia carregado o jQuery 3.7.1 embutido, sobrescrevendo o `$` global e quebrando o engine Ajax do Wicket. Solução: removido `jquery-1.4.2.min.js` (e as demais libs jQuery plugin que dependiam dele) de `renderHead()` — Wicket 10 já gerencia o jQuery 3.7.1 internamente. Validado: Ajax click em `menuItemsList-0-menuItemLink` → HTTP 200, `Ajax-Location: ListUsuarioPage` → `GET ListUsuarioPage` → HTTP 200 com conteúdo completo. Todos os JS da aplicação (`fw.js`, `inputTextMask.js`, `jquery.maskedinput.js`, `jquery.selectbox.js`, `jquery.datepick.min.js`, `jQuery.fileinput.js`) requerem e recebem nonces corretos via CSP.
+- **2026-03-06 (CSS/JS via renderHead — wicket:link removido):** CSS, JS e imagens retornavam HTTP 404 com os links corretos de CSS quebrados pois `<wicket:link>` em `LoginPage.html` e `BasePage.html` resolvia os caminhos relativos ao pacote Java (`WEB-INF/classes/com/frw/base/web/pages/`) em vez da raiz do WAR. Dois problemas: (1) `WicketEntryPointServlet` retornava `sendError(404)` para arquivos estáticos — corrigido: forward ao servlet `"default"` do container; (2) caminhos relativos `css/estilo.css` numa página servida em `/pages/LoginPage` resolviam para `/sisdat-web/pages/css/estilo.css` (404) — corrigido: removidos todos os `<wicket:link>` de `LoginPage.html` e `BasePage.html`; CSS/JS injetados programaticamente em `LoginPage.renderHead()` e `BasePage.renderHead()` com caminhos absolutos usando `getRequest().getContextPath()`. Validado: `css/estilo.css` → HTTP 200; `img/favicon.ico` → HTTP 200; LoginPage renderizada com `href="/sisdat-web/css/estilo.css"`.
+- **2026-03-06 (Payara 6 deploy + Wicket 10 + Java 17 — deploy funcional):** Deploy em Payara 6.2024.6-jdk21 validado com sucesso. Problemas encontrados e resolvidos: (1) `maven.compiler.source/target` era `11`, inválido para o JDK 21 (Eclipse Temurin) usado pelo Maven — corrigido para `17`; (2) `JAVA_HOME` do sistema apontava para JDK 8 — corrigido via `setx` para o JRE 21 do Eclipse; `scripts/setenv.bat` criado para uso por-sessão; (3) `persistence.xml` ainda usava namespace JPA 2.2 (`xmlns.jcp.org`) — migrado para Jakarta Persistence 3.0 (`jakarta.ee/xml/ns/persistence`); (4) HTML markup files do Wicket (LoginPage.html, BasePage.html, etc.) não estavam sendo copiados para os pacotes corretos em `WEB-INF/classes` — resolvido adicionando 12 entradas `<resource>` no `pom.xml` mapeando cada subdiretório de `WebContent` para o `targetPath` do pacote Java correspondente. Wicket atualizado de 9.18.0 para 10.8.0 (última LTS). Resultado final: 280 arquivos compilados, BUILD SUCCESS; deploy em 8.145ms; `GET /sisdat-web/` → HTTP 302 → `HTTP 200 LoginPage`; `POST login adm/sdtweb` → `HTTP 200 HomePage` (`SisDAT - Pelli Sistemas`); zero exceptions Wicket/JPA nos logs.
 - **2026-03-06 (Wicket 9 + Jakarta EE — migration completa):** Concluída a migração Wicket 9.18.0. 15 erros residuais corrigidos em 10 arquivos: `AjaxButtonFrw` e `NumberTextField` — eliminado `getServletContext()` (cascade `javax.servlet`) substituindo por `RequestCycle.getUrlRenderer()`; `ChangePasswordPanel`, `TextAreaPanel`, `UploadFilePanel`, `EditEscolherTipoPerguntaPanel`, `AbstractEntityEditPage` — removido parâmetro `Form<?>` de `onSubmit`/`onError` (Wicket 9 não passa form); `AbstractEntityEditPanel` — `form` (campo privado removido) substituído por `getForm()`; `BasePage` — `onSelectionChanged(Locale)` e `wantOnSelectionChangedNotifications()` removidos do `DropDownChoice` no Wicket 9, substituídos por `AjaxFormComponentUpdatingBehavior("change")`; `ImageHint` — `add(new Image(...))` impossível em componente não-container, substituído por `setImageResourceReference()`; `ViewMapMultiplePointsUpdatablePanel` — `HeaderContributor.forJavaScript()` removido, substituído por imports Wicket 9 de `IHeaderResponse`/`JavaScriptUrlReferenceHeaderItem`; `AbstractEntityListRespostaPanelNew` — `RequestCycle.setRequestTarget()` → `zipAnexo.respond()` e `AbstractReadOnlyModel` → `LambdaModel.of()`; `AbstractEntityListPage` — `AbstractReadOnlyModel` → `LambdaModel.of()`; `AnexosPage` — `ByteArrayResourceStream` (removido) → `ShowAnexoPage.respond()`; `MapSinglePointPanel` — `AjaxRequestTarget.get()` (removido) → `RequestCycle.get().find(IPartialPageRequestHandler.class).ifPresent(...)`. Resultado: **279 arquivos compilados, BUILD SUCCESS, zero erros**. Próximo passo: deploy em Payara 6.
 - **2026-03-04 (Fase C+D completa):** Migração para Payara 6.2024.6 (Java 11/Zulu 11) e Jakarta EE concluída. `Dockerfile.payara` atualizado de `5.2022.4` para `6.2024.6`. `docker-compose.yml` atualizado (campo `version` deprecado removido; `restart: unless-stopped` adicionado ao serviço payara). 103 arquivos Java migrados de `javax.*` para `jakarta.*` (persistence, ejb, inject, validation, ws.rs, annotation); `javax.servlet.*` mantido nos 7 arquivos que interagem com Wicket 1.4.22 (que usa `javax.servlet` internamente). `persistence.xml` migrado para namespace `jakarta.ee/xml/ns/persistence` versão 3.0. `web.xml` migrado para namespace Jakarta EE 5.0. `beans.xml` migrado para CDI 3.0 (`bean-discovery-mode="all"`). `sun-web.xml` substituído por `payara-web.xml`. `pom.xml` atualizado: provided-scope APIs migradas para coordenadas `jakarta.*` (jakarta.persistence 3.0.0, jakarta.ejb 4.0.0, jakarta.inject 2.0.0, jakarta.validation 3.0.0, jakarta.ws.rs 3.0.0, jakarta.servlet 5.0.0, jakarta.annotation 2.0.0, eclipselink 3.0.3); `javax.servlet-api 3.1.0` mantido como provided para compatibilidade de compilação com Wicket. Build validado: `mvn -DskipTests clean package` → 277 arquivos, BUILD SUCCESS. Deploy em Payara 6 confirmado: `sisdat-web deployed in 8,547ms` → HTTP 200 em `http://localhost:8080/sisdat-web/`.
 - **2026-03-04 (Fase B completa):** Todas as dependências migradas de `system`-scope para Maven Central. 38 JARs removidos de `WebContent/WEB-INF/lib`: Wicket 1.4.22 (6 artefatos), Apache Commons (8), logging (3), Gson, POI 3.10-FINAL, iText → `com.itextpdf:itextpdf:5.5.13.3`, JasperReports 6.20.6, JFreeChart 1.5.4, Joda-Time 2.12.5, HttpClient 4.5.14, json-lib, json-org → `org.json:json`, ezmorph, simple-xml, cglib-nodep 3.3.0, mysql-connector-j 8.0.33, Axis 1.4, jaxrpc-api 1.1, wsdl4j 1.6.3. JARs container-provided (javax.ejb, javax.inject, javax.servlet-api, bean-validator, portlet-api) removidos de `WEB-INF/lib`. PostgreSQL driver adicionado como `org.postgresql:postgresql:42.7.3` (necessário para `PSQLException` em `BaseDAO`). Apenas `LogicWicket-1.4.jar` permanece como `system`-scope (sem artefato público). Build final validado: `mvn -DskipTests clean package` → 277 arquivos compilados, BUILD SUCCESS.
@@ -399,7 +452,8 @@ Esta seção lista as variáveis de ambiente que o projeto e os scripts usam, os
 ### Variáveis e valores esperados
 
 - `JAVA_HOME`
-  - Esperado: `C:\Program Files\Java\jdk1.8.0_xxx` (Java 8) ou `C:\Program Files\Java\jdk-17` (Java 17).
+  - Esperado (2026-03-06): `C:\eclipse-jee-2025-12-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.9.v20251105-0741\jre` (Eclipse Temurin JRE 21).
+  - Configurar via `setx` (user scope) ou executar `scripts\setenv.bat` na sessão cmd atual.
   - Uso: compilação (`mvn`) e execução local.
 
 - `M2_HOME` e `PATH` com `mvn`
@@ -427,26 +481,30 @@ docker compose version
 docker ps
 ```
 
-### Como iniciar o ambiente local (estado atual — 2026-02-27)
+### Como iniciar o ambiente local (estado atual — 2026-03-06)
 
-```powershell
-# 1. Construir o WAR completo (WebContent + classes + JARs)
-powershell -ExecutionPolicy Bypass -File scripts\build-war.ps1
+```cmd
+REM 1. Garantir JAVA_HOME = JRE 21 (executar uma vez por sessão cmd se necessário)
+call scripts\setenv.bat
 
-# 2. Subir os containers (MySQL + Payara) com rebuild da imagem
+REM 2. Construir o WAR via Maven
+mvn -DskipTests clean package
+
+REM 3. Subir os containers (MySQL + Payara 6) com rebuild da imagem
 docker-compose up --build -d
 
-# 3. Acompanhar o deploy
+REM 4. Acompanhar o deploy (aguardar "sisdat-web was successfully deployed")
 docker-compose logs -f payara
 
-# 4. Acessar a aplicação
-# http://localhost:8080/sisdat-web/
+REM 5. Acessar a aplicação
+REM http://localhost:8080/sisdat-web/
 ```
 
 ### Para um reinício completo (limpar volumes do banco)
 
-```powershell
+```cmd
 docker-compose down -v
-powershell -ExecutionPolicy Bypass -File scripts\build-war.ps1
+call scripts\setenv.bat
+mvn -DskipTests clean package
 docker-compose up --build -d
 ```

@@ -10,7 +10,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.extensions.ajax.markup.html.tabs.AjaxTabbedPanel;
 import org.apache.wicket.extensions.markup.html.tabs.ITab;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -114,7 +114,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                                         error(getString(root.getMessage()));
                                         target.add(feedback);
                                         feedback.setVisible(true);
-                                        ModalWindow.closeCurrent(target);
+                                        UpdatableModalWindow.closeCurrent(target);
                                         return false;
                                     }
                                     throw e;
@@ -219,7 +219,7 @@ public abstract class AbstractEntityEditPanel<T extends EntidadeDominioBase> ext
                             /* não tenta abrir mensagem modal se este painel for um popup */
                             if (!getParent().getParent().getParent().getParent().getClass().isAssignableFrom(UpdatableModalWindowPanel.class)) {
                                 ((BasePage) getPage()).ShowAlertMessage(getString(getEntitySaveSuccessMessage()), target);
-                                confirmationModal.setWindowClosedCallback((new ModalWindow.WindowClosedCallback() {
+                                confirmationModal.setWindowClosedCallback((new UpdatableModalWindow.WindowClosedCallback() {
                                     @Override
                                     public void onClose(AjaxRequestTarget art) {
                                         updateButtons(getEntity());

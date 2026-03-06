@@ -4,7 +4,7 @@ import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.panel.Panel;
 
@@ -52,7 +52,7 @@ public class EditDispositivoPanel extends AbstractEntityEditPanel<Dispositivo> {
             public void onClick(AjaxRequestTarget target) {
             	entity.setUsuario(listUsuarioPanel.getSelectedEntity());
                 target.add(txtUsuario);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         };
         listUsuarioPanel.setOnClickHandler(onClickUsuario);

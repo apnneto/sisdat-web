@@ -9,7 +9,7 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.AbstractLink;
@@ -111,7 +111,7 @@ public abstract class AbstractEntityListPanel<T extends EntidadeBase> extends Pa
                                 if(root instanceof ForeignKeyViolationException) {
                                     error(getString(root.getMessage()));
                                     target.add(feedback);
-                                    ModalWindow.closeCurrent(target);
+                                    UpdatableModalWindow.closeCurrent(target);
                                     return false;
                                 }
                                 throw e;

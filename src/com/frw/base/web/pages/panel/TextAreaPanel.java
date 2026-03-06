@@ -3,7 +3,7 @@ package com.frw.base.web.pages.panel;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -34,7 +34,7 @@ public class TextAreaPanel extends Panel {
                     if(markupContainner != null)
                         target.add(markupContainner);
 
-                    ModalWindow.closeCurrent(target);
+                    UpdatableModalWindow.closeCurrent(target);
                 }
 	     
          });

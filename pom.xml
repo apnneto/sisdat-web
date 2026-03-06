@@ -12,23 +12,96 @@
     <description>Projeto legado SisDAT - pom.xml provisório para migração e build.</description>
 
     <properties>
-        <!-- Java 11 bytecode — required by Wicket 9.x and Payara 6 (Zulu 11) -->
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- Java 17 bytecode — required by Wicket 10.x; Payara 6 runs on JDK 21 -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <wicket.version>9.18.0</wicket.version>
+        <wicket.version>10.8.0</wicket.version>
     </properties>
 
     <build>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
         <finalName>sisdat-web</finalName>
         <resources>
+            <!-- Copy non-Java files from src (e.g. *.xml, *.properties) -->
             <resource>
                 <directory>${project.basedir}/src</directory>
                 <excludes>
                     <exclude>**/*.java</exclude>
                 </excludes>
+            </resource>
+            <!--
+                Wicket markup files: HTML and .properties must be co-located
+                with their .class files under WEB-INF/classes.
+                The HTML files live in WebContent at a shortened path that
+                corresponds to the last two package segments, so we map each
+                subdirectory to the correct target package explicitly.
+            -->
+            <resource>
+                <directory>${project.basedir}/WebContent</directory>
+                <includes>
+                    <include>BasePage.html</include>
+                    <include>BasePage*.properties</include>
+                    <include>LoginPage.html</include>
+                    <include>LoginPage*.properties</include>
+                    <include>HomePage.html</include>
+                    <include>MyErrorPage.html</include>
+                    <include>ObjetoObsoletoErrorPage.html</include>
+                    <include>SessaoExpiradaErrorPage.html</include>
+                    <include>AnexosPage.html</include>
+                </includes>
+                <targetPath>com/frw/base/web/pages</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/base</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/base</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/cadastro</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/cadastro</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/cadastro/filter</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/cadastro/filter</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/seguranca</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/seguranca</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/seguranca/filter</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/seguranca/filter</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/menu</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/menu</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/panel</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/panel</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/util</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/util</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/map</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/base/web/pages/map</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/WebContent/graficos/fusioncharts</directory>
+                <includes><include>*.html</include><include>*.properties</include></includes>
+                <targetPath>com/frw/negocio/graficos/fusioncharts</targetPath>
             </resource>
         </resources>
         <plugins>

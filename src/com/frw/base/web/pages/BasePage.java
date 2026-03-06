@@ -10,7 +10,11 @@ import org.apache.wicket.Session;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
+import org.apache.wicket.markup.head.CssUrlReferenceHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptUrlReferenceHeaderItem;
+import org.apache.wicket.markup.head.OnLoadHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -188,5 +192,30 @@ public class BasePage extends WebPage {
 
     protected void setTitulo(String messageKey) {
         tituloKey = messageKey;
+    }
+
+    /**
+     * Inject static resources (CSS, JS) using absolute context paths so they
+     * resolve correctly regardless of the Wicket page mount path (/pages/Xxx).
+     * <wicket:link> in the HTML uses classpath-relative paths which break when
+     * pages are mounted under a sub-path.
+     */
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        String ctx = getRequest().getContextPath();
+        // CSS
+        response.render(new CssUrlReferenceHeaderItem(ctx + "/css/estilo.css", null, null));
+        response.render(new CssUrlReferenceHeaderItem(ctx + "/css/jquery.selectbox.css", null, null));
+        response.render(new CssUrlReferenceHeaderItem(ctx + "/css/jquery.datepick.css", null, null));
+        // Application JS — Wicket 10 already loads jQuery 3.7.1;
+        // do NOT load jQuery 1.4.2 here (it would overwrite Wicket's jQuery and break Ajax).
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/fw.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/inputTextMask.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/jquery.maskedinput.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/jquery.selectbox.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/jquery.datepick.min.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/jquery.datepick.ext.min.js"));
+        response.render(JavaScriptUrlReferenceHeaderItem.forUrl(ctx + "/js/jQuery.fileinput.js"));
     }
 }

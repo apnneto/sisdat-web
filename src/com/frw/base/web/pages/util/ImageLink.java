@@ -4,7 +4,7 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -97,7 +97,7 @@ public class ImageLink extends Panel {
         confirmationModal.setInitialWidth(width);
         confirmationModal.setInitialHeight(height);
         confirmationModal.show(target);
-        confirmationModal.setWindowClosedCallback(new ModalWindow.WindowClosedCallback() {
+        confirmationModal.setWindowClosedCallback(new UpdatableModalWindow.WindowClosedCallback() {
             @Override
             public void onClose(AjaxRequestTarget art) {
                 onCloseEvent(art);

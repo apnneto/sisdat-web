@@ -6,7 +6,7 @@ import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.list.ListView;
@@ -83,7 +83,7 @@ public class EditUsuarioEmpresaPanel extends AbstractEntityEditPanel<Usuario> {
                 target.add(txtLogin);
                 target.add(txtNome);
                 target.add(txtTipoUsuario);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         };
         listUsuarioPanel.setOnClickHandler(onClickUsuario);

@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.Session;
+import org.apache.wicket.markup.head.CssUrlReferenceHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -104,8 +106,13 @@ public class LoginPage extends WebPage {
         DateFormat df = DateFormat.getDateInstance(DateFormat.LONG, getLocale());
 
         LabelFrw lblDataAtual = new LabelFrw("dataAtual", "V1.2");
-
         add(lblDataAtual);
+    }
 
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        String ctx = getRequest().getContextPath();
+        response.render(new CssUrlReferenceHeaderItem(ctx + "/css/estilo.css", null, null));
     }
 }

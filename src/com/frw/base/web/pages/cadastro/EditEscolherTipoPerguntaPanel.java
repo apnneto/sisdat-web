@@ -7,7 +7,7 @@ package com.frw.base.web.pages.cadastro;
 import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -69,7 +69,7 @@ public class EditEscolherTipoPerguntaPanel extends Panel {
 				
 				avancar = Boolean.TRUE;
 				
-				ModalWindow.closeCurrent(art);
+				UpdatableModalWindow.closeCurrent(art);
 			}
 		};
 		btnSalvar.setModel(new ResourceModel("botao.avancar"));
@@ -80,7 +80,7 @@ public class EditEscolherTipoPerguntaPanel extends Panel {
 			@Override
 			protected void onSubmit(AjaxRequestTarget art) {
 				avancar = Boolean.FALSE;
-				ModalWindow.closeCurrent(art);
+				UpdatableModalWindow.closeCurrent(art);
 			}
 		};
 		btnCancelar.setModel(new ResourceModel("botao.cancelar"));

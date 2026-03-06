@@ -6,7 +6,7 @@ package com.frw.base.web.pages.util;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.ResourceModel;
 
@@ -39,7 +39,7 @@ public abstract class ModalConfirmationPanel extends Panel {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 if (onConfirm(target)) {
-                    ModalWindow.closeCurrent(target);
+                    UpdatableModalWindow.closeCurrent(target);
                 }
             }
         });
@@ -49,7 +49,7 @@ public abstract class ModalConfirmationPanel extends Panel {
             @Override
             public void onClick(AjaxRequestTarget target) {
                 onCancel(target);
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
             }
         });
 

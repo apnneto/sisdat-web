@@ -7,7 +7,7 @@ package com.frw.base.web.pages.util;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import com.frw.base.web.util.LabelFrw;
@@ -39,7 +39,7 @@ public class ModalAlertPanel extends Panel {
 	      @Override
 	      public void onClick(AjaxRequestTarget target) {
 	       
-                ModalWindow.closeCurrent(target);
+                UpdatableModalWindow.closeCurrent(target);
 	      }
          });
 

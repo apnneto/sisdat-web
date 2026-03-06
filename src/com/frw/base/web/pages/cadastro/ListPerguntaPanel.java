@@ -6,7 +6,7 @@ import java.util.List;
 import jakarta.ejb.EJB;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import com.frw.base.web.pages.util.UpdatableModalWindow;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import com.frw.base.dominio.sisdat.Pergunta;
@@ -132,7 +132,7 @@ public class ListPerguntaPanel extends AbstractEntityListPanelNew<Pergunta> {
 			final EditEscolherTipoPerguntaPanel tipoPerguntaPanel = new EditEscolherTipoPerguntaPanel("content");
 			tipoPerguntaPanel.setOutputMarkupId(true);
 
-			confirmationModal.setWindowClosedCallback(new ModalWindow.WindowClosedCallback() {
+			confirmationModal.setWindowClosedCallback(new UpdatableModalWindow.WindowClosedCallback() {
 
 				@Override
 				public void onClose(AjaxRequestTarget target) {
